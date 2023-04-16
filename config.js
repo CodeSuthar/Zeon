@@ -8,6 +8,13 @@ module.exports = {
         DeveloperId: ["990643162928279592"]
     },
 
+    BotList: {
+        TopGG: {
+            APIToken: process.env.TopGGToken || "",
+            LinkToVote: "https://top.gg/bot/969558840926437406/vote"
+        }
+    },
+
     Dashboard: {
         ShouldRun: true,
         Information: {

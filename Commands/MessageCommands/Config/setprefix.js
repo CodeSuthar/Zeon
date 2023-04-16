@@ -9,6 +9,7 @@ module.exports = {
     description: "Set Custom Prefix",
     usage: "setprefix <prefix to set>",
     aliases: ["prefix"],
+    voteReq: true,
     run: async (message, args, client, prefix) => {
     
         const data = await db.findOne({ Guild: message.guildId });

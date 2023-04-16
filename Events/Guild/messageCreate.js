@@ -1,5 +1,7 @@
-const { EmbedBuilder, Collection } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const Topgg = require("@top-gg/sdk");
 const dbprefix = require("../../Database/prefix.js");
+const pdata = require("../../Database/premium.js")
 
 module.exports = {
     name: "messageCreate",
@@ -33,6 +35,8 @@ module.exports = {
 
         let command = client.commands.get(cmd);
         if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+        const PGuild = await pdata.findOne({ _id: message.guild.id });
     
         if (command) {
             try {
@@ -41,6 +45,22 @@ module.exports = {
                 if (db) {
                     return message.reply({ content: `${client.emoji.wrong} | You Are Blacklisted From Using This Bot` })
                 }
+
+                if (command.premiumReq) {
+                    if (!PGuild) {
+                        return await message.replyy({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`The command is premium only, you can purchase premium to override all command restrictions, including vote request command. To buy, contact \`Rtxeon#4726\``)] }).catch(() => { });
+                    }
+                }
+
+                if (command.voteReq) {
+                    if (!PGuild) {
+                        const topgg = new Topgg.Api(client.config.BotList.TopGG.APIToken);
+                        let voted = await topgg.hasVoted(message.author.id);
+                        if (!voted && !client.DeveloperId.includes(message.author.id)) {
+                            return await message.reply({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must vote me on [Top.gg](${client.config.BotList.TopGG.LinkToVote}) to use this command, or you can purchase premium for the server to override all command restrictions. To buy, contact \`Rtxeon#4726\``)], components: [new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel("Vote").setStyle(5).setURL(client.config.BotList.TopGG.LinkToVote))] }).catch(() => { });
+                        }
+                    }
+                };
                 
                 if (command.developer && !client.DeveloperId.includes(message.author.id)) {
                     return message.reply({ content: `Im, Not A Fool Bot, Only Owner Can Use This Commands` })
