@@ -3,7 +3,7 @@ const joinschema = require('../../Database/jointocreate');
 const joinchannelschema = require('../../Database/jointocreatechannels');
 
 module.exports = {
-    name: "VoiceStateUpdate",
+    name: "voiceStateUpdate",
     run: async (oldState, newState) => {
         try {
             if (oldState.member.guild === null) return;
