@@ -1,15 +1,11 @@
 const { InteractionType, EmbedBuilder, Collection, ButtonBuilder } = require("discord.js");
 const Topgg = require("@top-gg/sdk");
-const dbprefix = require("../../Database/prefix.js");
-const pdata = require("../../Database/premium.js")
+const pdata = require("../../Database/premium.js");
 
 module.exports = {
     name: "interactionCreate",
     run: async (client, interaction) => {
-        let prefix = client.runfix
-        const ress =  await dbprefix.findOne({ Guild: interaction.guildId })
-        if (ress && ress.Prefix) prefix = ress.Prefix;
-
+        let prefix = client.runfix;
         const PGuild = await pdata.findOne({ _id: interaction.guild.id });
 
         if(interaction.type === InteractionType.ApplicationCommand) {

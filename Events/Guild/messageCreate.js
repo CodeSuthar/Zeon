@@ -1,6 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const Topgg = require("@top-gg/sdk");
-const dbprefix = require("../../Database/prefix.js");
 const pdata = require("../../Database/premium.js")
 
 module.exports = {
@@ -8,9 +7,6 @@ module.exports = {
     run: async (client, message) => {
         if (!message.guild || !message.channel || !message.id || message.author.bot) return;
         let prefix = client.runfix;
-        const channel = message?.channel;
-        const ress =  await dbprefix.findOne({ Guild: message.guildId })
-        if (ress && ress.Prefix) prefix = ress.Prefix;
         const mentionedtheclient = new RegExp(`^<@!?${client.user.id}>( |)$`);
         if (message.content.match(mentionedtheclient)) {
             const embed = new EmbedBuilder()

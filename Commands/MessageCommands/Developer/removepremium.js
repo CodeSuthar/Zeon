@@ -13,7 +13,7 @@ module.exports = {
         if (!GuildId) {
             Guild = message.guild;
         } else {
-            Guild = client.guilds.cache.get(GuildId) || client.guilds.fetch(GuildId);
+            Guild = client.guilds.cache.get(GuildId) || await client.guilds.fetch(GuildId);
         }
 
         if (!Guild) {
@@ -49,4 +49,4 @@ module.exports = {
             }
         }
     }
-}
+};
