@@ -6,12 +6,31 @@ module.exports = {
     .setName('join-to-create')
     .setDescription('Configure your join to create voice channel.')
     .setDMPermission(false)
-    .addSubcommand(command => command.setName('setup').setDescription('Sets up your join to create voice channel.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be your join to create voice channel.').setRequired(true).addChannelTypes(ChannelType.GuildVoice)).addChannelOption(option => option.setName('category').setDescription('All new channels will be created in specified category.').setRequired(true).addChannelTypes(ChannelType.GuildCategory)).addIntegerOption(option => option.setName('voice-limit').setDescription('Set the default limit for the new voice channels.').setMinValue(2).setMaxValue(10)))
-    .addSubcommand(command => command.setName('disable').setDescription('Disables your join to create voice channel system.')),
+    .addSubcommand(command => command
+        .setName('setup')
+        .setDescription('Sets up your join to create voice channel.')
+        .addChannelOption(option => option.setName('channel')
+        .setDescription('Specified channel will be your join to create voice channel.')
+        .setRequired(true)
+        .addChannelTypes(ChannelType.GuildVoice))
+        .addChannelOption(option => option.setName('category')
+        .setDescription('All new channels will be created in specified category.').setRequired(true)
+        .addChannelTypes(ChannelType.GuildCategory))
+        .addIntegerOption(option => option
+            .setName('voice-limit')
+            .setDescription('Set the default limit for the new voice channels.')
+            .setMinValue(2)
+            .setMaxValue(10)
+        )
+    )
+    .addSubcommand(command => command
+        .setName('disable')
+        .setDescription('Disables your join to create voice channel system.')
+    ),
     run: async (client, interaction, args) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) && interaction.user.id !== '619944734776885276') return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
  
         const data = await voiceschema.findOne({ Guild: interaction.guild.id });
         const sub = interaction.options.getSubcommand();
@@ -19,7 +38,7 @@ module.exports = {
         switch (sub) {
             case 'setup':
  
-            if (data) return await interaction.reply({ content: `You have **already** set up the **join to create** system! \n> Do **/join-to-create disable** to undo.`, ephemeral: true});
+            if (data) return await interaction.reply({ content: `You have **already** set up the **join to create** system! \n> Do **/join-to-create disable** to undo.`});
             else {
  
                 const channel = await interaction.options.getChannel('channel');
@@ -34,7 +53,7 @@ module.exports = {
                 })
  
                 const setupembed = new EmbedBuilder()
-                .setColor('Purple')
+                .setColor('Random')
                 .setAuthor({ name: `🔊 Join to Create system`})
                 .setFooter({ text: `🔊 System Setup`})
                 .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081227919256457246/largepurple.png')
@@ -53,7 +72,7 @@ module.exports = {
             else {
  
                 const removeembed = new EmbedBuilder()
-                .setColor('Purple')
+                .setColor('Random')
                 .setAuthor({ name: `🔊 Join to Create system`})
                 .setFooter({ text: `🔊 System Disabled`})
                 .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081227919256457246/largepurple.png')

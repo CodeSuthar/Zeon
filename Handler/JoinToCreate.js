@@ -11,7 +11,7 @@ module.exports = async (client) => {
             return;
         }
      
-        if (newState.member.id === '1076798263098880116') return;
+        if (newState.member.id === '969558840926437406') return;
      
         const joindata = await joinschema.findOne({ Guild: newState.member.guild.id });
         const joinchanneldata1 = await joinchannelschema.findOne({ Guild: newState.member.guild.id, User: newState.member.id });
@@ -30,7 +30,7 @@ module.exports = async (client) => {
                     try {
      
                         const joinfail = new EmbedBuilder()
-                        .setColor('DarkRed')
+                        .setColor('Random')
                         .setThumbnail('https://cdn.discordapp.com/icons/1078641070180675665/c3ee76cdd52c2bba8492027dfaafa15d.webp?size=1024')
                         .setTimestamp()
                         .setAuthor({ name: `🔊 Join to Create System`})
@@ -78,7 +78,7 @@ module.exports = async (client) => {
                         try {
      
                             const joinfail = new EmbedBuilder()
-                            .setColor('DarkRed')
+                            .setColor('Random')
                             .setThumbnail('https://cdn.discordapp.com/icons/1078641070180675665/c3ee76cdd52c2bba8492027dfaafa15d.webp?size=1024')
                             .setTimestamp()
                             .setAuthor({ name: `🔊 Join to Create System`})
@@ -99,7 +99,7 @@ module.exports = async (client) => {
                     try {
      
                         const joinsuccess = new EmbedBuilder()
-                        .setColor('DarkRed')
+                        .setColor('Random')
                         .setThumbnail('https://cdn.discordapp.com/icons/1078641070180675665/c3ee76cdd52c2bba8492027dfaafa15d.webp?size=1024')
                         .setTimestamp()
                         .setAuthor({ name: `🔊 Join to Create System`})
@@ -125,7 +125,7 @@ module.exports = async (client) => {
             return;
         }
      
-        if (oldState.member.id === '1076798263098880116') return;
+        if (oldState.member.id === '969558840926437406') return;
      
         const leavechanneldata = await joinchannelschema.findOne({ Guild: oldState.member.guild.id, User: oldState.member.id });
      
@@ -146,7 +146,7 @@ module.exports = async (client) => {
             try {
      
                 const deletechannel = new EmbedBuilder()
-                .setColor('DarkRed')
+                .setColor('Random')
                 .setThumbnail('https://cdn.discordapp.com/icons/1078641070180675665/c3ee76cdd52c2bba8492027dfaafa15d.webp?size=1024')
                 .setTimestamp()
                 .setAuthor({ name: `🔊 Join to Create System`})
