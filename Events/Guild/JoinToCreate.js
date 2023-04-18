@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ChannelType } = require("discord.js");
 const joinschema = require('../../Database/jointocreate');
 const joinchannelschema = require('../../Database/jointocreatechannels');
 
