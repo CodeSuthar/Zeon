@@ -9,6 +9,7 @@ module.exports = {
     .addSubcommand(command => command.setName('setup').setDescription('Sets up your join to create voice channel.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be your join to create voice channel.').setRequired(true).addChannelTypes(ChannelType.GuildVoice)).addChannelOption(option => option.setName('category').setDescription('All new channels will be created in specified category.').setRequired(true).addChannelTypes(ChannelType.GuildCategory)).addIntegerOption(option => option.setName('voice-limit').setDescription('Set the default limit for the new voice channels.').setMinValue(2).setMaxValue(10)))
     .addSubcommand(command => command.setName('disable').setDescription('Disables your join to create voice channel system.')),
     run: async (client, interaction, args) => {
+        if (!interaction.replied) await interaction.deferReply();
  
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) && interaction.user.id !== '619944734776885276') return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
  
@@ -42,7 +43,7 @@ module.exports = {
                 .addFields({ name: `• Category`, value: `> ${category}`})
                 .addFields({ name: `• Voice Limit`, value: `> **${limit}**`, inline: true})
  
-                await interaction.reply({ embeds: [setupembed] });
+                await interaction.editReply({ embeds: [setupembed] });
             }
  
             break;
@@ -61,7 +62,7 @@ module.exports = {
  
                 await voiceschema.deleteMany({ Guild: interaction.guild.id });
  
-                await interaction.reply({ embeds: [removeembed] });
+                await interaction.editReply({ embeds: [removeembed] });
             }
         }
     }
