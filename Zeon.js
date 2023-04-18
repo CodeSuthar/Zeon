@@ -3,7 +3,7 @@ const client = new Client(
     Heart(GatewayIntentBits, Partials)
 );
   
-[ "Client-Extended", "ClientEvents", "Commands", "SlashCommands", "ConnectMongo", "HandlingError" ].forEach((Handler) => {
+[ "Client-Extended", "ClientEvents", "Commands", "SlashCommands", "ConnectMongo", "HandlingError", "JoinToCreate" ].forEach((Handler) => {
     try {
         require(`./Handler/${Handler}`)(client);
         console.log(`[ HANDLER ] Loaded ${Handler} System`);
