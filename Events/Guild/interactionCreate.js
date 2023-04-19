@@ -5,7 +5,6 @@ const pdata = require("../../Database/premium.js");
 module.exports = {
     name: "interactionCreate",
     run: async (client, interaction) => {
-        let prefix = client.runfix;
         const PGuild = await pdata.findOne({ _id: interaction.guild.id });
 
         if(interaction.type === InteractionType.ApplicationCommand) {
@@ -55,7 +54,7 @@ module.exports = {
                             return interaction.reply({ content: `Im, Not A Fool Bot, Only Owner Can Use This Commands` })
                         }
                     }
-                    await SlashCommands.run(client, interaction, prefix);
+                    await SlashCommands.run(client, interaction);
                 } catch (e) {
                     console.log(e);
                     if (interaction.replied) {

@@ -4,7 +4,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Get the bot latency"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
         interaction.editReply({ content: `Pinging` }).then(() => {

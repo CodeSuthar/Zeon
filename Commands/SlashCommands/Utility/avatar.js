@@ -10,7 +10,7 @@ module.exports = {
         .setDescription("Give me a user to fetch avatar")
         .setRequired(true)
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         let mention = interaction.options.getMember("user");

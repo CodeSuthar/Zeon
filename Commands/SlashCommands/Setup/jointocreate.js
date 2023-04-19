@@ -27,10 +27,10 @@ module.exports = {
         .setName('disable')
         .setDescription('Disables your join to create voice channel system.')
     ),
-    run: async (client, interaction, args) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.editReply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
  
         const data = await voiceschema.findOne({ Guild: interaction.guild.id });
         const sub = interaction.options.getSubcommand();
@@ -38,7 +38,7 @@ module.exports = {
         switch (sub) {
             case 'setup':
  
-            if (data) return await interaction.reply({ content: `You have **already** set up the **join to create** system! \n> Do **/join-to-create disable** to undo.`});
+            if (data) return await interaction.editReply({ content: `You have **already** set up the **join to create** system! \n> Do **/join-to-create disable** to undo.`});
             else {
  
                 const channel = await interaction.options.getChannel('channel');
@@ -68,7 +68,7 @@ module.exports = {
             break;
             case 'disable':
  
-            if (!data) return await interaction.reply({ content: `You **do not** have the **join to create** system **set up**, cannot delete **nothing**..`, ephemeral: true});
+            if (!data) return await interaction.editReply({ content: `You **do not** have the **join to create** system **set up**, cannot delete **nothing**..`, ephemeral: true});
             else {
  
                 const removeembed = new EmbedBuilder()

@@ -8,7 +8,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("stats")
     .setDescription("Shows Zeon's stats"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
         const duration1 = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");

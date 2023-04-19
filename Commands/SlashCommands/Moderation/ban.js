@@ -13,7 +13,7 @@ module.exports = {
         .setName("reason")
         .setDescription("The reason for banning the user.")
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply(`Hey Buddy, I need \`Ban Members Or Administrator\` permissions to execute this command!`);

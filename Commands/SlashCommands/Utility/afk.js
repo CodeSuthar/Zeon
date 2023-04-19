@@ -9,7 +9,7 @@ module.exports = {
         .setName("reason")
         .setDescription("Give me a reason to set your mode to afk")
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
         let reason = "No Reason Provided";

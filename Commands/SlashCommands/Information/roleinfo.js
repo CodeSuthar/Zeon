@@ -9,7 +9,7 @@ module.exports = {
         .setDescription("Give me a role to fetch information")
         .setRequired(true)
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         let role = interaction.options.getRole("role");

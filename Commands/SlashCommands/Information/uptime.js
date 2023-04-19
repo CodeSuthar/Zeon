@@ -4,7 +4,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("uptime")
     .setDescription("Shows The Uptime Of The Bot"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
         const duration1 = Math.round((Date.now() - client.uptime)/1000);

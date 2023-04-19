@@ -6,7 +6,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("shards")
     .setDescription("Total Shard Stats"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
         let m = interaction.guild.shardId;

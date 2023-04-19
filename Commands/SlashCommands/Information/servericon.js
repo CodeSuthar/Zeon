@@ -4,7 +4,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("servericon")
     .setDescription("Gives you the server's icon"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         const embed = new EmbedBuilder()

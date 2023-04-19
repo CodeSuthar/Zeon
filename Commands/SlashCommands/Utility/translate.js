@@ -14,7 +14,7 @@ module.exports = {
         .setDescription("The text to translate")
         .setRequired(true)
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         client.timertowait(2000);

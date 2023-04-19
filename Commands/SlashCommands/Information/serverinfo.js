@@ -18,7 +18,7 @@ module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("serverinfo")
     .setDescription("Gives You Some Pretty Cool Information About The Server"),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         const disabled = client.emoji.wrong;

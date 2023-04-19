@@ -10,7 +10,7 @@ module.exports = {
         .setDescription("Give me a user to show his profile")
         .setRequired(true)
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         let member = interaction.options.getMember("user");
 

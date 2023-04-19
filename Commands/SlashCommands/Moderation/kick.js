@@ -13,7 +13,7 @@ module.exports = {
         .setName("reason")
         .setDescription("The reason for kicking the user.")
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.editReply(`Hey Buddy, I need \`KICK_MEMBERS Or ADMINISTRATOR\` permissions to execute this command!`);

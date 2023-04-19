@@ -19,7 +19,7 @@ module.exports = {
         .setName("server")
         .setDescription("gives you the banner of the server")
     ),
-    run: async (client, interaction, prefix) => {
+    run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
         const args = interaction.options.getSubcommand();
