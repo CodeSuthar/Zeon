@@ -46,7 +46,7 @@ module.exports = {
         const channel = interaction.channel;
         const duration = interaction.options.getString('duration');
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: "You must have the Moderate Members permission to use this command!" })
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: "You must have the Moderate Members Or Administrator permission to use this command!" })
         if (!timeMember) return await interaction.editReply({ content: 'The user mentioned is no longer within the server.' })
         if (!duration) return interaction.editReply({content: 'You must set a valid duration for the timeout' })
         if (!timeMember.kickable) return interaction.editReply({ content: 'I cannot timeout this user! This is either because their higher then me or you.' })
@@ -63,7 +63,7 @@ module.exports = {
         .setDescription(`${timeUser.tag} has been **timed out** for ${duration / 60} minute(s) | Reason: ${reason}`)
 
         const dmEmbed = new EmbedBuilder()
-        .setDescription(`You have been timed out in ${interaction.guild.name} for ${duration / 60} minutes. You can check the status of your timeout within the server. | Reason: ${reason}`)
+        .setDescription(`You have been timed out in ${interaction.guild.name} for ${duration / 60} minute(s). You can check the status of your timeout within the server. | Reason: ${reason}`)
         .setColor(`Random`)
 
         await timeMember.send({ embeds: [dmEmbed] }).catch(err => {
