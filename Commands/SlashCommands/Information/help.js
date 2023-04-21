@@ -13,7 +13,7 @@ module.exports = {
         .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm <@${client.user.id}> , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
         .addFields(
             { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.gear}  \`:\`  **Configuration**\n${client.emoji.fun}  \`:\`  **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.system} \`:\` Setup\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
-            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeonbot.xyz) • [Support Server](https://discord.gg/C7PJbvjECt) • [Creavite.co](https://auto.creavite.co/)`}
+            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeon.code-source.tech) • [Support Server](https://discord.gg/C7PJbvjECt) • [Creavite.co](https://auto.creavite.co/)`}
         )
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter({ text: `Helping You Is My Pleasure <3`, iconURL: client.user.displayAvatarURL() })
