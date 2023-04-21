@@ -3,10 +3,10 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("impersonate")
-    .setDescription("impersonate a user with a webhook")
+    .setDescription("Impersonates a user with a message.")
     .addUserOption(option => option
         .setName("user")
-        .setDescription("The user you want to impersonate")
+        .setDescription("The user you want to impersonate.")
         .setRequired(true)
     )
     .addStringOption(option => option

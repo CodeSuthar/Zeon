@@ -4,7 +4,7 @@ const math = require("mathjs");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("calculator")
-    .setDescription("A Calculator to Solve Your Equation"),
+    .setDescription("A calculator for you to use in discord!."),
     run: async (client, interaction, args) => {
         if (!interaction.replied) await interaction.deferReply();
 

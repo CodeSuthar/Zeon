@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("time")
-    .setDescription("the current time and date"),
+    .setDescription("Gives you the current date and time."),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 

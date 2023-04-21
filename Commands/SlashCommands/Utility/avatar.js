@@ -4,10 +4,10 @@ const discordinfo = require("discordinfo.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("avatar")
-    .setDescription("Gives you the avatar of specified user")
+    .setDescription("Gives you the avatar of specified user.")
     .addUserOption((option) => option
         .setName("user")
-        .setDescription("Give me a user to fetch avatar")
+        .setDescription("User to get avatar of.")
         .setRequired(true)
     ),
     run: async (client, interaction) => {

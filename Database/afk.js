@@ -5,6 +5,7 @@ let AFK = new Schema({
     Member: String,
     Time: Number,
     Reason: String,
+    Nickname: String
 })
 
 module.exports = model('afk', AFK);

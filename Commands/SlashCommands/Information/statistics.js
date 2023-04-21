@@ -6,8 +6,8 @@ const si = require('systeminformation');
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
-    .setName("stats")
-    .setDescription("Shows Zeon's stats"),
+    .setName("statistics")
+    .setDescription("Shows the bot's statistics."),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         

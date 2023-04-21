@@ -7,23 +7,23 @@ module.exports = {
     .setDescription("Modifying Or Setting Up Of Advanced Ticket System")
     .addSubcommand(subcommand => subcommand
         .setName("setup")
-        .setDescription("Enables The Advanced Ticket System!")
+        .setDescription("Enables The Advanced Ticket System!.")
         .addChannelOption(option => option
             .setName("channel")
-            .setDescription("The channel you want to set up the ticket system in")
+            .setDescription("The channel you want to set up the ticket system in.")
             .setRequired(true)
             .addChannelTypes(ChannelType.GuildText)
         )
         .addChannelOption(option => option
             .setName("category")
-            .setDescription("The category you want to send the tickets in")
+            .setDescription("The category you want to send the tickets in.")
             .addChannelTypes(ChannelType.GuildCategory)
             .setRequired(true)
         )
     )
     .addSubcommand(subcommand => subcommand
         .setName("disable")
-        .setDescription("Disables The Advanced Ticket System!")
+        .setDescription("Disables The Advanced Ticket System!.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -93,7 +93,7 @@ module.exports = {
 
             case "disable":
                 const db  = await client.db.get(`ticket_channel_${interaction.guild.id}`);
-                const db1 = await client.db.get (`ticket_message_${interaction.guild.id}`);
+                const db1 = await client.db.get (`ticket_message_${interaction.guild.id}_message`);
 
                 if (!db && !db1) return interaction.editReply({ content: "You don't have a ticket system set up. You can run /ticket-setup to set one up." });
 

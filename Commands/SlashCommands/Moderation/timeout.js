@@ -5,8 +5,8 @@ module.exports = {
     .setName('timeout')
     .setDescription('Times out a server member.')
     .addUserOption(option => option
-        .setName('target')
-        .setDescription('The user you would like to time out')
+        .setName('user')
+        .setDescription('The user you would like to time out.')
         .setRequired(true)
     )
     .addStringOption(option => option
@@ -41,12 +41,15 @@ module.exports = {
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        const timeUser = interaction.options.getUser('target');
+        const timeUser = interaction.options.getUser('user');
         const timeMember = await interaction.guild.members.fetch(timeUser.id);
         const channel = interaction.channel;
         const duration = interaction.options.getString('duration');
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: "You must have the Moderate Members Or Administrator permission to use this command!" })
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Moderate Members Or Administrator permission to use this command!` });
+
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Moderate Members Or Administrator permission to use this command!` });
+
         if (!timeMember) return await interaction.editReply({ content: 'The user mentioned is no longer within the server.' })
         if (!duration) return interaction.editReply({content: 'You must set a valid duration for the timeout' })
         if (!timeMember.kickable) return interaction.editReply({ content: 'I cannot timeout this user! This is either because their higher then me or you.' })

@@ -3,10 +3,10 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("roleinfo")
-    .setDescription("Gives You Some Pretty Cool Information About Role")
+    .setDescription("Shows the role information.")
     .addRoleOption((option) => option
         .setName("role")
-        .setDescription("Give me a role to fetch information")
+        .setDescription("The role of which you want to get information.")
         .setRequired(true)
     ),
     run: async (client, interaction) => {

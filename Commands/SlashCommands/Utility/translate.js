@@ -4,14 +4,14 @@ const translate = require('@iamtraction/google-translate');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("translate")
-    .setDescription("Translates A Text")
+    .setDescription("Translates text given by you to another language")
     .addStringOption(option => option
         .setName("language")
-        .setDescription("The language of the text to translate")
+        .setDescription("The language of the text to translate. (Example: en, fr, de, etc.)")
         .setRequired(true))
     .addStringOption(option => option
         .setName("text")
-        .setDescription("The text to translate")
+        .setDescription("The text to translate.")
         .setRequired(true)
     ),
     run: async (client, interaction) => {

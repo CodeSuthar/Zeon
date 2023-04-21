@@ -4,11 +4,13 @@ const e = require('express');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('mass-unban')
-    .setDescription('Unban all members in the server. Use with caution!'),
+    .setDescription('Unban all members in the server. Use with caution ⚠️!.'),
     run: async (client, interaction, args) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.reply({ content: 'You **do not** have the permission to do that!'});
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Ban Members Or Administrator permission to use this command!` });
+
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Ban Members Or Administrator permission to use this command!` });
  
         try {
  

@@ -3,9 +3,10 @@ const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('meme')
-    .setDescription('Generate a meme every time you use this command'),
+    .setDescription('Generate a meme every time randomly.'),
     run: async (client, interaction) => {
- 
+        if (!interaction.replied) await interaction.deferReply();
+
         async function meme() {
             await fetch(`https://www.reddit.com/r/memes/random/.json`)
             .then(async r => {
@@ -23,7 +24,7 @@ module.exports = {
                 .setURL(`${image}`)
                 .setFooter({ text: author})
  
-                await interaction.reply({ embeds: [embed] });
+                await interaction.editReply({ embeds: [embed] });
             })
         }
         meme();

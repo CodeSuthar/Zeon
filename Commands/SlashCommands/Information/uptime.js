@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("uptime")
-    .setDescription("Shows The Uptime Of The Bot"),
+    .setDescription("Shows the uptime of the bot."),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         

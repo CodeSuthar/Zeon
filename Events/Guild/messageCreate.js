@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, InteractionCollector } = require("discord.js");
 const Topgg = require("@top-gg/sdk");
 const pdata = require("../../Database/premium.js")
 
@@ -9,10 +9,23 @@ module.exports = {
         let prefix = client.runfix;
         const mentionedtheclient = new RegExp(`^<@!?${client.user.id}>( |)$`);
         if (message.content.match(mentionedtheclient)) {
-            const embed = new EmbedBuilder()
-            .setColor("Random")
-            .setDescription(`**Hey It's Me ${client.user.username}, Try Me Using Prefix \`${prefix}\`**`);
-            return message.channel.send({embeds: [embed]})
+            const data = await client.db.get(`botcommandchannel_${message.guild.id}`);
+
+            if (data) {
+                const data2 = await client.db.get(`botcommandchannel_channel_${message.guild.id}`);
+
+                const embed = new EmbedBuilder()
+                .setColor("Random")
+                .setDescription(`**Hey It's Me ${client.user.username}, Try Me Using With Slash Command For More Information, Try \`/help\`. This Guild Has Bot Command Only Channel, So You Can Use Command In The <#${data2}> Channel Only.**`)
+
+                return message.channel.send({ embeds: [embed] })
+            } else {
+                const embed = new EmbedBuilder()
+                .setColor("Random")
+                .setDescription(`**Hey It's Me ${client.user.username}, Try Me Using With Slash Command For More Information, Try \`/help\`.**`)
+
+                return message.channel.send({ embeds: [embed] });
+            }
         }
         const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
@@ -36,6 +49,24 @@ module.exports = {
     
         if (command) {
             try {
+                const data = await client.db.get(`botcommandchannel_${message.guild.id}`);
+
+                if (data) {
+                    const data2 = await client.db.get(`botcommandchannel_channel_${message.guild.id}`);
+
+                    if (message.channel.id !== data2) {
+                        const embedpro = new EmbedBuilder()
+                        .setDescription(`${client.emoji.wrong} | This guild has configured the Bot System to listen Commands only in <#${data2}> channel. So, To use the bot run commands in <#${data2}> channel.`)
+                        .setColor("Random")
+
+                        const msg = await message.reply({ embeds: [embedpro] });
+
+                        client.timertowait(8000)
+
+                        msg.delete();
+                    }
+                }
+
                 const db = await client.db.get(`blacklist_${message.author.id}`);
 
                 if (db) {
@@ -57,6 +88,14 @@ module.exports = {
                         }
                     }
                 };
+
+                if (command.DeveloperId.includes(message.author.id)) {
+                    const embed = new EmbedBuilder()
+                    .setColor("Random")
+                    .setDescription(`We have moved Zeon Commands From Message Commands And Slash Command To Slash Command Only, Please Use Slash Command To Use This Command. Sorry For The Inconvenience \`<3\``);
+
+                    return message.reply({ embeds: [embed] });
+                }
                 
                 if (command.developer && !client.DeveloperId.includes(message.author.id)) {
                     return message.reply({ content: `Im, Not A Fool Bot, Only Owner Can Use This Commands` })

@@ -5,7 +5,7 @@ require("moment-duration-format");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("shards")
-    .setDescription("Total Shard Stats"),
+    .setDescription("Gives you status about the bot's shards."),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         

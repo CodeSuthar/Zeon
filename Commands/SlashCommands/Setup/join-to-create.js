@@ -10,12 +10,14 @@ module.exports = {
         .setName('setup')
         .setDescription('Sets up your join to create voice channel.')
         .addChannelOption(option => option.setName('channel')
-        .setDescription('Specified channel will be your join to create voice channel.')
-        .setRequired(true)
-        .addChannelTypes(ChannelType.GuildVoice))
-        .addChannelOption(option => option.setName('category')
-        .setDescription('All new channels will be created in specified category.').setRequired(true)
-        .addChannelTypes(ChannelType.GuildCategory))
+            .setDescription('Specified channel will be your join to create voice channel.')
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildVoice)
+        )
+        .addChannelOption(option => option
+            .setName('category')
+            .setDescription('All new channels will be created in specified category.').setRequired(true)
+            .addChannelTypes(ChannelType.GuildCategory))
         .addIntegerOption(option => option
             .setName('voice-limit')
             .setDescription('Set the default limit for the new voice channels.')
@@ -30,7 +32,7 @@ module.exports = {
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return await interaction.editReply({ content: 'You **do not** have the permission to do that!', ephemeral: true});
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply({ content: "You must have the Manage Guild Or Administrator permission to use this command!" });
  
         const data = await voiceschema.findOne({ Guild: interaction.guild.id });
         const sub = interaction.options.getSubcommand();
@@ -59,8 +61,10 @@ module.exports = {
                 .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081227919256457246/largepurple.png')
                 .setTimestamp()
                 .addFields({ name: `• Join to Create was Enabled`, value: `> Your channel (${channel}) will now act as \n> your join to create channel.`})
-                .addFields({ name: `• Category`, value: `> ${category}`})
-                .addFields({ name: `• Voice Limit`, value: `> **${limit}**`, inline: true})
+                .addFields(
+                    { name: `• Category`, value: `> ${category}`},
+                    { name: `• Voice Limit`, value: `> **${limit}**`, inline: true}
+                )
  
                 await interaction.editReply({ embeds: [setupembed] });
             }

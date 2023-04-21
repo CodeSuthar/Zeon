@@ -4,7 +4,7 @@ const { Hangman } = require(`discord-gamecord`);
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName(`hangman`)
-    .setDescription(`Play a game of hangman`),
+    .setDescription(`Play the classic game of hangman!`),
     run: async(client, interaction) => {
  
         const Game = new Hangman({

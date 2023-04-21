@@ -5,19 +5,19 @@ const axios = require("axios");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("banner")
-    .setDescription("Gives you the banner of a specified user or the server")
+    .setDescription("Gives you the banner of a specified user or the server.")
     .addSubcommand((subcommand) => subcommand
         .setName("user")
-        .setDescription("gives you the banner of a specified user")
+        .setDescription("gives you the banner of a specified user.")
         .addUserOption((option) => option
-            .setName("usermention")
-            .setDescription("mention a user")
+            .setName("user")
+            .setDescription("User to get banner of.")
             .setRequired(true)
         )
     )
     .addSubcommand((subcommand) => subcommand
         .setName("server")
-        .setDescription("gives you the banner of the server")
+        .setDescription("Gves you the banner of the server.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -75,7 +75,7 @@ module.exports = {
         }
 
         if (args === "user") {
-            const user = interaction.options.getUser("usermention");
+            const user = interaction.options.getUser("user");
             
             const data = await axios.get(`https://discord.com/api/users/${user.id}`, {
                 headers: {

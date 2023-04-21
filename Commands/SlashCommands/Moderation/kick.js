@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require("disc
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("kick")
-    .setDescription("Kick a user from a guild")
+    .setDescription("Kick's a user from a guild")
     .addUserOption((option) => option
         .setName("user")
         .setDescription("The user you want to kick.")
@@ -16,9 +16,9 @@ module.exports = {
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
-        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.editReply(`Hey Buddy, I need \`KICK_MEMBERS Or ADMINISTRATOR\` permissions to execute this command!`);
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Kick Members Or Administrator permission to use this command!` });
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.editReply(`Hey Buddy, You need \`KICK_MEMBERS Or ADMINISTRATOR\` permissions to execute this comand!`);
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Kick Members Or Administrator permission to use this command!` });
 
         let enemy = interaction.options.getUser("user");
     

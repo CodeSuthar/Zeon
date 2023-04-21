@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require("disc
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("ban")
-    .setDescription("Ban a user from a guild")
+    .setDescription("Ban's a user from the guild.")
     .addUserOption((option) => option
         .setName("user")
         .setDescription("The user you want to ban.")
@@ -16,9 +16,9 @@ module.exports = {
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
-        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply(`Hey Buddy, I need \`Ban Members Or Administrator\` permissions to execute this command!`);
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Ban Members Or Administrator permission to use this command!` });
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply(`Hey Buddy, You need \`Ban Members Or Administrator\` permissions to execute this comand!`);
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Ban Members Or Administrator permission to use this command!` });
 
         let enemy = interaction.options.getUser("user");
     

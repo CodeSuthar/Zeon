@@ -6,22 +6,22 @@ const moment = require("moment");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("premium")
-    .setDescription("Redeem your premium package")
+    .setDescription("Redeem's your premium package or Help's you find out a guild's premium status.")
     .addSubcommand((subcommand) => subcommand
         .setName("redeem")
-        .setDescription("Redeem your premium package")
+        .setDescription("Redeem's your premium package.")
         .addStringOption(option => option
             .setName("code")
-            .setDescription("The code you want to redeem")
+            .setDescription("The code you want to redeem.")
             .setRequired(true)
         )
     )
     .addSubcommand((subcommand) => subcommand
         .setName("status")
-        .setDescription("Check's Guilds Premium Status")
+        .setDescription("Help's you find out a guild's premium status.")
         .addStringOption(option => option
             .setName("guild_id")
-            .setDescription("The guild id of guild you want to check")
+            .setDescription("The guild id of guild you want to check.")
             .setRequired(false)
         )
     ),
@@ -31,7 +31,7 @@ module.exports = {
         const SubCommand = interaction.options.getSubcommand();
 
         if (SubCommand === "redeem") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply(`Hey Buddy, You need \`MANAGE_GUILD Or ADMINISTRATOR\` permissions to execute this command!`);
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply({ content: "You must have the Manage Guild Or Administrator permission to use this command!" });
 
             const code = interaction.options.getString("code");
         

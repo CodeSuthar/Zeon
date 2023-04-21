@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("membercount")
-    .setDescription("Get the member count of the server"),
+    .setDescription("Gets the member count of the server"),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         

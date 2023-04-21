@@ -4,13 +4,13 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('wikipedia')
-    .setDescription('search something on wikipedia')
+    .setDescription('Gives you an article in shortform from wikipedia.')
     .addSubcommand(subcommand => subcommand
         .setName('search')
-        .setDescription('search something on wikipedia')
+        .setDescription('search something on wikipedia.')
         .addStringOption(option => option
             .setName('query')
-            .setDescription('the thing you want to search on wiki')
+            .setDescription('the query you want to search.')
             .setRequired(true)
         )
     ),

@@ -59,18 +59,9 @@ module.exports = {
         const SubCommand = interaction.options.getSubcommand();
 
         if (SubCommand === "kick") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MoveMembers)){
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`You must have \`Move members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
-            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`I must have \`Move members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Move Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MoveMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Move Members Or Administrator permission to use this command!` });
         
             let member = interaction.options.getMember("user");
         
@@ -91,19 +82,9 @@ module.exports = {
         }
 
         if (SubCommand === "deafen") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.DeafenMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`You must have \`Deafen members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
-        
-            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.DeafenMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`I must have \`Deafen members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.DeafenMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Deafen Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.DeafenMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Deafen Members Or Administrator permission to use this command!` });
         
             let member = interaction.options.getMember("user");
         
@@ -132,19 +113,9 @@ module.exports = {
         }
 
         if (SubCommand === "undeafen") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.DeafenMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`You must have \`Deafen members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
-    
-            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.DeafenMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`I must have \`Deafen members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.DeafenMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Deafen Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.DeafenMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Deafen Members Or Administrator permission to use this command!` });
     
             let member = interaction.options.getMember("user");
     
@@ -173,19 +144,9 @@ module.exports = {
         }
 
         if (SubCommand === "mute") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`You must have \`Mute members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
-    
-            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MuteMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`I must have \`Mute members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Mute Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Mute Members Or Administrator permission to use this command!` });
     
             let member = interaction.options.getMember("user");
         
@@ -214,19 +175,9 @@ module.exports = {
         }
 
         if (SubCommand === "unmute") {
-            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`You must have \`Mute members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
-        
-            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MuteMembers)) {
-                const error = new EmbedBuilder()
-                .setColor("Random")
-                .setDescription(`I must have \`Mute members\` permission to use this command.`)
-                return interaction.editReply({embeds: [error]});
-            }
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Mute Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MuteMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Mute Members Or Administrator permission to use this command!` });
     
             let member = interaction.options.getMember("user");
     

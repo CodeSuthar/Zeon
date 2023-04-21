@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, InteractionCollector } = require("discord.js");
 const db = require("../../Database/afk");
 
 module.exports = {
@@ -9,9 +9,13 @@ module.exports = {
 
         if (afk) {
             if (message.content.startsWith(`[AFK]`)) return;
+
+            await message.member.setNickname(afk.Nickname).catch(e => {});
             
             message.reply(`Welcome Back! **${message.author.username}#${message.author.discriminator}**, I Removed You From My AFK List, You Were AFK For **${convertTime(Date.now() - afk.Time)}**`)
-            afk.delete();
+            db.deleteMany({ Guild: message.guild.id, Member: message.author.id }).then(() => {
+                console.log(`AFK Ended`)
+            });
         } else {
             for(const user of [...message.mentions.users.values()]) {
                 afk = await db.findOne({ Guild: message.guild.id, Member: user.id });
@@ -45,4 +49,4 @@ function convertTime(duration) {
     } else {
         return hours + " Hour, " + minutes + " Minutes " + "And " + seconds + " Seconds";
     }
-}
+};

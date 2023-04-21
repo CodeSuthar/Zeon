@@ -3,20 +3,20 @@ const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('disc
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('untimeout')
-    .setDescription('Untimesout a server member')
+    .setDescription('Untimesout a server member.')
     .addUserOption(option => option
-        .setName('target')
-        .setDescription('The user you would like to untimeout')
+        .setName('user')
+        .setDescription('The user you would like to untimeout.')
         .setRequired(true)
     )
     .addStringOption(option => option
         .setName('reason')
-        .setDescription('The reason for untiming out the user')
+        .setDescription('The reason for untiming out the user.')
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
  
-        const timeUser = interaction.options.getUser('target');
+        const timeUser = interaction.options.getUser('user');
         const timeMember = await interaction.guild.members.fetch(timeUser.id);
  
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: "You must have the Moderate Members permission to use this command!" })

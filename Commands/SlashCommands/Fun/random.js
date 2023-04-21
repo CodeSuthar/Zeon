@@ -3,18 +3,18 @@ const {SlashCommandBuilder, EmbedBuilder, Embed} = require("discord.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("random")
-    .setDescription("Gives you a random answer from the given options")
+    .setDescription("Gives you a random answer from the given options.")
     .addSubcommand(subcommand => subcommand
         .setName("answer")
-        .setDescription("Gives you a random answer from the given options")
+        .setDescription("Gives you a random answer from the given options.")
         .addStringOption(option => option
             .setName("option-1")
-            .setDescription("the first option")
+            .setDescription("the first option.")
             .setRequired(true)
         )
         .addStringOption(option => option
             .setName("option-2")
-            .setDescription("The second option")
+            .setDescription("The second option.")
             .setRequired(true)
         )
     ),

@@ -13,6 +13,24 @@ module.exports = {
 
             if (SlashCommands) {
                 try {
+                    const data = await client.db.get(`botcommandchannel_${interaction.guild.id}`);
+
+                    if (data) {
+                        const data2 = await client.db.get(`botcommandchannel_channel_${interaction.guild.id}`);
+    
+                        if (interaction.channel.id !== data2) {
+                            const embedpro = new EmbedBuilder()
+                            .setDescription(`${client.emoji.wrong} | This guild has configured the Bot System to listen Commands only in <#${data2}> channel. So, To use the bot run commands in <#${data2}> channel.`)
+                            .setColor("Random")
+    
+                            if (!interaction.replied) {
+                                interaction.reply({ embeds: [embedpro] });
+                            } else {
+                                interaction.editReply({ embeds: [embedpro] });
+                            }
+                        }
+                    }
+
                     const db = await client.db.get(`blacklist_${interaction.user.id}`);
 
                     if (db) {

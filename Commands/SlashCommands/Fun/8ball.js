@@ -3,10 +3,10 @@ const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Butt
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('8ball')
-    .setDescription(`This is the 8ball game`)
+    .setDescription(`Help's you to play the iconic 8ball game.`)
     .addStringOption(option => option
         .setName('question')
-        .setDescription(`This will be your question for the 8ball`)
+        .setDescription(`This will be your question for the 8ball.`)
         .setRequired(true)
     ),
     run: async (client, interaction) => {

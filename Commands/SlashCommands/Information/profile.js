@@ -4,10 +4,10 @@ const UserSchema = require("../../../Database/user.js");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("profile")
-    .setDescription("Shows your profile")
+    .setDescription("Shows your profile with achievements, badges, etc.")
     .addUserOption((option) => option
         .setName("user")
-        .setDescription("Give me a user to show his profile")
+        .setDescription("Give me a user to show his profile.")
         .setRequired(true)
     ),
     run: async (client, interaction) => {

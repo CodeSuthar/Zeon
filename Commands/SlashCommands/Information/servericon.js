@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = r
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("servericon")
-    .setDescription("Gives you the server's icon"),
+    .setDescription("Gives the server icon of the server."),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 

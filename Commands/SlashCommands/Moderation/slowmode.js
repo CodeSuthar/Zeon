@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField, ChannelType } = 
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('slowmode')
-    .setDescription('Set the slowmode of a channel')
+    .setDescription('Sets the slowmode of a channel.')
     .addIntegerOption(option => option
         .setName('duration')
         .setDescription('The time of the slowmode')
@@ -11,16 +11,16 @@ module.exports = {
     )
     .addChannelOption(option => option
         .setName('channel')
-        .setDescription('The channel you want to set the slowmode of')
+        .setDescription('The channel you want to set the slowmode of.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(false)
     ),
     run: async(client, interaction, args) => {
         if (!interaction.replied) await interaction.deferReply();
 
-        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply(`Hey Buddy, I need \`Manage Channels Or Administrator\` permissions to execute this command!`);
+        if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Channels Or Administrator permission to use this command!` });
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply(`Hey Buddy, You need \`Manage Channels Or Administrator\` permissions to execute this comand!`);
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Channels Or Administrator permission to use this command!` });
  
         const { options } = interaction;
         const duration = options.getInteger('duration');

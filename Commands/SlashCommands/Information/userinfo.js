@@ -4,10 +4,10 @@ const moment = require("moment");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("userinfo")
-    .setDescription("Gives You Some Pretty Cool Information About A User")
+    .setDescription("Shows you the information about a user.")
     .addUserOption((option) => option
         .setName("user")
-        .setDescription("Give me a user to fetch avatar")
+        .setDescription("The user you want to get the information of.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -26,7 +26,7 @@ module.exports = {
             EmbedLinks: "Embed Links",
             KickMembers: "Kick Members",
             ManageChannels: "Manage Channels",
-            ManageEmojisAndStickers: "Manage Emojis And Stickers",
+            ManageGuildExpressions: "Manage Emojis And Stickers",
             ManageEvents: "Manage Events",
             ManageGuild: "Manage Guild",
             ManageMessages: "Manage Messages",

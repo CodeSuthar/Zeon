@@ -4,10 +4,10 @@ const { default: axios } = require('axios');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('enlarge')
-    .setDescription('make an emoji bigger')
+    .setDescription('Makes an emoji bigger.')
     .addStringOption(option => option
         .setName('emoji')
-        .setDescription('emoji you want to make bigger')
+        .setDescription('emoji you want to make bigger.')
         .setRequired(true)
     ),
     run: async (client, interaction) => {
