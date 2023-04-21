@@ -77,6 +77,8 @@ module.exports = {
 
                     return interaction.editReply({ embeds: [setupembed] })
                 } else {
+                    const ch = await client.db.get(`botcommandchannel_channel_${interaction.guild.id}`);
+                    
                     await client.db.set(`botcommandchannel_${interaction.guild.id}`, false);
 
                     await client.db.set(`botcommandchannel_channel_${interaction.guild.id}`, false);
