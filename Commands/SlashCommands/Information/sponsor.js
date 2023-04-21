@@ -12,7 +12,7 @@ module.exports = {
         .setDescription(`**[auto.creavite.co](https://auto.creavite.co/) is free graphic generator from templates, made by Hannes. It also has premium templates.**`)
         .setImage(`https://images-ext-2.discordapp.net/external/Hglt-T9jXFKYdZUYWvGND-Mb7A9it2L6U5Uh8QU_uWE/https/auto.creavite.co/og-image.jpg?width=1074&height=561`)
         .setColor("Random")
-        .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: client.user.displayAvatarURL() })
+        .setFooter({ text: `Requested by ${interaction.user.tag}` })
         .setTimestamp()
 
         const button = new ButtonBuilder()
