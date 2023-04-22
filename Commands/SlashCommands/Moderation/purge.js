@@ -51,7 +51,7 @@ module.exports = {
         collector.on('collect', async (int) => {
             if (int.customId === 'purge') {
                 if (int.deferred) await int.deferUpdate();
-                await int.deleteReply();
+                await interaction.deleteReply();
             }
         });
     }
