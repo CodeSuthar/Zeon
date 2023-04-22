@@ -29,7 +29,8 @@ module.exports = {
                 inline: true,
             },
         )
-        .setThumbnail("https://cdn.discordapp.com/avatars/969558840926437406/eadc4efd5655de1b06e8ced1dd2ad72e.png?size=4096")
+        .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 512 }))
+        .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
         .setTimestamp()
         
         interaction.editReply({ 
