@@ -48,10 +48,10 @@ module.exports = {
 
         const collector = msg.createMessageComponentCollector({ filter, time: 10000 });
 
-        collector.on('collect', async i => {
-            if (i.customId === 'purge') {
-                await i.deferUpdate();
-                await interaction.deleteReply();
+        collector.on('collect', async (int) => {
+            if (int.customId === 'purge') {
+                if (int.deferred) await int.deferUpdate();
+                await int.deleteReply();
             }
         });
     }
