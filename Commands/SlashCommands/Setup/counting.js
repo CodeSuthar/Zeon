@@ -50,7 +50,7 @@ module.exports = {
         
         const { options, guildId, guild, member } = interaction;
 
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply({ content: "You must have the Manage Guild Or Administrator permission to use this command!" });
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Guild Or Administrator permission to use this command!` });
 
         const SubGroup = options.getSubcommandGroup();
 

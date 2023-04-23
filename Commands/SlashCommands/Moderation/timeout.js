@@ -50,11 +50,10 @@ module.exports = {
 
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Moderate Members Or Administrator permission to use this command!` });
 
-        if (!timeMember) return await interaction.editReply({ content: 'The user mentioned is no longer within the server.' })
-        if (!duration) return interaction.editReply({content: 'You must set a valid duration for the timeout' })
-        if (!timeMember.kickable) return interaction.editReply({ content: 'I cannot timeout this user! This is either because their higher then me or you.' })
-        if (interaction.member.id === timeMember.id) return interaction.editReply({content: "You cannot timeout yourself!" })
-        if (timeMember.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.editReply({content: "You cannot timeout staff members or people with the Administrator permission!" })
+        if (!duration) return interaction.editReply({content: `${client.emoji.wrong} | You must set a valid duration for the timeout` })
+        if (interaction.member.id === timeMember.id) return interaction.editReply({content: `${client.emoji.wrong} | You cannot timeout yourself!` })
+        if (!timeMember.kickable) return interaction.editReply({ content: `${client.emoji.wrong} | I cannot timeout this user! This is either because their higher then me or you.` })
+        if (timeMember.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.editReply({content: `${client.emoji.wrong} | You cannot timeout staff members or people with the Administrator permission!` })
  
         let reason = interaction.options.getString('reason');
         if (!reason) reason = "No reason given."

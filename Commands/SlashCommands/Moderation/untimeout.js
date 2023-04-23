@@ -19,10 +19,10 @@ module.exports = {
         const timeUser = interaction.options.getUser('user');
         const timeMember = await interaction.guild.members.fetch(timeUser.id);
  
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: "You must have the Moderate Members permission to use this command!" })
-        if (interaction.member.id === timeMember.id) return interaction.editReply({content: "You cannot untimeout yourself!" })
-        if (!timeMember.kickable) return interaction.editReply({ content: 'I cannot timeout this user! This is either because their higher then me or you.' })
-        if (timeMember.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.editReply({content: "You cannot untimeout staff members or people with the Administrator permission!" })
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ModerateMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Moderate Members permission to use this command!` })
+        if (interaction.member.id === timeMember.id) return interaction.editReply({content: `${client.emoji.wrong} | You cannot untimeout yourself!` })
+        if (!timeMember.kickable) return interaction.editReply({ content: `${client.emoji.wrong} | I cannot timeout this user! This is either because their higher then me or you.` })
+        if (timeMember.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.editReply({content: `${client.emoji.wrong} | You cannot untimeout staff members or people with the Administrator permission!`})
  
         let reason = interaction.options.getString('reason');
         if (!reason) reason = "No reason given."

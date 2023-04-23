@@ -66,7 +66,7 @@ module.exports = {
             let member = interaction.options.getMember("user");
         
             if (!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
             
             if (!member.voice.channel) {
@@ -89,7 +89,7 @@ module.exports = {
             let member = interaction.options.getMember("user");
         
             if (!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
         
             if (!member.voice.channel) {
@@ -120,7 +120,7 @@ module.exports = {
             let member = interaction.options.getMember("user");
     
             if(!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
         
             if(!member.voice.channel) {
@@ -151,7 +151,7 @@ module.exports = {
             let member = interaction.options.getMember("user");
         
             if (!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
         
             if (!member.voice.channel) {
@@ -186,7 +186,7 @@ module.exports = {
             }
     
             if (!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
 
             if (!member.voice.serverMute) {
@@ -207,7 +207,7 @@ module.exports = {
 
         if (SubCommand === "list") {
             if (!interaction.member.voice.channel) {
-                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`You must be connected to a voice channel first.`)]})
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
             }
     
             let members = interaction.guild.members.cache.filter(m => m.voice?.channel?.id == interaction.member?.voice?.channel?.id).map(m => `${m.user.tag} | <@${m.user.id}>`).join(`\n`)
