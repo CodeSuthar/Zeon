@@ -170,7 +170,7 @@ module.exports = {
                 interaction.editReply({ embeds: [Mod] });
             } else if (int.values[0] === 'Setup') {
                 currentPage = 5;
-                minteraction.editReply({ embeds: [Setup] });
+                interaction.editReply({ embeds: [Setup] });
             } else if (int.values[0] === 'Utility') {
                 currentPage = 6;
                 interaction.editReply({ embeds: [Utility] });
