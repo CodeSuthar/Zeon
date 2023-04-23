@@ -3,10 +3,10 @@ const { SlashCommandBuilder, PermissionsBitField, ChannelType, EmbedBuilder } = 
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("botcommandchannel")
-    .setDescription("Enables or disables the Bot to listen commands in a specific Channel")
+    .setDescription("Help's you in setup, de-setup of bot command channel only system.")
     .addSubcommand((subcommand) => subcommand
-        .setName("enable")
-        .setDescription("Enables the Bot to listen commands in a specific channel")
+        .setName("setup")
+        .setDescription("Setups the advanced bot command channel only system!.")
         .addChannelOption((option) => option
             .setName("channel")
             .setDescription("The Channel where you want to enable The Bot to listen commands")
@@ -15,8 +15,8 @@ module.exports = {
         )
     )
     .addSubcommand((subcommand) => subcommand
-        .setName("disable")
-        .setDescription("Disables the Bot to listen commands in a specific channel")
+        .setName("de-setup")
+        .setDescription("De-setups the bot command channel only system!.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -26,7 +26,7 @@ module.exports = {
         const subcommand = interaction.options.getSubcommand();
 
         switch (subcommand) {
-            case "enable": 
+            case "setup": 
 
                 const data = await client.db.get(`botcommandchannel_${interaction.guild.id}`);
 
@@ -63,7 +63,7 @@ module.exports = {
 
             break;
 
-            case "disable":
+            case "de-setup":
                 const data2 = await client.db.get(`botcommandchannel_${interaction.guild.id}`)
                 
                 if (!data2) {
@@ -89,7 +89,7 @@ module.exports = {
                     .setFooter({ text: `🤖 | System Setup`})
                     .setThumbnail(client.user.displayAvatarURL())
                     .setTimestamp()
-                    .addFields({ name: `• Bot Command Channel is disabled now`, value: `> This channel (${channel}) will now  not act up as \n> the only channel to listen the bot command.`})
+                    .addFields({ name: `• Bot Command Channel is disabled now`, value: `> This channel (${channel}) will now not act up as \n> the only channel to listen the bot command.`})
 
                     botcommandchannelSchema.deleteOne({ Guild: interaction.guild.id })
 

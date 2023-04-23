@@ -25,6 +25,7 @@ module.exports = {
             CallbackURL: process.env.CallbackURL || "/api/callback",
             Port: 20074,
             Scopes: ["identify", "guilds"],
+            ReverseProxy: "103.60.13.250"
         } 
     },
     

@@ -4,11 +4,11 @@ const voiceschema = require('../../../Database/jointocreate');
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('join-to-create')
-    .setDescription('Configure your join to create voice channel.')
+    .setDescription('Hep\'s you in setup, de-setup of join to create voice channel system.')
     .setDMPermission(false)
     .addSubcommand(command => command
         .setName('setup')
-        .setDescription('Sets up your join to create voice channel.')
+        .setDescription('Setups the advanced join to create voice channel system!.')
         .addChannelOption(option => option.setName('channel')
             .setDescription('Specified channel will be your join to create voice channel.')
             .setRequired(true)
@@ -26,8 +26,8 @@ module.exports = {
         )
     )
     .addSubcommand(command => command
-        .setName('disable')
-        .setDescription('Disables your join to create voice channel system.')
+        .setName('de-setup')
+        .setDescription('De-setups the advanced join to create voice channel system!.')
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -70,7 +70,7 @@ module.exports = {
             }
  
             break;
-            case 'disable':
+            case 'de-setup':
  
             if (!data) return await interaction.editReply({ content: `You **do not** have the **join to create** system **set up**, cannot delete **nothing**..`, ephemeral: true});
             else {

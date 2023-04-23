@@ -22,7 +22,7 @@ module.exports = {
         
         //Dashboard
         if (client.config.Dashboard.ShouldRun) {
-            if (await isPortReachable(18612, { host: "usa1.infinitynodes.org" }) === false) {
+            if (await isPortReachable(client.config.Dashboard.Port, { host: client.config.Dashboard.ReverseProxy }) === false) {
                 require("../../Dashboard/dashboard.js")(client);
             }
         }

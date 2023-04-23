@@ -4,10 +4,10 @@ const ticketSchema = require("../../../Database/ticketSchema");
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("ticket")
-    .setDescription("Modifying Or Setting Up Of Advanced Ticket System")
+    .setDescription("Help's you in setup, de-setup of advanced ticket system.")
     .addSubcommand(subcommand => subcommand
         .setName("setup")
-        .setDescription("Enables The Advanced Ticket System!.")
+        .setDescription("Setups the advanced ticket system!.")
         .addChannelOption(option => option
             .setName("channel")
             .setDescription("The channel you want to set up the ticket system in.")
@@ -22,8 +22,8 @@ module.exports = {
         )
     )
     .addSubcommand(subcommand => subcommand
-        .setName("disable")
-        .setDescription("Disables The Advanced Ticket System!.")
+        .setName("de-setup")
+        .setDescription("De-setups the advanced Ticket System!.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -91,7 +91,7 @@ module.exports = {
 
             break;
 
-            case "disable":
+            case "de-setup":
                 const db  = await client.db.get(`ticket_channel_${interaction.guild.id}`);
                 const db1 = await client.db.get (`ticket_message_${interaction.guild.id}_message`);
 
