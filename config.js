@@ -23,9 +23,9 @@ module.exports = {
             ClientSecret: process.env.CLIENT_SECRET || "",
             Domain: process.env.DOMAIN || "https://zeon.code-source.tech",
             CallbackURL: process.env.CallbackURL || "/api/callback",
-            Port: 20074,
+            Port: 9342,
             Scopes: ["identify", "guilds"],
-            ReverseProxy: "103.60.13.250"
+            ReverseProxy: "fi1.pylexservers.xyz"
         } 
     },
     
