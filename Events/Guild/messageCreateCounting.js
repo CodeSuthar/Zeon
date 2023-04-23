@@ -23,7 +23,7 @@ module.exports = {
                 ]
 
                 Data.Count = 1;
-                Data.LastPerson = message.author.id;
+                Data.LastPerson = '';
                 Data.save();
 
                 message.channel.send({
