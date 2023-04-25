@@ -31,6 +31,11 @@ module.exports = {
                 emoji: client.emoji.home
             },
             {
+                label: "AutoMod",
+                value: "Automod",
+                emoji: client.emoji.automod
+            },
+            {
                 label: "Configuration",
                 value: "Config",
                 emoji: client.emoji.gear
@@ -108,6 +113,8 @@ module.exports = {
             .setDisabled(true)
         );
 
+        const automod = new EmbedBuilder().setColor("Random").setDescription(`\`automod flagged-words\`, \`automod keyword\`, \`automod mention-spam\`, \`automod spam-messages\``)
+
         const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel enable\`, \`botcommandchannel disable\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
 
         const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 11 Information Commands.`});
@@ -136,7 +143,7 @@ module.exports = {
             idle: 60000 / 2,
         });
 
-        const pages = [ helpembed, Config, Fun, Info, Mod, Setup, Utility ];
+        const pages = [ helpembed, automod, Config, Fun, Info, Mod, Setup, Utility ];
 
         let currentPage = 0;
     
@@ -156,23 +163,26 @@ module.exports = {
             } else if (int.values[0] === 'Home') {
                 currentPage = 0;
                 interaction.editReply({ embeds: [helpembed] });
-            } else if (int.values[0] === 'Config') {
+            } else if (int.customId === "Automod") {
                 currentPage = 1;
+                interaction.editReply({ embeds: [automod] })
+            } else if (int.values[0] === 'Config') {
+                currentPage = 2;
                 interaction.editReply({ embeds: [Config] });
             } else if (int.values[0] === 'Fun') {
-                currentPage = 2;
+                currentPage = 3;
                 interaction.editReply({ embeds: [Fun] });
             } else if (int.values[0] === 'Info') {
-                currentPage = 3;
+                currentPage = 4;
                 interaction.editReply({ embeds: [Info] })
             } else if (int.values[0] === 'Mod') {
-                currentPage = 4;
+                currentPage = 5;
                 interaction.editReply({ embeds: [Mod] });
             } else if (int.values[0] === 'Setup') {
-                currentPage = 5;
+                currentPage = 6;
                 interaction.editReply({ embeds: [Setup] });
             } else if (int.values[0] === 'Utility') {
-                currentPage = 6;
+                currentPage = 7;
                 interaction.editReply({ embeds: [Utility] });
             }
         })
