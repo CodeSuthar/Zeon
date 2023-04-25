@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
- 
+
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName('8ball')
