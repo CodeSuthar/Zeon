@@ -58,7 +58,7 @@ module.exports = {
                 .setColor('Random')
                 .setAuthor({ name: `🔊 Join to Create system`})
                 .setFooter({ text: `🔊 System Setup`})
-                .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081227919256457246/largepurple.png')
+                .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }))
                 .setTimestamp()
                 .addFields({ name: `• Join to Create was Enabled`, value: `> Your channel (${channel}) will now act as \n> your join to create channel.`})
                 .addFields(
@@ -79,7 +79,7 @@ module.exports = {
                 .setColor('Random')
                 .setAuthor({ name: `🔊 Join to Create system`})
                 .setFooter({ text: `🔊 System Disabled`})
-                .setThumbnail('https://cdn.discordapp.com/attachments/1080219392337522718/1081227919256457246/largepurple.png')
+                .setThumbnail(client.user.displayAvatarURL({ dynamic: true, size: 2048 }))
                 .setTimestamp()
                 .addFields({ name: `• Join to Create was Disabled`, value: `> Your channel (<#${data.Channel}>) will no longer act as \n> your join to create channel.`})
  

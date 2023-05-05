@@ -1,0 +1,215 @@
+const { SlashCommandBuilder, PermissionsBitField } = require(`discord.js`);
+const ms = require('ms');
+const { mongoose } = require(`mongoose`)
+ 
+//if interaction is being edited by the method editReply then the ephemeral thing is not required.
+
+module.exports = {
+    SlashData: new SlashCommandBuilder()
+    .setName(`giveaway`)
+    .setDescription(`Start a giveaway or configure already existing ones.`)
+    .addSubcommand(command => command
+        .setName('start')
+        .setDescription('Starts a giveaway with the specified fields.')
+        .addStringOption(option => option
+            .setName('duration')
+            .setDescription(`Specified duration will be the giveaway's duration (in ms)`)
+            .setRequired(true)
+        )
+        .addIntegerOption(option => option
+            .setName('winners')
+            .setDescription('Specified amount will be the amount of winners chosen.')
+            .setRequired(true)
+        )
+        .addStringOption(option => option
+            .setName('prize')
+            .setDescription('Specified prize will be the prize for the giveaway.')
+            .setRequired(true)
+        )
+        .addChannelOption(option => option
+            .setName('channel')
+            .setDescription('Specified channel will receive the giveaway.')
+        )
+        .addStringOption(option => option
+            .setName('content')
+            .setDescription('Specified content will be used for the giveaway embed.')
+        )
+    )
+    .addSubcommand(command => command
+        .setName(`edit`)
+        .setDescription(`Edits specified giveaway.`)
+        .addStringOption(option => option
+            .setName('message-id')
+            .setDescription('Specify the message ID of the giveaway you want to edit.')
+            .setRequired(true)
+        )
+        .addStringOption(option => option
+            .setName('time')
+            .setDescription('Specify the added duration of the giveaway (in ms).').setRequired(true)
+        )
+        .addIntegerOption(option => option
+            .setName('winners')
+            .setDescription('Specify the new ammount of winners.')
+            .setRequired(true)
+        )
+        .addStringOption(option => option
+            .setName('prize')
+            .setDescription('Specify the new prize for the giveaway.')
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(command => command
+        .setName('end')
+        .setDescription(`Ends specified giveaway.`)
+        .addStringOption(option => option
+            .setName('message-id')
+            .setDescription('Specify the message ID of the giveaway you want to end.').setRequired(true)
+        )
+    )
+    .addSubcommand(command => command
+        .setName(`reroll`)
+        .setDescription(`Rerolls specified giveaway.`)
+        .addStringOption(option => option.setName('message-id')
+        .setDescription('Specify the message ID of the giveaway you want to reroll.')
+        .setRequired(true)
+        )
+    ),
+    run: async (client, interaction) => {
+        if (!interaction.replied) return interaction.deferReply({ ephemeral: true });
+ 
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
+            return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Roles Or Administrator permission to use this command!` });
+        }
+ 
+        const sub = interaction.options.getSubcommand();
+ 
+        switch (sub) {
+            case 'start':
+            // GIVEAWAY START COMMAND CODE //
+ 
+            const duration = ms(interaction.options.getString("duration"));
+            if (!duration) return interaction.editReply({ content: `${client.emoji.wrong} | You must specify a valid duration!` })
+            const winnerCount = interaction.options.getInteger('winners');
+            const prize = interaction.options.getString('prize');
+            const contentmain = interaction.options.getString(`content`);
+            const channel = interaction.options.getChannel("channel");
+            const showchannel = interaction.options.getChannel('channel') || interaction.channel;
+            if (!channel && !contentmain)
+ 
+            client.giveawayManager.start(interaction.channel, {
+                prize,
+                winnerCount,
+                duration,
+                hostedBy: interaction.user,
+                lastChance: {
+                    enabled: false,
+                    content: contentmain,
+                    threshold: 60000000000_000,
+                    embedColor: 'Random'
+                }
+            });
+            else if (!channel)
+            client.giveawayManager.start(interaction.channel, {
+                prize,
+                winnerCount,
+                duration,
+                hostedBy: interaction.user,
+                lastChance: {
+                    enabled: true,
+                    content: contentmain,
+                    threshold: 60000000000_000,
+                    embedColor: 'Random'
+                }
+            });
+            else if (!contentmain)
+            client.giveawayManager.start(channel, {
+                prize,
+                winnerCount,
+                duration,
+                hostedBy: interaction.user,
+                lastChance: {
+                    enabled: false,
+                    content: contentmain,
+                    threshold: 60000000000_000,
+                    embedColor: 'Random'
+                }
+            });
+            else 
+            client.giveawayManager.start(channel, {
+                prize,
+                winnerCount,
+                duration,
+                hostedBy: interaction.user,
+                lastChance: {
+                    enabled: true,
+                    content: contentmain,
+                    threshold: 60000000000_000,
+                    embedColor: 'Random'
+                }
+            });
+ 
+            return interaction.editReply({ content: `Your **giveaway** has started successfuly! Check ${showchannel}.` })
+ 
+ 
+            // EDIT GIVEAWAY CODE //
+ 
+            break;
+            case 'edit':
+            await interaction.editReply({ content: `**Editing** your giveaway..` });
+ 
+            const newprize = interaction.options.getString('prize');
+            const newduration = interaction.options.getString('time');
+            const newdurationinms = ms(newduration);
+            if (!newdurationinms) return interaction.editReply({ content: `${client.emoji.wrong} | You must specify a valid duration!`})
+            const newwinners = interaction.options.getInteger('winners');
+            const messageId = interaction.options.getString('message-id');
+
+            if (!messageId) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${query}**".` });
+
+            client.giveawayManager.edit(messageId, {
+                addTime: ms(newduration),
+                newWinnerCount: newwinners,
+                newPrize: newprize
+            }).then(() => {
+                interaction.editReply({ content: `Your **giveaway** has been **edited** successfuly!`, ephemeral: true});
+            }).catch((err) => {
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+            });
+ 
+            // END GIVEAWAY CODE //
+            break;
+            case 'end':
+ 
+            await interaction.editReply({ content: `**Ending** your giveaway..` });
+ 
+            const messageId1 = interaction.options.getString('message-id');
+
+            if (!messageId1) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${query}**".` });
+
+            client.giveawayManager.end(messageId1).then(() => {
+                interaction.editReply({ content: 'Your **giveaway** has ended **successfuly!**', ephemeral: true});
+            })
+            .catch((err) => {
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+            });
+ 
+            break;
+            case 'reroll':
+            // REROLL GIVEAWAY CODE //
+            await interaction.editReply({ content: `**Rerolling** your giveaway..` });
+ 
+            const query = interaction.options.getString('message-id');
+            const giveaway = client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.prize === query) || client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === query);
+
+            if (!giveaway) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${query}**".` });
+
+            const messageId2 = interaction.options.getString('message-id');
+            client.giveawayManager.reroll(messageId2).then(() => {
+                interaction.editReply({ content: `Your **giveaway** has been **successfuly** rerolled!`});
+            })
+            .catch((err) => {
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+            });
+        }
+    }
+}

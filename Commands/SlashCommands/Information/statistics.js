@@ -24,7 +24,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle(`Zeon's statistics`)
-            .setDescription(`**Hey am [Zeon](https://zeonbot.xyz/) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
+            .setDescription(`**Hey am [Zeon](https://zeon.code-source.tech/) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
 `)
             .setThumbnail("https://images-ext-1.discordapp.net/external/lzR6jeDYThwRRvQHu6uEvedNACkrFmY8HxleMNfx2r8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/969558840926437406/9d2c7499963e7b2d409bca59f4a24a60.png?width=558&height=558")
             .setColor("#00008B")

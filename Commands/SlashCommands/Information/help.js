@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder } = require("discord.js");
+const e = require("express");
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -12,8 +13,8 @@ module.exports = {
         .setColor("Random")
         .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm <@${client.user.id}> , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
         .addFields(
-            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.gear}  \`:\`  **Configuration**\n${client.emoji.fun}  \`:\`  **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.system} \`:\` Setup\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
-            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeon.code-source.tech) • [Support Server](https://discord.gg/C7PJbvjECt) • [Creavite.co](https://auto.creavite.co/)`}
+            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.jointocreate} \`:\` Join To Create\n${client.emoji.system} \`:\` Setup\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` Counting\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
+            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeon.code-source.tech) • [Support Server](https://discord.gg/C7PJbvjECt) • [Creavite](https://crvt.co/b)`}
         )
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter({ text: `Helping You Is My Pleasure <3`, iconURL: client.user.displayAvatarURL() })
@@ -56,15 +57,25 @@ module.exports = {
                 emoji: client.emoji.mod
             },
             {
-                label: "Setup Systems",
-                value: "Setup",
-                emoji: client.emoji.system
+                label: "Join To Create",
+                value: "jointocreate",
+                emoji: client.emoji.jointocreate
+            },
+            {
+                lable: "Ticket",
+                value: "ticket",
+                emoji: client.emoji.ticket
+            },
+            {
+                name: "Counting",
+                value: "counting",
+                emoji: client.emoji.counting
             },
             {
                 label: "Utility",
                 value: "Utility",
                 emoji: client.emoji.utility
-            },
+            }
         ]);
         
         const Ended = new StringSelectMenuBuilder()
@@ -75,10 +86,55 @@ module.exports = {
         .setPlaceholder(`HelpMenu Has Been Expired!`)
         .addOptions([
             {
-                label: "Can't Use It Lol",
-                description: "Disabled",
-                value: "disabled",
+                label: "Home",
+                value: "Home",
+                emoji: client.emoji.home
             },
+            {
+                label: "AutoMod",
+                value: "Automod",
+                emoji: client.emoji.automod
+            },
+            {
+                label: "Configuration",
+                value: "Config",
+                emoji: client.emoji.gear
+            },
+            {
+                label: "Fun",
+                value: "Fun",
+                emoji: client.emoji.fun
+            },
+            {
+                label: "Information",
+                value: "Info",
+                emoji: client.emoji.info
+            },
+            {
+                label: "Moderation",
+                value: "Mod",
+                emoji: client.emoji.mod
+            },
+            {
+                label: "Join To Create",
+                value: "jointocreate",
+                emoji: client.emoji.jointocreate
+            },
+            {
+                lable: "Ticket",
+                value: "ticket",
+                emoji: client.emoji.ticket
+            },
+            {
+                name: "Counting",
+                value: "counting",
+                emoji: client.emoji.counting
+            },
+            {
+                label: "Utility",
+                value: "Utility",
+                emoji: client.emoji.utility
+            }
         ]);
         
         const row = new ActionRowBuilder()
@@ -115,7 +171,7 @@ module.exports = {
 
         const automod = new EmbedBuilder().setColor("Random").setDescription(`\`automod flagged-words\`, \`automod keyword\`, \`automod mention-spam\`, \`automod spam-messages\``)
 
-        const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel enable\`, \`botcommandchannel disable\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
+        const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel setup\`, \`botcommandchannel de-setup\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
 
         const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 11 Information Commands.`});
 
@@ -123,7 +179,11 @@ module.exports = {
 
         const Mod = new EmbedBuilder().setColor("Random").setDescription(`\`ban\`, \`kick\`, \`lock\`, \`mass-unban\`, \`purge\`, \`setnick\`, \`slowmode\`, \`timeout\`, \`unlock\`, \`untimeout\`, \`voice kick\`, \`voice deafen\`, \`voice undeafen\`, \`voice mute\`, \`voice unmute\`, \`voice list\``).setTitle("Moderation Commands").setFooter({text: `Total 16 Moderation Commands.`});
 
-        const Setup = new EmbedBuilder().setColor("Random").setDescription(`\`join-to-create setup\`, \`join-to-create disable\`, \`ticket setup\`, \`ticket disable\``).setTitle("Setup Commands").setFooter({text: `Total 4 Setup Commands.`});
+        const jointocreate = new EmbedBuilder().setColor("Random").setDescription(`\`jointocreate setup\`, \`jointocreate de-setup\``).setTitle("Join To Create Commands").setFooter({text: `Total 2 Join To Create Commands.`});
+
+        const ticket = new EmbedBuilder().setColor("Random").setDescription(`\`ticket setup\`, \`ticket de-setup\``).setTitle("Ticket Commands").setFooter({text: `Total 2 Ticket Commands.`})
+
+        const counting = new EmbedBuilder().setColor("Random").setDescription(`\`counting game setup\`, \`counting game de-setup\`. \`counting user block\`, \`counting user unblock\``).setTitle("Counting Commands").setFooter({text: `Total 4 Counting Commands.`})
 
         const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 7 Utility Commands.`});
         
@@ -143,7 +203,7 @@ module.exports = {
             idle: 60000 / 2,
         });
 
-        const pages = [ helpembed, automod, Config, Fun, Info, Mod, Setup, Utility ];
+        const pages = [ helpembed, automod, Config, Fun, Info, Mod, jointocreate, ticket, counting, Utility ];
 
         let currentPage = 0;
     
@@ -178,9 +238,15 @@ module.exports = {
             } else if (int.values[0] === 'Mod') {
                 currentPage = 5;
                 interaction.editReply({ embeds: [Mod] });
-            } else if (int.values[0] === 'Setup') {
+            } else if (int.values[0] === 'jointocreate') {
                 currentPage = 6;
-                interaction.editReply({ embeds: [Setup] });
+                interaction.editReply({ embeds: [jointocreate] });
+            } else if (int.values[0] === 'ticket') {
+                currentPage = 7;
+                interaction.editReply({ embeds: [ticket] });
+            } else if (int.values[0] === 'counting') {
+                currentPage = 8;
+                interaction.editReply({ embeds: [counting] });
             } else if (int.values[0] === 'Utility') {
                 currentPage = 7;
                 interaction.editReply({ embeds: [Utility] });

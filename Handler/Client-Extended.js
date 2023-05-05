@@ -17,6 +17,20 @@ module.exports = async (client) => {
     client.rest.on('rateLimited', (info) => {
         console.log("[ Rate Limited Log ]" + info);
     });
+
+    //Giveaway Manager
+    const GiveawaysManager = require("./Bot-Function-Extended/DiscordGiveaways.js");
+
+    const giveawayManager = new GiveawaysManager(client, {
+        default: {
+          botsCanWin: false,
+          embedColor: "#a200ff",
+          embedColorEnd: "#550485",
+          reaction: "🎉",
+        }
+    });
+
+    client.giveawaysManager = giveawayManager;
 };
 
 function timertowait(ms) {
