@@ -21,7 +21,7 @@ module.exports = async (client) => {
     //Giveaway Manager
     const GiveawaysManager = require("./Bot-Function-Extended/DiscordGiveaways.js");
 
-    const giveawayManager = new GiveawaysManager(client, {
+    client.giveawayManager = new GiveawaysManager(client, {
         default: {
           botsCanWin: false,
           embedColor: "#a200ff",
@@ -29,8 +29,6 @@ module.exports = async (client) => {
           reaction: "🎉",
         }
     });
-
-    client.giveawaysManager = giveawayManager;
 };
 
 function timertowait(ms) {

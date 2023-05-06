@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField } = require(`discord.js`);
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, PermissionsBitField } = require(`discord.js`);
 const ms = require('ms');
 const { mongoose } = require(`mongoose`)
  
@@ -75,7 +75,7 @@ module.exports = {
         )
     ),
     run: async (client, interaction) => {
-        if (!interaction.replied) return interaction.deferReply({ ephemeral: true });
+        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
  
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
             return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Roles Or Administrator permission to use this command!` });
@@ -94,61 +94,102 @@ module.exports = {
             const contentmain = interaction.options.getString(`content`);
             const channel = interaction.options.getChannel("channel");
             const showchannel = interaction.options.getChannel('channel') || interaction.channel;
-            if (!channel && !contentmain)
+            if (!channel && !contentmain) {
+
+                client.giveawayManager.start(interaction.channel, {
+                    prize,
+                    winnerCount,
+                    duration,
+                    hostedBy: interaction.user,
+                    lastChance: {
+                        enabled: false,
+                        content: contentmain,
+                        threshold: 60000000000_000,
+                        embedColor: 'Random'
+                    },
+                    messages: {
+                        drawing: "Ends in: {timestamp}\n",
+                        hostedBy: "**Hosted by:**\n{this.hostedBy}",
+                        noWinner: "Giveaway cancelled, no valid participations.\n",
+                        endedAt: "Ended at", 
+                        giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
+                        giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
+                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
+                    }
+                });
+            } else if (!channel) {
+                client.giveawayManager.start(interaction.channel, {
+                    prize,
+                    winnerCount,
+                    duration,
+                    hostedBy: interaction.user,
+                    lastChance: {
+                        enabled: true,
+                        content: contentmain,
+                        threshold: 60000000000_000,
+                        embedColor: 'Random'
+                    },
+                    messages: {
+                        drawing: "Ends in: {timestamp}\n",
+                        hostedBy: "**Hosted by:**\n{this.hostedBy}",
+                        noWinner: "Giveaway cancelled, no valid participations.\n",
+                        endedAt: "Ended at", 
+                        giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
+                        giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
+                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
+                    }
+                });
+            } else if (!contentmain) {
+                client.giveawayManager.start(channel, {
+                    prize,
+                    winnerCount,
+                    duration,
+                    hostedBy: interaction.user,
+                    lastChance: {
+                        enabled: false,
+                        content: contentmain,
+                        threshold: 60000000000_000,
+                        embedColor: 'Random'
+                    },
+                    messages: {
+                        drawing: "Ends in: {timestamp}\n",
+                        hostedBy: "**Hosted by:**\n{this.hostedBy}",
+                        noWinner: "Giveaway cancelled, no valid participations.\n",
+                        endedAt: "Ended at", 
+                        giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
+                        giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
+                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
+                    }
+                });
+            } else {
+                client.giveawayManager.start(channel, {
+                    prize,
+                    winnerCount,
+                    duration,
+                    hostedBy: interaction.user,
+                    lastChance: {
+                        enabled: true,
+                        content: contentmain,
+                        threshold: 60000000000_000,
+                        embedColor: 'Random'
+                    },
+                    messages: {
+                        drawing: "Ends in: {timestamp}\n",
+                        hostedBy: "**Hosted by:**\n{this.hostedBy}",
+                        noWinner: "Giveaway cancelled, no valid participations.\n",
+                        endedAt: "Ended at", 
+                        giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
+                        giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
+                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
+                    }
+                });
+            }
  
-            client.giveawayManager.start(interaction.channel, {
-                prize,
-                winnerCount,
-                duration,
-                hostedBy: interaction.user,
-                lastChance: {
-                    enabled: false,
-                    content: contentmain,
-                    threshold: 60000000000_000,
-                    embedColor: 'Random'
-                }
-            });
-            else if (!channel)
-            client.giveawayManager.start(interaction.channel, {
-                prize,
-                winnerCount,
-                duration,
-                hostedBy: interaction.user,
-                lastChance: {
-                    enabled: true,
-                    content: contentmain,
-                    threshold: 60000000000_000,
-                    embedColor: 'Random'
-                }
-            });
-            else if (!contentmain)
-            client.giveawayManager.start(channel, {
-                prize,
-                winnerCount,
-                duration,
-                hostedBy: interaction.user,
-                lastChance: {
-                    enabled: false,
-                    content: contentmain,
-                    threshold: 60000000000_000,
-                    embedColor: 'Random'
-                }
-            });
-            else 
-            client.giveawayManager.start(channel, {
-                prize,
-                winnerCount,
-                duration,
-                hostedBy: interaction.user,
-                lastChance: {
-                    enabled: true,
-                    content: contentmain,
-                    threshold: 60000000000_000,
-                    embedColor: 'Random'
-                }
-            });
- 
-            return interaction.editReply({ content: `Your **giveaway** has started successfuly! Check ${showchannel}.` })
+                return interaction.editReply({ content: `Your **giveaway** has started successfuly! Check ${showchannel}.` })
  
  
             // EDIT GIVEAWAY CODE //

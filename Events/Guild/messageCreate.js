@@ -78,16 +78,6 @@ module.exports = {
                         return await message.replyy({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`The command is premium only, you can purchase premium to override all command restrictions, including vote request command. To buy, contact \`Rtxeon#4726\``)] }).catch(() => { });
                     }
                 }
-
-                if (SlashCommands.premiumReq) {
-                    if (!PGuild) {
-                        if (interaction.replied) {
-                            return await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`The command is premium only, you can purchase premium to override all command restrictions, including vote request command. To buy, contact Rtxeon#4726`)] }).catch(() => { });
-                        } else {
-                            return await interaction.reply({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`The command is premium only, you can purchase premium to override all command restrictions, including vote request command. To buy, contact Rtxeon#4726`)] }).catch(() => { });
-                        }
-                    }
-                }
                 
 
                 if (command.voteReq) {
@@ -100,7 +90,7 @@ module.exports = {
                     }
                 };
 
-                if (command.DeveloperId.includes(message.author.id)) {
+                if (!client.DeveloperId.includes(message.author.id)) {
                     const embed = new EmbedBuilder()
                     .setColor("Random")
                     .setDescription(`We have moved Zeon Commands From Message Commands And Slash Command To Slash Command Only, Please Use Slash Command To Use This Command. Sorry For The Inconvenience \`<3\``);

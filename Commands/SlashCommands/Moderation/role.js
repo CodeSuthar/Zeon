@@ -7,7 +7,11 @@ module.exports = {
     .addSubcommand(subcommand => subcommand
         .setName('all')
         .setDescription('Gives a role to a every member in the guild')
-        .addRoleOption("The role you want to give to every member in the guild")
+        .addRoleOption(option => option
+            .setName('role')
+            .setDescription('The role you want to give to every member in the guild')
+            .setRequired(true)
+        )
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
