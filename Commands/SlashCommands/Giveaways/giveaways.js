@@ -1,8 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder, PermissionsBitField } = require(`discord.js`);
 const ms = require('ms');
 const { mongoose } = require(`mongoose`)
- 
-//if interaction is being edited by the method editReply then the ephemeral thing is not required.
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -63,15 +61,35 @@ module.exports = {
         .setDescription(`Ends specified giveaway.`)
         .addStringOption(option => option
             .setName('message-id')
-            .setDescription('Specify the message ID of the giveaway you want to end.').setRequired(true)
+            .setDescription('Specify the message ID of the giveaway you want to end.')
+            .setRequired(true)
         )
     )
     .addSubcommand(command => command
         .setName(`reroll`)
         .setDescription(`Rerolls specified giveaway.`)
-        .addStringOption(option => option.setName('message-id')
-        .setDescription('Specify the message ID of the giveaway you want to reroll.')
-        .setRequired(true)
+        .addStringOption(option => option
+            .setName('message-id')
+            .setDescription('Specify the message ID of the giveaway you want to reroll.')
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(command => command
+        .setName(`pause`)
+        .setDescription("Pauses A Giveaway")
+        .addStringOption(option => option
+            .setName('message-id')
+            .setDescription('Specify the message ID of the giveaway you want to pause.')
+            .setRequired(true)
+        )
+    )
+    .addSubcommand(command => command
+        .setName(`resumes`)
+        .setDescription("Resumes A Giveaway")
+        .addStringOption(option => option
+            .setName('message-id')
+            .setDescription('Specify the message ID of the giveaway you want to resumes.')
+            .setRequired(true)
         )
     ),
     run: async (client, interaction) => {
@@ -130,6 +148,12 @@ module.exports = {
                         threshold: 60000000000_000,
                         embedColor: 'Random'
                     },
+                    pauseOptions: {
+                        isPaused: false,
+                        content: `${client.config.paused} This giveaway has been paused!** ${client.config.paused}`,
+                        unPauseAfter: null,
+                        embedColor: 'Random'
+                    },
                     messages: {
                         drawing: "Ends in: {timestamp}\n",
                         hostedBy: "**Hosted by:**\n{this.hostedBy}",
@@ -153,7 +177,13 @@ module.exports = {
                         threshold: 60000000000_000,
                         embedColor: 'Random'
                     },
-                    messages: {
+                    pauseOptions: {
+                        isPaused: false,
+                        content: `${client.config.paused} This giveaway has been paused!** ${client.config.paused}`,
+                        unPauseAfter: null,
+                        embedColor: 'Random'
+                    },
+                    messages: { 
                         drawing: "Ends in: {timestamp}\n",
                         hostedBy: "**Hosted by:**\n{this.hostedBy}",
                         noWinner: "Giveaway cancelled, no valid participations.\n",
@@ -174,6 +204,12 @@ module.exports = {
                         enabled: true,
                         content: contentmain,
                         threshold: 60000000000_000,
+                        embedColor: 'Random'
+                    },
+                    pauseOptions: {
+                        isPaused: false,
+                        content: `${client.config.paused} This giveaway has been paused!** ${client.config.paused}`,
+                        unPauseAfter: null,
                         embedColor: 'Random'
                     },
                     messages: {
@@ -212,9 +248,9 @@ module.exports = {
                 newWinnerCount: newwinners,
                 newPrize: newprize
             }).then(() => {
-                interaction.editReply({ content: `Your **giveaway** has been **edited** successfuly!`, ephemeral: true});
+                interaction.editReply({ content: `Your **giveaway** has been **edited** successfuly!` });
             }).catch((err) => {
-                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}` });
             });
  
             // END GIVEAWAY CODE //
@@ -228,10 +264,10 @@ module.exports = {
             if (!messageId1) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${query}**".` });
 
             client.giveawayManager.end(messageId1).then(() => {
-                interaction.editReply({ content: 'Your **giveaway** has ended **successfuly!**', ephemeral: true});
+                interaction.editReply({ content: 'Your **giveaway** has ended **successfuly!**' });
             })
             .catch((err) => {
-                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}` });
             });
  
             break;
@@ -249,8 +285,54 @@ module.exports = {
                 interaction.editReply({ content: `Your **giveaway** has been **successfuly** rerolled!`});
             })
             .catch((err) => {
-                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}`, ephemeral: true});
+                interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}` });
             });
+            break;
+
+            case 'pause':
+            // PAUSE GIVEAWAY CODE //
+            await interaction.editReply({ content: `**Pausing** your giveaway..` });
+ 
+            const msgid = interaction.options.getString('message-id');
+            const gw = client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.prize === msgid) || client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === msgid);
+
+            if (!gw) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${msgid}**".` });
+
+            const messageId3 = interaction.options.getString('message-id');
+            client.giveawayManager.pause(messageId3).then(() => {
+                interaction.editReply({ content: `Your **giveaway** has been **successfuly** paused!`});
+            })
+            .catch((err) => {
+                if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is already ended.`)) {
+                    interaction.editReply({ content : "This giveaway is already ended!" });
+                } else {
+                    console.log(e)
+                    interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}` });
+                }
+            });
+            break;
+
+            case 'resume':
+            // RESUME GIVEAWAY CODE //
+            await interaction.editReply({ content: `**Resuming** your giveaway..` });
+ 
+            const msgid2 = interaction.options.getString('message-id');
+            const gw2 = client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.prize === msgid2) || client.giveawayManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === msgid2);
+
+            if (!gw2) return interaction.editReply({ content: `${client.emoji.wrong} | **Couldn't** find a **giveaway** with the ID of "**${msgid2}**".` });
+
+            const messageId4 = interaction.options.getString('message-id');
+            client.giveawayManager.unpause(messageId4).then(() => {
+                interaction.editReply({ content: `Your **giveaway** has been **successfuly** resumed!`});
+            }).catch((err) => {
+                if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is already ended.`)) {
+                    interaction.editReply({ content : "This giveaway is already ended!" });
+                } else {
+                    console.log(e)
+                    interaction.editReply({ content: `An **error** occured! Please contact **Rtxeon#4726** if this issue continues. \n> **Error**: ${err}` });
+                }
+            });
+            break;
         }
     }
 }

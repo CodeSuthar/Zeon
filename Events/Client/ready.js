@@ -10,7 +10,6 @@ module.exports = {
         let mcount = 0; 
         client.guilds.cache.forEach((guild) => {
             mcount += guild.memberCount;
-
         });
 
         //Game
