@@ -3,9 +3,8 @@ const { PermissionsBitField, EmbedBuilder, ChannelType } = require('discord.js')
 const publishschema = require('../../../Database/autoPublish');
  
 module.exports = {
-    data: new SlashCommandBuilder()
+    SlashData: new SlashCommandBuilder()
     .setName('auto')
-    .setDMPermission(false)
     .setDescription('Configure your auto publisher system.')
     .addSubcommand(command => command.setName('publisher-add').setDescription('Adds a channel to the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be added to the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))
     .addSubcommand(command => command.setName('publisher-remove').setDescription('Removes a channel from the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be removed from the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))

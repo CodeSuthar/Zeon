@@ -84,7 +84,7 @@ module.exports = {
         )
     )
     .addSubcommand(command => command
-        .setName(`resumes`)
+        .setName(`resume`)
         .setDescription("Resumes A Giveaway")
         .addStringOption(option => option
             .setName('message-id')
@@ -302,8 +302,8 @@ module.exports = {
             client.giveawayManager.pause(messageId3).then(() => {
                 interaction.editReply({ content: `Your **giveaway** has been **successfuly** paused!`});
             })
-            .catch((err) => {
-                if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is already ended.`)) {
+            .catch((e) => {
+                if (e.startsWith(`Giveaway with message Id ${messageId3} is already ended.`)) {
                     interaction.editReply({ content : "This giveaway is already ended!" });
                 } else {
                     console.log(e)
@@ -324,8 +324,8 @@ module.exports = {
             const messageId4 = interaction.options.getString('message-id');
             client.giveawayManager.unpause(messageId4).then(() => {
                 interaction.editReply({ content: `Your **giveaway** has been **successfuly** resumed!`});
-            }).catch((err) => {
-                if (e.startsWith(`Giveaway with message Id ${giveaway.messageId} is already ended.`)) {
+            }).catch((e) => {
+                if (e.startsWith(`Giveaway with message Id ${messageId4} is already ended.`)) {
                     interaction.editReply({ content : "This giveaway is already ended!" });
                 } else {
                     console.log(e)

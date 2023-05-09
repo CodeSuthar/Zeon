@@ -1,3 +1,5 @@
+const { ChannelType } = require("discord.js");
+
 module.exports = {
     name: "messageCreate",
     run: async (client, message) => {
