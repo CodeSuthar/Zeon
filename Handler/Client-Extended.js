@@ -11,7 +11,6 @@ module.exports = async (client) => {
     client.timertowait = timertowait;
     client.noprefix = client.config.Bot.NoPrefix;
     client.DeveloperId = client.config.Bot.DeveloperId;
-    client.util = new Util(client);
     client.emoji = require("../emoji.json");
 
     client.rest.on('rateLimited', (info) => {

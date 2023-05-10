@@ -13,8 +13,8 @@ module.exports = {
         .setColor("Random")
         .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm <@${client.user.id}> , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
         .addFields(
-            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.jointocreate} \`:\` Join To Create\n${client.emoji.system} \`:\` Setup\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` Counting\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
-            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeon.code-source.tech) • [Support Server](https://discord.gg/C7PJbvjECt) • [Creavite](https://crvt.co/b)`}
+            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.gift} \`:\` Giveaway\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.jointocreate} \`:\` Join To Create\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` Counting\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
+            { name: "___Links___",  value: `[Vote](https://top.gg/bot/969558840926437406/vote) • [Dashboard](https://zeon.code-source.tech) • [Support Server](https://discord.gg/py6YtgyFwp)`}
         )
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter({ text: `Helping You Is My Pleasure <3`, iconURL: client.user.displayAvatarURL() })
@@ -25,58 +25,52 @@ module.exports = {
         .setMinValues(1)
         .setMaxValues(1)
         .setPlaceholder(`Scroll The Help Menu!`)
-        .addOptions([
-            {
-                label: "Home",
-                value: "Home",
-                emoji: client.emoji.home
-            },
-            {
-                label: "AutoMod",
-                value: "Automod",
-                emoji: client.emoji.automod
-            },
-            {
-                label: "Configuration",
-                value: "Config",
-                emoji: client.emoji.gear
-            },
-            {
-                label: "Fun",
-                value: "Fun",
-                emoji: client.emoji.fun
-            },
-            {
-                label: "Information",
-                value: "Info",
-                emoji: client.emoji.info
-            },
-            {
-                label: "Moderation",
-                value: "Mod",
-                emoji: client.emoji.mod
-            },
-            {
-                label: "Join To Create",
-                value: "jointocreate",
-                emoji: client.emoji.jointocreate
-            },
-            {
-                lable: "Ticket",
-                value: "ticket",
-                emoji: client.emoji.ticket
-            },
-            {
-                name: "Counting",
-                value: "counting",
-                emoji: client.emoji.counting
-            },
-            {
-                label: "Utility",
-                value: "Utility",
-                emoji: client.emoji.utility
-            }
-        ]);
+        .addOptions(
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Home")
+            .setValue("Home")
+            .setEmoji(client.emoji.home),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("AutoMod")
+            .setValue("Automod")
+            .setEmoji(client.emoji.automod),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Configuration")
+            .setValue("Config")
+            .setEmoji(client.emoji.gear),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Fun")
+            .setValue("Fun")
+            .setEmoji(client.emoji.fun),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Information")
+            .setValue("Info")
+            .setEmoji(client.emoji.info),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Giveaway")
+            .setValue("gw")
+            .setEmoji(client.emoji.gift),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Moderation")
+            .setValue("Mod")
+            .setEmoji(client.emoji.mod),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Join To Create")
+            .setValue("jointocreate")
+            .setEmoji(client.emoji.jointocreate),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Ticket")
+            .setValue("ticket")
+            .setEmoji(client.emoji.ticket),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Counting")
+            .setValue("counting")
+            .setEmoji(client.emoji.counting),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Utility")
+            .setValue("utility")
+            .setEmoji(client.emoji.utility)
+        );
         
         const Ended = new StringSelectMenuBuilder()
         .setCustomId('menu')
@@ -84,58 +78,52 @@ module.exports = {
         .setMinValues(1)
         .setMaxValues(1)
         .setPlaceholder(`HelpMenu Has Been Expired!`)
-        .addOptions([
-            {
-                label: "Home",
-                value: "Home",
-                emoji: client.emoji.home
-            },
-            {
-                label: "AutoMod",
-                value: "Automod",
-                emoji: client.emoji.automod
-            },
-            {
-                label: "Configuration",
-                value: "Config",
-                emoji: client.emoji.gear
-            },
-            {
-                label: "Fun",
-                value: "Fun",
-                emoji: client.emoji.fun
-            },
-            {
-                label: "Information",
-                value: "Info",
-                emoji: client.emoji.info
-            },
-            {
-                label: "Moderation",
-                value: "Mod",
-                emoji: client.emoji.mod
-            },
-            {
-                label: "Join To Create",
-                value: "jointocreate",
-                emoji: client.emoji.jointocreate
-            },
-            {
-                lable: "Ticket",
-                value: "ticket",
-                emoji: client.emoji.ticket
-            },
-            {
-                name: "Counting",
-                value: "counting",
-                emoji: client.emoji.counting
-            },
-            {
-                label: "Utility",
-                value: "Utility",
-                emoji: client.emoji.utility
-            }
-        ]);
+        .addOptions(
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Home")
+            .setValue("Home")
+            .setEmoji(client.emoji.home),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("AutoMod")
+            .setValue("Automod")
+            .setEmoji(client.emoji.automod),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Configuration")
+            .setValue("Config")
+            .setEmoji(client.emoji.gear),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Fun")
+            .setValue("Fun")
+            .setEmoji(client.emoji.fun),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Information")
+            .setValue("Info")
+            .setEmoji(client.emoji.info),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Giveaway")
+            .setValue("gw")
+            .setEmoji(client.emoji.gift),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Moderation")
+            .setValue("Mod")
+            .setEmoji(client.emoji.mod),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Join To Create")
+            .setValue("jointocreate")
+            .setEmoji(client.emoji.jointocreate),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Ticket")
+            .setValue("ticket")
+            .setEmoji(client.emoji.ticket),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Counting")
+            .setValue("counting")
+            .setEmoji(client.emoji.counting),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Utility")
+            .setValue("utility")
+            .setEmoji(client.emoji.utility)
+        );
         
         const row = new ActionRowBuilder()
         .addComponents(menu);
@@ -177,6 +165,8 @@ module.exports = {
 
         const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`membercount\`, \`ping\`, \`profile\`, \`roleinfo\`, \`servericon\`, \`serverinfo\`, \`shards\`, \`statistics\`, \`time\`, \`uptime\`, \`userinfo\``).setTitle("Information Commands").setFooter({text: `Total 12 Information Commands.`});
 
+        const gw = new EmbedBuilder().setColor("Random").setDescription(`\`giveaway start\`, \`giveaway edit\`, \`giveaway end\`, \`giveaway reroll\`, \`giveaway pause\`, \`giveaway resume\``).setTitle("Giveaway Commands").setFooter({text: `Total 6 Giveaway Commands.`});
+
         const Mod = new EmbedBuilder().setColor("Random").setDescription(`\`ban\`, \`kick\`, \`lock\`, \`mass-unban\`, \`purge\`, \`setnick\`, \`slowmode\`, \`timeout\`, \`unlock\`, \`untimeout\`, \`voice kick\`, \`voice deafen\`, \`voice undeafen\`, \`voice mute\`, \`voice unmute\`, \`voice list\``).setTitle("Moderation Commands").setFooter({text: `Total 16 Moderation Commands.`});
 
         const jointocreate = new EmbedBuilder().setColor("Random").setDescription(`\`jointocreate setup\`, \`jointocreate de-setup\``).setTitle("Join To Create Commands").setFooter({text: `Total 2 Join To Create Commands.`});
@@ -203,7 +193,7 @@ module.exports = {
             idle: 60000 / 2,
         });
 
-        const pages = [ helpembed, automod, Config, Fun, Info, Mod, jointocreate, ticket, counting, Utility ];
+        const pages = [ helpembed, automod, Config, Fun, Info, gw, Mod, jointocreate, ticket, counting, Utility ];
 
         let currentPage = 0;
     
@@ -234,21 +224,24 @@ module.exports = {
                 interaction.editReply({ embeds: [Fun] });
             } else if (int.values[0] === 'Info') {
                 currentPage = 4;
+                interaction.editReply({ embeds: [gw] })
+            } else if (int.values[0] === 'Info') {
+                currentPage = 5;
                 interaction.editReply({ embeds: [Info] })
             } else if (int.values[0] === 'Mod') {
-                currentPage = 5;
+                currentPage = 6;
                 interaction.editReply({ embeds: [Mod] });
             } else if (int.values[0] === 'jointocreate') {
-                currentPage = 6;
+                currentPage = 7;
                 interaction.editReply({ embeds: [jointocreate] });
             } else if (int.values[0] === 'ticket') {
-                currentPage = 7;
+                currentPage = 8;
                 interaction.editReply({ embeds: [ticket] });
             } else if (int.values[0] === 'counting') {
-                currentPage = 8;
+                currentPage = 9;
                 interaction.editReply({ embeds: [counting] });
             } else if (int.values[0] === 'Utility') {
-                currentPage = 7;
+                currentPage = 10;
                 interaction.editReply({ embeds: [Utility] });
             }
         })

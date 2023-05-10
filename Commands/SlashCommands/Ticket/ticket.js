@@ -1,4 +1,4 @@
-const { PermissionsBitField, EmbedBuilder, ChannelType, ActionRowBuilder, StringSelectMenuBuilder, SlashCommandBuilder } = require("discord.js");
+const { PermissionsBitField, EmbedBuilder, ChannelType, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuilder } = require("discord.js");
 const ticketSchema = require("../../../Database/ticketSchema");
 
 module.exports = {
@@ -63,22 +63,26 @@ module.exports = {
                     .setMaxValues(1)
                     .setPlaceholder("🥶 Select A Topic")
                     .addOptions(
-                        {
-                            label: "🌐 General Support",
-                            value: "Subject: General Support"
-                        },
-                        {
-                            label: "🛠️ Moderation Support",
-                            value: "Subject: Moderation Support"
-                        },
-                        {
-                            label: "🥶 Server Support",
-                            value: "Subject: Server Support"
-                        },
-                        {
-                            label: "💸 Other",
-                            value: "Subject: Other"
-                        },
+                        new StringSelectMenuOptionBuilder()
+                        .setLabel("General Support")
+                        .setValue("Subject: General Support")
+                        .setDescription("Get help with general issues.")
+                        .setEmoji("🌐"),
+                        new StringSelectMenuOptionBuilder()
+                        .setLabel("Moderation Support")
+                        .setValue("Subject: Moderation Support")
+                        .setDescription("Get help with moderation issues.")
+                        .setEmoji("🛠️"),
+                        new StringSelectMenuOptionBuilder()
+                        .setLabel("Server Support")
+                        .setValue("Subject: Server Support")
+                        .setDescription("Get help with server issues.")
+                        .setEmoji("🥶"),
+                        new StringSelectMenuOptionBuilder()
+                        .setLabel("Other")
+                        .setValue("Subject: Other")
+                        .setDescription("Get help with other issues.")
+                        .setEmoji("💸"),
                     )
                 )
  
