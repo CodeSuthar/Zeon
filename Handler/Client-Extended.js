@@ -1,5 +1,4 @@
 const { Collection } = require("discord.js");
-const Util = require("./Util.js");
 
 module.exports = async (client) => {
     client.commands = new Collection();
