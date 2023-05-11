@@ -11,6 +11,8 @@ module.exports = {
         if (interaction.isModalSubmit()) return;
         if (!["ticketclosebutton", "ticketclaimbutton", "ticketlockbutton", "ticketunlockbutton"].includes(interaction.customId)) return;
 
+        const emb = new EmbedBuilder().setColor("Random");
+
         if (interaction.isButton()) {
             const but = interaction.customId;
             switch (but) {
@@ -26,12 +28,6 @@ module.exports = {
                     }
 
                     if (!interaction.replied) await interaction.deferReply();
-
-                    const transcript = await createTranscript(interaction.channel, {
-                        limit: -1,
-                        returnBuffer: false,
-                        filename: `ticket-${interaction.channel.id}.html`,
-                    })
 
                     const transcriptEmbed = new EmbedBuilder()
                     .setColor("Random")
@@ -55,6 +51,12 @@ module.exports = {
                     const ticketLogChannel = interaction.guild.channels.cache.get(ticData.TicketLog) || interaction.guild.channels.fetch(ticData.TicketLog);
 
                     await interaction.editReply({ embeds: [transcriptProcessingEmbed] }).then(async () => {
+                        const transcript = await createTranscript(interaction.channel, {
+                            limit: -1,
+                            returnBuffer: false,
+                            filename: `ticket-${interaction.channel.id}.html`,
+                        })
+
                         await ticketLogChannel.send({
                             embeds: [transcriptEmbed],
                             files: [
@@ -72,12 +74,32 @@ module.exports = {
                         });
                     })
 
-                    data.closed = true;
+                    data.Closed = true;
 
-                    client.db.set(`ticket_${interaction.channel.id}`, data);
+                    await client.db.set(`ticket_${interaction.channel.id}`, data);
 
                     await interaction.channel.delete();
-                break;   
+                break;
+                case "ticketclaimbutton":
+                    let set = await client.db.get(`ticket_${interaction.channel.id}`);
+
+                    if (set.Claimed) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`This ticket is already claimed by <@${set.ClaimedBy}>`)] });
+                    }
+
+                    if (!interaction.replied) await interaction.deferReply();
+
+                    set.Claimed = true;
+                    set.ClaimedBy = interaction.user.id;
+
+                    await client.db.set(`ticket_${interaction.channel.id}`, set);
+
+                    return await interaction.editReply({ embeds: [emb.setDescription(`This ticket has been successfully claimed by <@${interaction.user.id}>`)] });
+                break;
             }
         }
     }

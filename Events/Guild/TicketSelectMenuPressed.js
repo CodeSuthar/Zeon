@@ -22,9 +22,7 @@ module.exports = {
          
                 ticketSchema.updateOne(filter, update, {
                     new: true
-                }).then(value => {
-                    console.log(value)
-                 })
+                })
             } else {
                 return;
             }

@@ -61,7 +61,6 @@ module.exports = {
                         TicketLog: log.id
                     })
                 } else {
-                    console.log(data)
                     return await interaction.editReply({ content: "You already have a ticket system set up. You can run /ticket-disable to remove it and restart." })
                 }
 
