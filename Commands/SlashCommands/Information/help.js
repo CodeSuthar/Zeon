@@ -224,9 +224,9 @@ module.exports = {
             } else if (int.values[0] === 'Info') {
                 currentPage = 4;
                 interaction.editReply({ embeds: [gw] })
-            } else if (int.values[0] === 'Info') {
+            } else if (int.values[0] === 'gw') {
                 currentPage = 5;
-                interaction.editReply({ embeds: [Info] })
+                interaction.editReply({ embeds: [gw] })
             } else if (int.values[0] === 'Mod') {
                 currentPage = 6;
                 interaction.editReply({ embeds: [Mod] });
