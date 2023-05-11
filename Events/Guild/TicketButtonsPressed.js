@@ -100,6 +100,52 @@ module.exports = {
 
                     return await interaction.editReply({ embeds: [emb.setDescription(`This ticket has been successfully claimed by <@${interaction.user.id}>`)] });
                 break;
+                case "ticketlockbutton":
+                    let sett = await client.db.get(`ticket_${interaction.channel.id}`);
+
+                    if (sett.Locked) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`The mode of ticket is already set to locked.`)] });
+                    }
+
+                    if (!interaction.replied) await interaction.deferReply();
+
+                    interaction.channel.permissionOverwrites.edit(sett.MembersID, {
+                        SendMessages: false
+                    });
+
+                    sett.Locked = true;
+
+                    await client.db.set(`ticket_${interaction.channel.id}`, sett);
+
+                    return await interaction.editReply({ embeds: [emb.setDescription(`${client.emoji.lock} | This ticket has been locked successfully.`)] });
+                break;
+                case "ticketunlockbutton":
+                    let settt = await client.db.get(`ticket_${interaction.channel.id}`);
+
+                    if (!settt.locked) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`The mode of ticket is already set to unlocked.`)] });
+                    }
+
+                    if (!interaction.replied) await interaction.deferReply();
+
+                    interaction.channel.permissionOverwrites.edit(settt.MembersID, {
+                        SendMessages: true
+                    });
+
+                    settt.Locked = false;
+
+                    await client.db.set(`ticket_${interaction.channel.id}`, settt);
+
+                    return await interaction.editReply({ embeds: [emb.setDescription(`${client.emoji.unlock} | This ticket has been unlocked successfully.`)] });
+                break;
             }
         }
     }
