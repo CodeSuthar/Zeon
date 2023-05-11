@@ -86,7 +86,7 @@ module.exports = {
                 await channel.send({ embeds: [embed], components: [button] }).then(async (msg) => {
                     await msg.pin();
                     
-                    await client.db.set(`ticket_${interaction.channel.id}`, {
+                    await client.db.set(`ticket_${channel.id}`, {
                         GuildID: interaction.guild.id,
                         ChannelID: channel.id,
                         MessageID: msg.id,

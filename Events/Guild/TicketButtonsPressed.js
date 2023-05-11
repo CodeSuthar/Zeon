@@ -15,7 +15,7 @@ module.exports = {
             const but = interaction.customId;
             switch (but) {
                 case "ticketclosebutton":
-                    let data = client.db.get(`ticket_${interaction.channel.id}`);
+                    let data = await client.db.get(`ticket_${interaction.channel.id}`);
 
                     if (data.closed) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
@@ -38,8 +38,8 @@ module.exports = {
                     .setTitle("Ticket Transcript")
                     .setDescription("Here is your ticket transcript!")
                     .addFields(
-                        { name: "Ticket Type:", value: `${data.type}` },
-                        { name: "Ticket Reason:", value: `${data.reason}` },
+                        { name: "Ticket Type:", value: `${data.Type}` },
+                        { name: "Ticket Reason:", value: `${data.Reason}` },
                         { name: "Ticket Id:", value: `${interaction.channel.id}` },
                     )
                     .setTimestamp()
@@ -62,17 +62,19 @@ module.exports = {
                             ]
                         })
 
-                        const member = await interaction.guild.members.cache.get(data.MembersID) || await interaction.guild.members.fetch(data.MembersID);
+                        let member = await interaction.guild.members.cache.get(data.MembersID);
 
-                        console.log(member)
+                        if (!member) member = await interaction.guild.members.fetch(data.MembersID);
 
-                        member.send({
+                        await member.send({
                             embeds: [transcriptEmbed],
                             files: [transcript]
-                        }).catch(e => {
-                            return interaction.channel.send({ content: "Couldn't send transcript to the ticket owner, maybe their dm is closed or they have blocked me!" })
-                        })
+                        });
                     })
+
+                    data.closed = true;
+
+                    client.db.set(`ticket_${interaction.channel.id}`, data);
 
                     await interaction.channel.delete();
                 break;   
