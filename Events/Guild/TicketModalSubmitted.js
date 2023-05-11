@@ -1,5 +1,6 @@
-const { ButtonStyle, ChannelType, EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { ButtonStyle, ChannelType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, PermissionFlagsBits } = require("discord.js");
 const ticketSchema = require("../../Database/ticketSchema");
+const { ViewChannel, SendMessages, ReadMessageHistory } = PermissionFlagsBits;
 
 module.exports = {
     name: "interactionCreate",
@@ -63,15 +64,34 @@ module.exports = {
                     name: `ticket-${interaction.user.id}-`,
                     type: ChannelType.GuildText,
                     topic: `Ticket Id: ${interaction.channel.id}\nTicket Owner: ${usernameInput}\nReason: ${reasonInput}\nEmail: ${emailInput ? emailInput : "Not Given By The User"}\nTicket Type: ${data.Ticket}`,
-                    parent: category
+                    parent: category,
+                    permissionOverwrites: [
+                        {
+                            id: interaction.guild.roles.everyone,
+                            deny: [ViewChannel, SendMessages, ReadMessageHistory]
+                        },
+                        {
+                            id: interaction.user.id,
+                            allow: [ViewChannel, SendMessages, ReadMessageHistory]
+                        },
+                        {
+                            id: data.Handler,
+                            allow: [ViewChannel, SendMessages, ReadMessageHistory]
+                        }
+                    ]
                 }).then(async (ch) => {
                     channel = ch;
-
+                });
+     
+                await channel.send({ embeds: [embed], components: [button] }).then(async (msg) => {
+                    await msg.pin();
+                    
                     await client.db.set(`ticket_${interaction.channel.id}`, {
                         GuildID: interaction.guild.id,
                         ChannelID: channel.id,
+                        MessageID: msg.id,
                         MembersID: interaction.user.id,
-                        TicketID: TId,
+                        Reason: reasonInput,
                         Closed: false,
                         Locked: false,
                         Type: data.Ticket,
@@ -79,18 +99,7 @@ module.exports = {
                         ClaimedBy: null
                     });
                 })
-
-                channel.permissionOverwrites.edit(interaction.guild.roles.everyone, {
-                    'ViewChannel': false
-                });
-
-                channel.permissionOverwrites.edit(interaction.user, {
-                    'ViewChannel': true,
-                    'SendMessages': true
-                });
-     
-                await channel.send({ embeds: [embed], components: [button] });
-                interaction.reply({ content: `Your ticket is now open inside of ${channel}.`, ephemeral: true });
+                return interaction.reply({ content: `Your ticket is now open inside of ${channel}.`, ephemeral: true });
             }
         }
     }

@@ -20,6 +20,17 @@ module.exports = {
             .addChannelTypes(ChannelType.GuildCategory)
             .setRequired(true)
         )
+        .addRoleOption(option => option
+            .setName("access-role")
+            .setDescription("The role you want to give access and handling permission of the ticket system.")
+            .setRequired(true)
+        )
+        .addChannelOption(option => option
+            .setName("ticket-log")
+            .setDescription("The channel you want to send the ticket logs in.")
+            .addChannelTypes(ChannelType.GuildText)
+            .setRequired(true)
+        )
     )
     .addSubcommand(subcommand => subcommand
         .setName("de-setup")
@@ -36,6 +47,8 @@ module.exports = {
             case "setup":
                 const channel = interaction.options.getChannel("channel");
                 const category = interaction.options.getChannel("category");
+                const role = interaction.options.getRole("access-role");
+                const log = interaction.options.getChannel("ticket-log");
                 
                 const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
 
@@ -43,7 +56,9 @@ module.exports = {
                     ticketSchema.create({
                         Guild: interaction.guild.id,
                         Channel: category.id,
-                        Ticket: "first"
+                        Ticket: "first",
+                        Handler: role.id,
+                        TicketLog: log.id
                     })
                 } else {
                     console.log(data)
