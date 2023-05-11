@@ -4,6 +4,7 @@ let ticketSchema = new Schema({
     Guild: String,
     Channel: String,
     Ticket: String,
+    Handler: String
 });
  
 module.exports = model("ticketSchema", ticketSchema);

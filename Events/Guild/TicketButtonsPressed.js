@@ -7,7 +7,7 @@ module.exports = {
         if (interaction.isChatInputCommand()) return;
         if (interaction.isStringSelectMenu()) return;
         if (interaction.isModalSubmit()) return;
-        if (!["ticketclosebutton"].includes(interaction.customId)) return;
+        if (!["ticketclosebutton", "ticketclaimbutton", "ticketlockbutton", "ticketunlockbutton"].includes(interaction.customId)) return;
 
         if (interaction.isButton()) {
             if (interaction.customId === "ticketclosebutton") {
@@ -26,6 +26,8 @@ module.exports = {
                 return await member.send({ embeds: [dmEmbed] }).catch(err => {
                     console.log(err)
                 })
+            } else if (interaction.customId === "ticketclaimbutton") {
+                
             }
         }
     }

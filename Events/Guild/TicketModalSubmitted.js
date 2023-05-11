@@ -26,9 +26,9 @@ module.exports = {
                     .setTitle(`${interaction.user.id}'s Ticket`)
                     .setDescription("Welcome to your ticket! Please wait while the staff team review the details.")
                     .addFields(
-                        { name: `Email`, value: `${emailInput ? emailInput : "Not Given By The User"}` },
                         { name: `Username`, value: `${usernameInput}` },
                         { name: `Reason`, value: `${reasonInput}` },
+                        { name: `Email`, value: `${emailInput ? emailInput : "Not Given By The User"}` },
                         { name: `Type`, value: `${data.Ticket}` }
                     )
                     .setFooter({ text: `${interaction.guild.name}'s tickets.` })
@@ -43,12 +43,12 @@ module.exports = {
                     new ButtonBuilder()
                     .setCustomId("ticketclaimbutton")
                     .setLabel("Claim Ticket")
-                    .setStyle(ButtonStyle.Primary)
+                    .setStyle(ButtonStyle.Secondary)
                     .setEmoji("🛄"),
                     new ButtonBuilder()
                     .setCustomId("ticketlockbutton")
                     .setLabel("Lock Ticket")
-                    .setStyle(ButtonStyle.Secondary)
+                    .setStyle(ButtonStyle.Success)
                     .setEmoji("🔒"),
                     new ButtonBuilder()
                     .setCustomId("ticketunlockbutton")
@@ -58,32 +58,25 @@ module.exports = {
                 )
 
                 let channel;
-
-                let TId = Math.floor(Math.random() * 9000000000000) + 1000000000000;
-
-                const tic = client.db.get(`ticket_${TId}`);
-
-                if (tic) {
-                    const newTId = Math.floor(Math.random() * 9000000000000) + 1000000000000;
-                    TId = newTId;
-                }
     
                 await interaction.guild.channels.create({
                     name: `ticket-${interaction.user.id}-`,
                     type: ChannelType.GuildText,
+                    topic: `Ticket Id: ${interaction.channel.id}\nTicket Owner: ${usernameInput}\nReason: ${reasonInput}\nEmail: ${emailInput ? emailInput : "Not Given By The User"}\nTicket Type: ${data.Ticket}`,
                     parent: category
-                }).then((ch) => {
+                }).then(async (ch) => {
                     channel = ch;
 
-                    client.db.set(`ticket_${NewID}`, {
+                    await client.db.set(`ticket_${interaction.channel.id}`, {
                         GuildID: interaction.guild.id,
                         ChannelID: channel.id,
                         MembersID: interaction.user.id,
-                        TicketID: NewID,
+                        TicketID: TId,
                         Closed: false,
                         Locked: false,
                         Type: data.Ticket,
-                        Claimed: false
+                        Claimed: false,
+                        ClaimedBy: null
                     });
                 })
 
