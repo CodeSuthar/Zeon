@@ -7,6 +7,7 @@ module.exports = {
         if (interaction.isChatInputCommand()) return;
         if (interaction.isStringSelectMenu()) return;
         if (interaction.isModalSubmit()) return;
+        if (!["ticketclosebutton"].includes(interaction.customId)) return;
 
         if (interaction.isButton()) {
             if (interaction.customId === "ticketclosebutton") {

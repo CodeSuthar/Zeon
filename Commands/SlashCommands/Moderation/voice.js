@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionsBitField, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionsBitField, EmbedBuilder, ChannelType } = require("discord.js");
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -47,6 +47,21 @@ module.exports = {
             .setName("user")
             .setDescription("The user you want to unmute from your vc.")
             .setRequired(true)
+        )
+    )
+    .addSubcommand((subcommand) => subcommand
+        .setName("move")
+        .setDescription("Moves a user from your vc to another.")
+        .addUserOption((option) => option
+            .setName("user")
+            .setDescription("The user you want to move from your vc.")
+            .setRequired(true)
+        )
+        .addChannelOption((option) => option
+            .setName("channel")
+            .setDescription("The channel you want to move the user to.")
+            .setRequired(true)
+            .addChannelTypes(ChannelType.GuildVoice)
         )
     )
     .addSubcommand((subcommand) => subcommand
@@ -202,6 +217,27 @@ module.exports = {
                 interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.tick} | Successfully Unmuted <@${member.user.id}> From Voice!`)]})
             } catch(err) {
                 return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`I was unable to voice unmute <@${member.user.id}>.`)]})
+            }
+        }
+
+        if (SubCommand === "move") {
+            if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Move Members Or Administrator permission to use this command!` });
+
+            if (!interaction.member.permissions.has(PermissionsBitField.Flags.MoveMembers)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Move Members Or Administrator permission to use this command!` });
+    
+            let member = interaction.options.getMember("user");
+
+            let ch = interaction.options.getChannel("channel");
+    
+            if (!member.voice.channel) {
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`<@${member.user.id}> is not in a vc.`)]})
+            }
+
+            try {
+                member.voice.setChannel(ch, `Voice Move Command Ran By ${interaction.user.tag} (${interaction.user.id})`)
+                interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.tick} | Successfully Moved <@${member.user.id}> To Your Voice Channel!`)]})
+            } catch(err) {
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`I was unable to move <@${member.user.id}>.`)]})
             }
         }
 

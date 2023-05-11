@@ -7,9 +7,11 @@ module.exports = {
         if (interaction.isButton()) return;
         if (interaction.isChatInputCommand()) return;
 
+        if (!["ticketselectmenu"].includes(interaction.customId)) return;
+
         if (interaction.isStringSelectMenu()) {
             if (interaction.customId === "ticketselectmenu") {
-                choices = interaction.values;
+                const choices = interaction.values;
  
                 const result = choices.join("");
 

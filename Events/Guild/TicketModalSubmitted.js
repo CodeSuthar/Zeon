@@ -34,17 +34,57 @@ module.exports = {
                     .setFooter({ text: `${interaction.guild.name}'s tickets.` })
     
                 const button = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("ticketclosebutton")
-                            .setLabel("🗑️ Close Ticket")
-                            .setStyle(ButtonStyle.Danger)
-                    )
+                .addComponents(
+                    new ButtonBuilder()
+                    .setCustomId("ticketclosebutton")
+                    .setLabel("Close Ticket")
+                    .setStyle(ButtonStyle.Danger)
+                    .setEmoji("🗑️"),
+                    new ButtonBuilder()
+                    .setCustomId("ticketclaimbutton")
+                    .setLabel("Claim Ticket")
+                    .setStyle(ButtonStyle.Primary)
+                    .setEmoji("🛄"),
+                    new ButtonBuilder()
+                    .setCustomId("ticketlockbutton")
+                    .setLabel("Lock Ticket")
+                    .setStyle(ButtonStyle.Secondary)
+                    .setEmoji("🔒"),
+                    new ButtonBuilder()
+                    .setCustomId("ticketunlockbutton")
+                    .setLabel("Unlock Ticket")
+                    .setStyle(ButtonStyle.Primary)
+                    .setEmoji("🔓")
+                )
+
+                let channel;
+
+                let TId = Math.floor(Math.random() * 9000000000000) + 1000000000000;
+
+                const tic = client.db.get(`ticket_${TId}`);
+
+                if (tic) {
+                    const newTId = Math.floor(Math.random() * 9000000000000) + 1000000000000;
+                    TId = newTId;
+                }
     
-                let channel = await interaction.guild.channels.create({
-                    name: `ticket-${interaction.user.id}`,
+                await interaction.guild.channels.create({
+                    name: `ticket-${interaction.user.id}-`,
                     type: ChannelType.GuildText,
                     parent: category
+                }).then((ch) => {
+                    channel = ch;
+
+                    client.db.set(`ticket_${NewID}`, {
+                        GuildID: interaction.guild.id,
+                        ChannelID: channel.id,
+                        MembersID: interaction.user.id,
+                        TicketID: NewID,
+                        Closed: false,
+                        Locked: false,
+                        Type: data.Ticket,
+                        Claimed: false
+                    });
                 })
 
                 channel.permissionOverwrites.edit(interaction.guild.roles.everyone, {

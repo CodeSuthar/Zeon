@@ -67,7 +67,7 @@ module.exports = {
                         .setLabel("General Support")
                         .setValue("Subject: General Support")
                         .setDescription("Get help with general issues.")
-                        .setEmoji("🌐"),
+                        .setEmoji("📰"),
                         new StringSelectMenuOptionBuilder()
                         .setLabel("Moderation Support")
                         .setValue("Subject: Moderation Support")
@@ -79,10 +79,15 @@ module.exports = {
                         .setDescription("Get help with server issues.")
                         .setEmoji("🥶"),
                         new StringSelectMenuOptionBuilder()
+                        .setLabel("Billing/Payment Support")
+                        .setValue("Subject: Billing/Payment Support")
+                        .setDescription("Get help with billing/payment issues.")
+                        .setEmoji("💳"),
+                        new StringSelectMenuOptionBuilder()
                         .setLabel("Other")
                         .setValue("Subject: Other")
                         .setDescription("Get help with other issues.")
-                        .setEmoji("💸"),
+                        .setEmoji("🔍"),
                     )
                 )
  

@@ -33,6 +33,7 @@
         "body-parser": "^1.20.2",
         "discord-gamecord": "^4.4.0",
         "discord-giveaways": "^6.0.1",
+        "discord-html-transcripts": "^3.1.4",
         "discord.js": "^14.11.0",
         "discordinfo.js": "^1.0.0",
         "dotenv": "^16.0.3",
