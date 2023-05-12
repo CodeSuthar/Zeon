@@ -63,7 +63,7 @@ module.exports = {
                 await interaction.guild.channels.create({
                     name: `ticket-${interaction.user.id}-`,
                     type: ChannelType.GuildText,
-                    topic: `Ticket Id: ${interaction.channel.id}\nTicket Owner: ${usernameInput}\nReason: ${reasonInput}\nEmail: ${emailInput ? emailInput : "Not Given By The User"}\nTicket Type: ${data.Ticket}`,
+                    topic: `Ticket Id: ${interaction.channel.id}\nTicket Owner: <@${interaction.user.id}>\nReason: ${reasonInput}\nEmail: ${emailInput ? emailInput : "Not Given By The User"}\nTicket Type: ${data.Ticket}`,
                     parent: category,
                     permissionOverwrites: [
                         {
@@ -92,6 +92,7 @@ module.exports = {
                         MessageID: msg.id,
                         MembersID: interaction.user.id,
                         Reason: reasonInput,
+                        Email: `${emailInput ? emailInput : "Not Given By The User"}`,
                         Closed: false,
                         Locked: false,
                         Type: data.Ticket,

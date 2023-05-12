@@ -82,6 +82,16 @@ module.exports = {
                 case "ticketclaimbutton":
                     let set = await client.db.get(`ticket_${interaction.channel.id}`);
 
+                    const TicDat = await ticketSchema.findOne({ Guild: interaction.guild.id });
+
+                    if (!interaction.member.roles.cache.has(TicDat.Handler)) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to claim this ticket!`)] });
+                    }
+
                     if (set.Claimed) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
@@ -92,6 +102,10 @@ module.exports = {
 
                     if (!interaction.replied) await interaction.deferReply();
 
+                    interaction.channel.edit({
+                        topic: `Ticket Id: ${interaction.channel.id}\nTicket Owner: <@${set.MembersID}>\nReason: ${set.Reason}\nEmail: ${set.Email}\nTicket Type: ${set.Type}\nClaimed By: <@${interaction.user.id}>`
+                    })
+
                     set.Claimed = true;
                     set.ClaimedBy = interaction.user.id;
 
@@ -101,6 +115,16 @@ module.exports = {
                 break;
                 case "ticketlockbutton":
                     let sett = await client.db.get(`ticket_${interaction.channel.id}`);
+
+                    const TicDat1 = await ticketSchema.findOne({ Guild: interaction.guild.id });
+                    
+                    if (!interaction.member.roles.cache.has(TicDat1.Handler)) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to lock this ticket!`)] });
+                    }
 
                     if (sett.Locked) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
@@ -124,6 +148,16 @@ module.exports = {
                 break;
                 case "ticketunlockbutton":
                     let settt = await client.db.get(`ticket_${interaction.channel.id}`);
+
+                    const TicDat2 = await ticketSchema.findOne({ Guild: interaction.guild.id });
+
+                    if (!interaction.member.roles.cache.has(TicDat2.Handler)) {
+                        if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
+
+                        client.timertowait(2000);
+
+                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to unlock this ticket!`)] });
+                    }
 
                     if (!settt.locked) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
