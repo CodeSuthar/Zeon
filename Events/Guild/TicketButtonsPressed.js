@@ -1,7 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { createTranscript } = require("discord-html-transcripts")
 const ticketSchema = require("../../Database/ticketSchema");
-const { channel } = require("diagnostics_channel");
 
 module.exports = {
     name: "interactionCreate",
