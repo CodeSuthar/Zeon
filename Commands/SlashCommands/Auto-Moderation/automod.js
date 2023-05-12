@@ -31,7 +31,7 @@ module.exports = {
         )
     ),
  
-    async execute (interaction) {
+    run: async (client, interaction) => {
         const { guild, options } = interaction;
  
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Guild Or Administrator permission to use this command!` });
