@@ -123,7 +123,7 @@ module.exports = {
 
                         client.timertowait(2000);
 
-                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to lock this ticket!`)] });
+                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat1.Handler}> role to lock this ticket!`)] });
                     }
 
                     if (sett.Locked) {
@@ -156,7 +156,7 @@ module.exports = {
 
                         client.timertowait(2000);
 
-                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to unlock this ticket!`)] });
+                        return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat2.Handler}> role to unlock this ticket!`)] });
                     }
 
                     if (!settt.locked) {
