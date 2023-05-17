@@ -31,7 +31,7 @@ module.exports = {
 
                 await interaction.editReply({ content: `${client.emoji.loading} | Giving ${role} to every member in the guild... This may take some time.` });
 
-                await client.timertwait(2000);
+                client.timertowait(2000);
 
                 let num = 0;
 

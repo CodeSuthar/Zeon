@@ -1,4 +1,5 @@
 const { ChannelType } = require("discord.js");
+const publishschema = require("../../Database/autoPublish");
 
 module.exports = {
     name: "messageCreate",
