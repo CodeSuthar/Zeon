@@ -85,7 +85,7 @@ module.exports = {
                   inline: true,
                 },   
               )
-          .setFooter({ text: `Zeon Development 💖`, iconURL: "https://images-ext-1.discordapp.net/external/lzR6jeDYThwRRvQHu6uEvedNACkrFmY8HxleMNfx2r8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/969558840926437406/9d2c7499963e7b2d409bca59f4a24a60.png?width=558&height=558"})
+          .setFooter({ text: `CodeSource Development 💖`, iconURL: "https://images-ext-1.discordapp.net/external/lzR6jeDYThwRRvQHu6uEvedNACkrFmY8HxleMNfx2r8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/969558840926437406/9d2c7499963e7b2d409bca59f4a24a60.png?width=558&height=558"})
           .setTimestamp()
         
           interaction.editReply({ embeds: [embed] })
