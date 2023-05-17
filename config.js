@@ -2,11 +2,14 @@ require('dotenv').config()
 
 module.exports = {
     Bot: {
+        Name: "Zeon",
         Token: process.env.TOKEN || "",
         Prefix: "!",
         NoPrefix: ["990643162928279592"],
         DeveloperId: ["1060577145258262541"],
-        Invite: "https://discord.com/api/oauth2/authorize?client_id=969558840926437406&permissions=1395763178742&scope=bot%20applications.commands"
+        Invite: "https://discord.com/api/oauth2/authorize?client_id=969558840926437406&permissions=1395763178742&scope=bot%20applications.commands",
+        SupportServer: "https://discord.gg/py6YtgyFwp",
+        Avatar: ""
     },
 
     BotList: {

@@ -93,7 +93,7 @@ module.exports = {
                 if (!client.DeveloperId.includes(message.author.id)) {
                     const embed = new EmbedBuilder()
                     .setColor("Random")
-                    .setDescription(`We have moved Zeon Commands From Message Commands And Slash Command To Slash Command Only, Please Use Slash Command To Use This Command. Sorry For The Inconvenience \`<3\``);
+                    .setDescription(`We have moved ${client.config.Bot.Name} Commands From Message Commands And Slash Command To Slash Command Only, Please Use Slash Command To Use This Command. Sorry For The Inconvenience \`<3\``);
 
                     return message.reply({ embeds: [embed] });
                 }

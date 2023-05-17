@@ -3,11 +3,12 @@ const moment = require("moment");
 require("moment-duration-format");
 const os = require('os')
 const si = require('systeminformation');
+const { Bot } = require(`../../../config.js`)
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("statistics")
-    .setDescription("Shows the bot's statistics."),
+    .setDescription(`Shows the ${Bot.Name}'s statistics.`),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
         
@@ -23,10 +24,9 @@ module.exports = {
         });
 
         const embed = new EmbedBuilder()
-            .setTitle(`Zeon's statistics`)
-            .setDescription(`**Hey am [Zeon](https://zeon.code-source.tech/) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
+            .setTitle(`${Bot.Name}'s statistics`)
+            .setDescription(`**Hey am [${Bot.Name}](${client.config.Dashboard.Information.DOmain}) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
 `)
-            .setThumbnail("https://images-ext-1.discordapp.net/external/lzR6jeDYThwRRvQHu6uEvedNACkrFmY8HxleMNfx2r8/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/969558840926437406/9d2c7499963e7b2d409bca59f4a24a60.png?width=558&height=558")
             .setColor("#00008B")
             .addFields(
                 {

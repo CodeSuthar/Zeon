@@ -109,27 +109,44 @@ module.exports = async (client) => {
         res.render("index", {
             user: req.isAuthenticated() ? req.user : null,
             bot: client,
-            req: req
+            req: req,
+            config: client.config
         });
     });
 
     app.get("/invite", (req, res) => {
-        res.render("invite");
+        res.render("invite", {
+            user: req.isAuthenticated() ? req.user : null,
+            bot: client,
+            req: req,
+            config: client.config
+        });
     });
 
     app.get("/support", (req, res) => {
-        res.render("support");
+        res.render("support", {
+            user: req.isAuthenticated() ? req.user : null,
+            bot: client,
+            req: req,
+            config: client.config
+        });
     });
 
     app.get("/vote", (req, res) => {
-        res.render("vote");
+        res.render("vote", {
+            user: req.isAuthenticated() ? req.user : null,
+            bot: client,
+            req: req,
+            config: client.config
+        });
     });
 
     app.get("/underprogress", (req, res) => {
         res.render("underprogress", {
             req: req,
             user: req.isAuthenticated() ? req.user : null,
-            client: client
+            client: client,
+            config: client.config
         });
     });
 
@@ -138,13 +155,15 @@ module.exports = async (client) => {
             res.render("401", {
                 req: req,
                 user: req.isAuthenticated() ? req.user : null,
-                client: client
+                client: client,
+                config: client.config
             })
         } else {
             res.render("dashhome", {
                 req: req,
                 user: req.isAuthenticated() ? req.user : null,
                 client: client,
+                config: client.config,
                 Permissions: PermissionsBitField
             })
         }
@@ -155,7 +174,8 @@ module.exports = async (client) => {
             res.render("401", {
                 req: req,
                 user: req.isAuthenticated() ? req.user : null,
-                client: client
+                client: client,
+                config: client.config
             })
         }
       
@@ -167,7 +187,8 @@ module.exports = async (client) => {
             res.render("401", {
                 req: req,
                 user: req.isAuthenticated() ? req.user : null,
-                client: client
+                client: client,
+                config: client.config
             })
         }
   
@@ -175,7 +196,8 @@ module.exports = async (client) => {
             res.render("401",  {
                 user: req.isAuthenticated() ? req.user : null,
                 client: client,
-                req: req
+                req: req,
+                config: client.config
             })
         }
   
@@ -183,7 +205,8 @@ module.exports = async (client) => {
             req: req,
             user: req.isAuthenticated() ? req.user : null,
             guild: Guild,
-            client: client
+            client: client,
+            config: client.config
         })
     })
 
@@ -192,7 +215,8 @@ module.exports = async (client) => {
             return res.render("404", {
                 req: req,
                 user: req.isAuthenticated() ? req.user : null,
-                client: client
+                client: client,
+                config: client.config
             })
         }
     });

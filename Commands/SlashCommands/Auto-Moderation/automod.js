@@ -44,8 +44,8 @@ module.exports = {
             await interaction.reply({ content: `Loading your **automod rule**..`});
  
             const rule = await guild.autoModerationRules.create({
-                name: `Block profinity, sexual content, and slurs by Zeon - The Multifunctional Discord Bot - 969558840926437406.`,
-                creatorId: '969558840926437406',
+                name: `Block profinity, sexual content, and slurs by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`,
+                creatorId: `${client.user.id}`,
                 enabled: true,
                 eventType: 1,
                 triggerType: 4,
@@ -59,7 +59,7 @@ module.exports = {
                         metadata: {
                             channel: interaction.channel,
                             durationSeconds: 10,
-                            customMessage: 'This message was prevented by Zeon - The Multifunctional Discord Bot - 969558840926437406!'
+                            customMessage: `This message was prevented by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}!`
                         }
                     }
                 ]
@@ -95,8 +95,8 @@ module.exports = {
             const word = options.getString("word");
  
             const rule2 = await guild.autoModerationRules.create({
-                name: `Prevent the word ${word} by Zeon - The Multifunctional Discord Bot - 969558840926437406.`,
-                creatorId: '969558840926437406',
+                name: `Prevent the word ${word} by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`,
+                creatorId: `${client.user.id}`,
                 enabled: true,
                 eventType: 1,
                 triggerType: 1,
@@ -110,7 +110,7 @@ module.exports = {
                         metadata: {
                             channel: interaction.channel,
                             durationSeconds: 10,
-                            customMessage: 'This message was prevented by Zeon - The Multifunctional Discord Bot - 969558840926437406.'
+                            customMessage: `This message was prevented by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`
                         }
                     }
                 ]
@@ -146,8 +146,8 @@ module.exports = {
  
  
             const rule3 = await guild.autoModerationRules.create({
-                name: 'Prevent Spam Messages by Zeon - The Multifunctional Discord Bot - 969558840926437406.',
-                creatorId: '969558840926437406',
+                name: `Prevent Spam Messages by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`,
+                creatorId: `${client.user.id}`,
                 enabled: true,
                 eventType: 1,
                 triggerType: 5,
@@ -161,7 +161,7 @@ module.exports = {
                         metadata: {
                             channel: interaction.channel,
                             durationSeconds: 10,
-                            customMessage: 'This message was prevented by Zeon - The Multifunctional Discord Bot - 969558840926437406.'
+                            customMessage: `This message was prevented by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`
                         }
                     }
                 ]
@@ -196,8 +196,8 @@ module.exports = {
             const number = options.getInteger("number")
  
             const rule4 = await guild.autoModerationRules.create({
-                name: `Prevent Spam Mentions by Zeon - The Multifunctional Discord Bot - 969558840926437406.`,
-                creatorId: '969558840926437406',
+                name: `Prevent Spam Mentions by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`,
+                creatorId: `${client.user.id}`,
                 enabled: true,
                 eventType: 1,
                 triggerType: 5,
@@ -211,7 +211,7 @@ module.exports = {
                         metadata: {
                             channel: interaction.channel,
                             durationSeconds: 2,
-                            customMessage: 'This message was prevented by Zeon - The Multifunctional Discord Bot - 969558840926437406.'
+                            customMessage: `This message was prevented by ${client.config.Bot.Name} - The Multifunctional Discord Bot - ${client.user.id}.`
                         }
                     }
                 ]
