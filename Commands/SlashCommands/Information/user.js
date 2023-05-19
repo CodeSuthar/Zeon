@@ -1,6 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const moment = require("moment");
 const UserSchema = require("../../../Database/user.js");
+const discordinfo = require("discordinfo.js")
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -162,7 +163,6 @@ module.exports = {
 
             return interaction.editReply({ embeds: [embed] });
         } else if (Subcommand === "avatar") {
-            if (!interaction.replied) await interaction.deferReply();
 
             let mention = interaction.options.getMember("user");
     

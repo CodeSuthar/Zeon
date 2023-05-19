@@ -12,6 +12,7 @@ module.exports = {
             if (!SlashCommands) return;
 
             if (SlashCommands) {
+                console.log(`[ ⌨️ COMMAND ] ${interaction.user.tag} (${interaction.user.id}) ran command ${interaction} in ${interaction.guild.name} (${interaction.guild.id})`)
                 try {
                     const data = await client.db.get(`botcommandchannel_${interaction.guild.id}`);
 
