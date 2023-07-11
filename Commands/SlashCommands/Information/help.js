@@ -10,9 +10,9 @@ module.exports = {
         const helpembed = new EmbedBuilder()
         .setTitle(`${client.config.Bot.Name}'s Help Page`)
         .setColor("Random")
-        .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm <@${client.user.id}> , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
+        .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm ${client.user.username} , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
         .addFields(
-            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.gift} \`:\` Giveaway\n${client.emoji.mod} \`:\` Moderation\n${client.emoji.jointocreate} \`:\` Join To Create\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` Counting\n${client.emoji.utility} \`:\` Utility\n\n • *Select Category From Below Menu*`},
+            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.images} \`:\` **Images**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.gift} \`:\` **Giveaway**\n${client.emoji.mod} \`:\` **Moderation**\n${client.emoji.jointocreate} \`:\` **Join To Create**\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` **Counting**\n${client.emoji.utility} \`:\` **Utility**\n\n • *Select Category From Below Menu*`},
             { name: "___Links___",  value: `[Vote](${client.config.BotList.TopGG.LinkToVote}) • [Dashboard](${client.config.Dashboard.Information.Domain}) • [Support Server](${client.config.Bot.SupportServer})`}
         )
         .setThumbnail(client.user.displayAvatarURL())
@@ -41,6 +41,10 @@ module.exports = {
             .setLabel("Fun")
             .setValue("Fun")
             .setEmoji(client.emoji.fun),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Images")
+            .setValue("Images")
+            .setEmoji(client.emoji.images),
             new StringSelectMenuOptionBuilder()
             .setLabel("Information")
             .setValue("Info")
@@ -95,6 +99,10 @@ module.exports = {
             .setValue("Fun")
             .setEmoji(client.emoji.fun),
             new StringSelectMenuOptionBuilder()
+            .setLabel("Images")
+            .setValue("Images")
+            .setEmoji(client.emoji.images),
+            new StringSelectMenuOptionBuilder()
             .setLabel("Information")
             .setValue("Info")
             .setEmoji(client.emoji.info),
@@ -130,13 +138,93 @@ module.exports = {
         const rowbut = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
-            .setStyle("Danger")
-            .setEmoji("◀")
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.backforward)
+            .setCustomId('back'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonleft)
             .setCustomId('prev'),
             new ButtonBuilder()
-            .setStyle("Success")
-            .setEmoji("▶")
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonstop)
+            .setCustomId('stop'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonright)
+            .setCustomId('next'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.frontbackward)
+            .setCustomId('front')
+        );
+
+        const rowbut3 = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.backforward)
+            .setCustomId('back')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonleft)
+            .setCustomId('prev')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonstop)
+            .setCustomId('stop'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonright)
+            .setCustomId('next'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.frontbackward)
+            .setCustomId('front')
+        );
+
+        const rowbut4 = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.backforward)
+            .setCustomId('back'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonleft)
+            .setCustomId('prev'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonstop)
+            .setCustomId('stop'),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonright)
             .setCustomId('next')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.frontbackward)
+            .setCustomId('front')
+            .setDisabled(true)
+        );
+
+        const rowbutlink = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+            .setStyle("Link")
+            .setLabel("Invite Flantic")
+            .setURL(client.config.Bot.Invite),
+            new ButtonBuilder()
+            .setStyle("Link")
+            .setLabel("Support Server")
+            .setURL(client.config.Bot.SupportServer),
+            new ButtonBuilder()
+            .setStyle("Link")
+            .setLabel("Vote Me!")
+            .setURL(client.config.BotList.TopGG.LinkToVote)
         );
         
         const row2 = new ActionRowBuilder()
@@ -145,24 +233,41 @@ module.exports = {
         const rowbut2 = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
-            .setStyle("Danger")
-            .setEmoji("◀")
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.backforward)
+            .setCustomId('back')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonleft)
             .setCustomId('prev')
             .setDisabled(true),
             new ButtonBuilder()
-            .setStyle("Success")
-            .setEmoji("▶")
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonstop)
+            .setCustomId('stop')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.buttonright)
             .setCustomId('next')
+            .setDisabled(true),
+            new ButtonBuilder()
+            .setStyle("Secondary")
+            .setEmoji(client.emoji.frontbackward)
+            .setCustomId('front')
             .setDisabled(true)
         );
 
-        const automod = new EmbedBuilder().setColor("Random").setDescription(`\`automod flagged-words\`, \`automod keyword\`, \`automod mention-spam\`, \`automod spam-messages\``)
+        const automod = new EmbedBuilder().setColor("Random").setDescription(`\`automod flagged-words\`, \`automod keyword\`, \`automod mention-spam\`, \`automod spam-messages\``).setTitle("AutoMod Commands").setFooter({text: `Total 4 AutoMod Commands.`});
 
         const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel setup\`, \`botcommandchannel de-setup\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
 
         const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 11 Information Commands.`});
 
-        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`time\`, \`uptime\`, \`user info\`, \`user profile`).setTitle("Information Commands").setFooter({text: `Total 11 Information Commands.`});
+        const Images = new EmbedBuilder().setColor("Random").setDescription(`\`advertisement\`, \`affect\`, \`batslap\`, \`beautiful\`, \`blur\`, \`bobross\`, \`delete\`, \`gay\`, \`gay\`, \`hitler\`, \`jail\`, \`poutine\`, \`rip\`, \`trash\`, \`triggered\`, \`wanted\``).setTitle("Images Commands").setFooter({text: `Total 16 Images Commands.`});
+
+        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`time\`, \`uptime\`, \`user info\`, \`user profile\``).setTitle("Information Commands").setFooter({text: `Total 11 Information Commands.`});
 
         const gw = new EmbedBuilder().setColor("Random").setDescription(`\`giveaway start\`, \`giveaway edit\`, \`giveaway end\`, \`giveaway reroll\`, \`giveaway pause\`, \`giveaway resume\``).setTitle("Giveaway Commands").setFooter({text: `Total 6 Giveaway Commands.`});
 
@@ -176,7 +281,7 @@ module.exports = {
 
         const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 8 Utility Commands.`});
         
-        await interaction.editReply({ embeds: [helpembed], components: [row, rowbut] });
+        await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         
         const filter = (int) => {
             if (int.user.id === interaction.user.id) return true;
@@ -192,61 +297,79 @@ module.exports = {
             idle: 60000 / 2,
         });
 
-        const pages = [ helpembed, automod, Config, Fun, Info, gw, Mod, jointocreate, ticket, counting, Utility ];
+        const pages = [ helpembed, automod, Config, Fun, Images, Info, gw, Mod, jointocreate, ticket, counting, Utility ];
 
         let currentPage = 0;
     
         collector.on("collect", async (int) => {
             if (!int.deferred) await int.deferUpdate();
 
-            if (int.customId === "prev") {
+            if (int.customId === "back") {
+                currentPage = 0;
+                interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut3, row, rowbutlink] });
+            } else if (int.customId === "prev") {
                 if (currentPage === 0) currentPage = pages.length - 1;
                 else currentPage--;
-                interaction.editReply({ embeds: [pages[currentPage]] });
-                
+                if (currentPage === 0) {
+                    interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut3, row, rowbutlink] });
+                } else {
+                    interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut, row, rowbutlink] });
+                }
+            } else if (int.customId === "stop") {
+                collector.stop();
             } else if (int.customId === "next") {
                 if (currentPage === pages.length - 1) currentPage = 0;
                 else currentPage++;
-                interaction.editReply({ embeds: [pages[currentPage]] });
-                
+                const cur = pages.length - 1
+                if (currentPage === cur) {
+                    interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut4, row, rowbutlink] });
+                } else {
+                    interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut, row, rowbutlink] });
+                }
+            } else if (int.customId === "front") {
+                currentPage = pages.length - 1;
+                interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut4, row, rowbutlink] });
             } else if (int.values[0] === 'Home') {
                 currentPage = 0;
-                interaction.editReply({ embeds: [helpembed] });
+                interaction.editReply({ embeds: [helpembed], components: [rowbut, rowbut3, rowbutlink] });
             } else if (int.customId === "Automod") {
                 currentPage = 1;
-                interaction.editReply({ embeds: [automod] })
+                interaction.editReply({ embeds: [automod], components: [rowbut, row, rowbutlink] })
             } else if (int.values[0] === 'Config') {
                 currentPage = 2;
-                interaction.editReply({ embeds: [Config] });
+                interaction.editReply({ embeds: [Config], components: [rowbut, row, rowbutlink] });
             } else if (int.values[0] === 'Fun') {
                 currentPage = 3;
-                interaction.editReply({ embeds: [Fun] });
-            } else if (int.values[0] === 'Info') {
+                interaction.editReply({ embeds: [Fun], components: [rowbut, row, rowbutlink] });
+            } else if (int.customId === "Images") {
                 currentPage = 4;
-                interaction.editReply({ embeds: [gw] })
-            } else if (int.values[0] === 'gw') {
+                interaction.editReply({ embeds: [Images], components: [rowbut, row, rowbutlink] })
+            } else if (int.values[0] === 'Info') {
                 currentPage = 5;
-                interaction.editReply({ embeds: [gw] })
-            } else if (int.values[0] === 'Mod') {
+                interaction.editReply({ embeds: [gw], components: [rowbut, row, rowbutlink] })
+            } else if (int.values[0] === 'gw') {
                 currentPage = 6;
+                interaction.editReply({ embeds: [gw], components: [rowbut, row, rowbutlink] })
+            } else if (int.values[0] === 'Mod') {
+                currentPage = 7;
                 interaction.editReply({ embeds: [Mod] });
             } else if (int.values[0] === 'jointocreate') {
-                currentPage = 7;
-                interaction.editReply({ embeds: [jointocreate] });
-            } else if (int.values[0] === 'ticket') {
                 currentPage = 8;
-                interaction.editReply({ embeds: [ticket] });
-            } else if (int.values[0] === 'counting') {
+                interaction.editReply({ embeds: [jointocreate], components: [rowbut, row, rowbutlink] });
+            } else if (int.values[0] === 'ticket') {
                 currentPage = 9;
+                interaction.editReply({ embeds: [ticket], components: [rowbut, row, rowbutlink] });
+            } else if (int.values[0] === 'counting') {
+                currentPage = 10;
                 interaction.editReply({ embeds: [counting] });
             } else if (int.values[0] === 'Utility') {
-                currentPage = 10;
-                interaction.editReply({ embeds: [Utility] });
+                currentPage = 11;
+                interaction.editReply({ embeds: [Utility], components: [rowbut, rowbut4, rowbutlink] });
             }
         })
     
         collector.on("end", () => {
-            return interaction.editReply({ components: [row2, rowbut2] })
+            return interaction.editReply({ components: [rowbut2, row2, rowbutlink] })
         })
     }  
 };

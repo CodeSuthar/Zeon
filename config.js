@@ -8,7 +8,7 @@ module.exports = {
         NoPrefix: ["990643162928279592"],
         DeveloperId: ["1060577145258262541"],
         Invite: "https://discord.com/oauth2/authorize?client_id=969558840926437406&permissions=2088234238&scope=bot%20applications.commands",
-        SupportServer: "https://discord.gg/py6YtgyFwp"
+        SupportServer: "https://discord.gg/tHvGtcyh6V"
     },
 
     BotList: {
