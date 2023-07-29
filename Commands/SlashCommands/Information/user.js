@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const moment = require("moment");
 const UserSchema = require("../../../Database/user.js");
-const discordinfo = require("discordinfo.js")
+const discordinfo = require("discordinfo.js");
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -120,7 +120,7 @@ module.exports = {
             .setAuthor({ name: `${interaction.user.username}'s Information`, iconURL: user.user.avatarURL()})
             .setThumbnail(usericon)
             .addFields(
-                { name: `General Information`, value: `Name: \`\`${user.user.username}\`\`\nDiscriminator: \`${user.user.discriminator}\` \nNickname: \`${nick}\`` },
+                { name: `General Information`, value: `Display Name: \`\`${user.user.displayName}\`\`\nUsername: \`${user.user.username}\` \nNickname: \`${nick}\`` },
                 { name: `Overview`, value: `Badges: ${flagsArray.join(" ")}\nType: ${bot}` },
                 { name: `Server Relating Information`, value: `Roles: ${user._roles[0] ? `<@&${user._roles.join(">  <@&")}>` : `\`No roles\``} \nKey Permissions: \`\`\`${finalPermissions.includes("Administrator") ? "Administrator (All Permissions Enabled)" : finalPermissions.join(', ') }\`\`\`` },
                 { name: `Misc Information`, value: `Acc Created on: \`${moment(user.user.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\`\nJoined This Server on: \`${moment(user.joinedAt).format("dddd, MMMM Do YYYY, h:mm:ss A")}\`` }
@@ -132,7 +132,7 @@ module.exports = {
     
             return interaction.editReply({ embeds: [userlol] });
         } else if (Subcommand === "profile") {
-            let member = interaction.options.getMember("user");
+            let member = interaction.options.getMember("user") || interaction.member;
 
             let data = await UserSchema.findOne({ UserId: member.id });
 
@@ -157,8 +157,9 @@ module.exports = {
 
             const embed = new EmbedBuilder()
             .setTitle("Profile")
-            .setDescription(`User: **${member.user.tag}**`)
-            .addFields({ name: "Badges", value: badge })
+            .setDescription(`User: **${member.user.username}** | **${member.user.id}**`)
+            .addFields({ name: "Bot Badges:", value: badge })
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 2048, format: "png" }))
             .setColor("Random");
 
             return interaction.editReply({ embeds: [embed] });
@@ -166,7 +167,7 @@ module.exports = {
 
             let mention = interaction.options.getMember("user");
     
-            const avatar = mention.displayAvatarURL({ dynamic: true, size: 2048, format: "png" })
+            const avatar = mention.displayAvatarURL({ dynamic: true, size: 2048, extension: "png" })
         
             const embed = new EmbedBuilder()
             .setAuthor({ name: `${mention.user.tag}'s Avatar `, iconURL: avatar })
@@ -176,7 +177,7 @@ module.exports = {
             .setTimestamp()
             .setColor("Random")
     
-            const link = mention.displayAvatarURL({ dynamic: true, size: 2048, format: "gif" })
+            const link = mention.displayAvatarURL({ dynamic: true, size: 2048, extension: "gif" })
         
             const dlbutton = new ButtonBuilder()
             .setLabel(`PNG`)

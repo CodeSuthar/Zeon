@@ -4,11 +4,11 @@ const publishschema = require('../../../Database/autoPublish');
  
 module.exports = {
     SlashData: new SlashCommandBuilder()
-    .setName('auto')
-    .setDescription('Configure your auto publisher system.')
-    .addSubcommand(command => command.setName('publisher-add').setDescription('Adds a channel to the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be added to the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))
-    .addSubcommand(command => command.setName('publisher-remove').setDescription('Removes a channel from the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be removed from the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))
-    .addSubcommand(command => command.setName('publisher-remove-all').setDescription('Removes all channels from the auto publisher channel list')),
+    .setName('auto-publisher')
+    .setDescription('Configures your auto publisher system.')
+    .addSubcommand(command => command.setName('add').setDescription('Adds a channel to the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be added to the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))
+    .addSubcommand(command => command.setName('remove').setDescription('Removes a channel from the auto publisher channel list.').addChannelOption(option => option.setName('channel').setDescription('Specified channel will be removed from the publisher channel list.').setRequired(true).addChannelTypes(ChannelType.GuildAnnouncement)))
+    .addSubcommand(command => command.setName('remove-all').setDescription('Removes all channels from the auto publisher channel list')),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
  
@@ -18,7 +18,7 @@ module.exports = {
  
         switch (sub) {
  
-            case 'publisher-add':
+            case 'add':
  
             const data = await publishschema.findOne({ Guild: interaction.guild.id });
  
@@ -34,7 +34,7 @@ module.exports = {
  
             if (!data) {
  
-                await interaction.reply({ embeds: [addembed] })
+                await interaction.editReply({ embeds: [addembed] })
  
                 await publishschema.create({
                     Guild: interaction.guild.id,
@@ -45,26 +45,26 @@ module.exports = {
  
             } else {
  
-                if (data.Channel.includes(channel.id)) return await interaction.reply({ content: `The channel ${channel} is **already** in the **publisher** list!`, ephemeral: true });
+                if (data.Channel.includes(channel.id)) return await interaction.editReply({ content: `The channel ${channel} is **already** in the **publisher** list!`, ephemeral: true });
                 else {
-                    await interaction.reply({ embeds: [addembed] });
+                    await interaction.editReply({ embeds: [addembed] });
                     await publishschema.updateOne({ Guild: interaction.guild.id }, { $push: { Channel: channel.id }});
                 }
  
             }
  
             break;
-            case 'publisher-remove':
+            case 'remove':
  
             const data1 = await publishschema.findOne({ Guild: interaction.guild.id });
  
             if (!data1) {
  
-                return await interaction.reply({ content: `You have **not** added **any** channels to the **publisher system**, cannot remove **nothing**..`, ephemeral: true})
+                return await interaction.editReply({ content: `You have **not** added **any** channels to the **publisher system**, cannot remove **nothing**..`, ephemeral: true})
  
             } else {
  
-                if (!data1.Channel.includes(channel.id)) return await interaction.reply({ content: `The channel ${channel} is **not** in the **publisher** list!`, ephemeral: true });
+                if (!data1.Channel.includes(channel.id)) return await interaction.editReply({ content: `The channel ${channel} is **not** in the **publisher** list!`, ephemeral: true });
                 else {
  
                     const removeembed = new EmbedBuilder()
@@ -78,21 +78,21 @@ module.exports = {
                     .addFields({ name: `• Channel`, value: `> ${channel}`})
  
  
-                    await interaction.reply({ embeds: [removeembed] });
+                    await interaction.editReply({ embeds: [removeembed] });
                     await publishschema.updateOne({ Guild: interaction.guild.id }, { $pull: { Channel: channel.id }});
                 }
  
             }
  
             break;
-            case 'publisher-remove-all':
+            case 'remove-all':
  
             const data4 = await publishschema.findOne({ Guild: interaction.guild.id });
  
             if (!data4) {
-                return await interaction.reply({ content: `You have **not** added **any** channels to the **publisher system**, cannot remove **nothing**..`, ephemeral: true})
+                return await interaction.editReply({ content: `You have **not** added **any** channels to the **publisher system**, cannot remove **nothing**..`, ephemeral: true})
             } else {
-                await interaction.reply({ content: `**All** your **announcement** channels have been **removed** from the **publisher** channel list.`, ephemeral: true});
+                await interaction.editReply({ content: `**All** your **announcement** channels have been **removed** from the **publisher** channel list.`, ephemeral: true});
  
                 await publishschema.deleteMany({
                     Guild: interaction.guild.id

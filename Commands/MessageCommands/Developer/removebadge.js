@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const UserSchema = require("../../../Database/user.js");
 
 module.exports = {
-    name: 'removebage',
+    name: 'removebadge',
     category: 'Developer',
     aliases: ['removeb'],
     description: 'Leave server',

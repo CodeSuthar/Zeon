@@ -13,13 +13,15 @@ module.exports = {
         if (!Data || !Data.Channel) return;
 
         if (message.channel.id === Data.Channel) {
-            const embed = new EmbedBuilder()
-            .setTitle(`${client.emoji.wrong} | Counted Number Was Deleted By Someone`)
-            .setDescription(`> **Watch Out**, ⚠️ Caution: The deleted number can be the last number which was counted. So, Keep in mind that the\n> Last Number was \`${Data.Count - 1}\``)
-            .setColor("Random")
-            .setTimestamp()
+            if (Data.LastMessage === message.id) {
+                const embed = new EmbedBuilder()
+                .setTitle(`${client.emoji.wrong} | Last Number Was Deleted By Someone`)
+                .setDescription(`> **Watch Out**, ⚠️ Caution: The last counted number was deleted. So, Keep in mind that the\n> Last Number was \`${Data.Count - 1}\``)
+                .setColor("Random")
+                .setTimestamp()
 
-            message.channel.send({ embeds: [embed] });
-        }
+                message.channel.send({ embeds: [embed] });
+            } else return
+        } else  return
     }
 };

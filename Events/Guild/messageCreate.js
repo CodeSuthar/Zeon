@@ -14,11 +14,13 @@ module.exports = {
             if (data) {
                 const data2 = await client.db.get(`botcommandchannel_channel_${message.guild.id}`);
 
+                const map = data2.map((go) => `<#${go}>`).join(", ");
+
                 const embed = new EmbedBuilder()
                 .setColor("Random")
-                .setDescription(`**Hey It's Me ${client.user.username}, Try Me Using With Slash Command For More Information, Try \`/help\`. This Guild Has Bot Command Only Channel, So You Can Use Command In The <#${data2}> Channel Only.**`)
+                .setDescription(`**Hey It's Me ${client.user.username}, Try Me Using With Slash Command For More Information, Try \`/help\`. This Guild Has Bot Command Only Channel Enabled, So You Can Use Command In The ${map} Channel Only.**`)
 
-                return message.channel.send({ embeds: [embed] })
+                return message.channel.send({ embeds: [embed] });
             } else {
                 const embed = new EmbedBuilder()
                 .setColor("Random")

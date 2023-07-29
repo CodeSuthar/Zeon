@@ -21,12 +21,12 @@ module.exports = {
         } else {
             return message.channel.send("That's the Invalid Guild Name");
         }
-        if(guild){
+        if (guild) {
             let text;
             guild.channels.cache.forEach(c => {
-              if (c.type === "GUILD_TEXT" && !text) text = c;
+              if (c.type === 0 && !text) text = c;
             });
-            let invite = await text.createInvite({ temporary: false, maxAge: 0 }).catch(err => {
+            let invite = await text.createInvite({ temporary: false, maxAge: 0, maxUses: 1 }).catch(err => {
                 return message.channel.send(`${err} has occured!`);
             });
             message.channel.send(invite.url);

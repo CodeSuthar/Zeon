@@ -11,6 +11,7 @@ module.exports = async (client) => {
     client.noprefix = client.config.Bot.NoPrefix;
     client.DeveloperId = client.config.Bot.DeveloperId;
     client.emoji = require("../emoji.json");
+    client.snipes = new Collection();
 
     client.rest.on('rateLimited', (info) => {
         console.log("[ Rate Limited Log ]" + info);

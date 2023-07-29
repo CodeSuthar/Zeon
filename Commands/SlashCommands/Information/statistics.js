@@ -13,8 +13,6 @@ module.exports = {
         if (!interaction.replied) await interaction.deferReply();
         
         const duration1 = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-        const cpu = await si.cpu();
-        const about = "🔎";
         let ccount = client.channels.cache.size;
         let scount = client.guilds.cache.size;
         let mcount = 0; 
@@ -25,13 +23,13 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle(`${Bot.Name}'s statistics`)
-            .setDescription(`**Hey am [${Bot.Name}](${client.config.Dashboard.Information.DOmain}) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
+            .setDescription(`**Hey, <:wave:1129815890775527506> I am [${Bot.Name}](${client.config.Bot.Invite}) A cool 😎 and Multifunctional Bot with Awesome Features to enhance your discord with more easier way. Find out what I can do using the buttons below.**
 `)
             .setColor("#00008B")
             .addFields(
                 {
                   name: `Developer(s)`,
-                  value: `[**Rtxeonᴸᴳᴺ**](https://discord.com/users/880675703761272854)`,
+                  value: `[**@Rtxeon**](https://discord.com/users/1060577145258262541)`,
                   inline: false,
                 },
                 {

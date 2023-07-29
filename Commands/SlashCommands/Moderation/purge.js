@@ -18,9 +18,13 @@ module.exports = {
         .addChannelTypes(ChannelType.GuildText)
     ),
     run: async (client, interaction) => {
+        if (!interaction.replied) interaction.deferRelpy();
+
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Messages Or Administrator permission to use this command!` });
 
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Messages Or Administrator permission to use this command!` });
+
+        if (interaction.replied) await interaction.deleteReply()
 
         const amount = interaction.options.getInteger('amount');
 
@@ -33,6 +37,7 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setColor("Random")
         .setDescription(`${client.emoji.tick} | ${amount} messages have been purged in ${channel} by the administrator`)
+        .setFooter()
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -42,7 +47,7 @@ module.exports = {
             .setStyle(ButtonStyle.Primary)
         )
 
-        const msg = await interaction.reply({ embeds: [embed], components: [row] }); 
+        const msg = await interaction.channel.send({ embeds: [embed], components: [row] }); 
         
         const filter = i => i.user.id === interaction.user.id;
 
@@ -51,7 +56,7 @@ module.exports = {
         collector.on('collect', async (int) => {
             if (int.customId === 'purge') {
                 if (int.deferred) await int.deferUpdate();
-                await interaction.deleteReply();
+                await i.deleteReply();
             }
         });
     }

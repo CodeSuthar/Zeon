@@ -1,6 +1,7 @@
-const { InteractionType, EmbedBuilder, Collection, ButtonBuilder } = require("discord.js");
+const { InteractionType, EmbedBuilder, Collection, ButtonBuilder, WebhookClient } = require("discord.js");
 const Topgg = require("@top-gg/sdk");
 const pdata = require("../../Database/premium.js");
+const { CapitalizeText } = require("../../Handler/Bot-Function-Extended/Utils.js")
 
 module.exports = {
     name: "interactionCreate",
@@ -12,22 +13,45 @@ module.exports = {
             if (!SlashCommands) return;
 
             if (SlashCommands) {
-                console.log(`[ ⌨️ COMMAND ] ${interaction.user.tag} (${interaction.user.id}) ran command ${interaction} in ${interaction.guild.name} (${interaction.guild.id})`)
+                if (interaction.isChatInputCommand()) {
+                    const cmdlog = `${interaction}`;
+              
+                    console.log(`[ ⌨️ COMMAND ] ${interaction.user.username} (${interaction.user.id}) ran command /${CapitalizeText(cmdlog.slice(1))} in ${interaction.guild.name} (${interaction.guild.id})`)
+
+                
+                    const WebHook = new WebhookClient({
+                        id: '1128644507550887958',
+                        token: 'YHOnY2ChEJOxhrLJr1dfHIGeQJJzFA3DWbVtaHiJBOEYHX4Gd8RQkBdA3ce9I1WXeFD_'
+                    });
+
+                    const CommandEMB = new EmbedBuilder()
+                    .setTitle(`Command Ran`)
+                    .setColor("Random")
+                    .setDescription(`**Command Name**:-\n/${CapitalizeText(cmdlog.slice(1))}\n\n**Command Description:-**\n${SlashCommands.SlashData.description ? SlashCommands.SlashData.description : SlashCommands.description}\n\n**Command Usage:-**\n${SlashCommands.usage ? SlashCommands.usage : "No Usage Mentioned"}\n\n**Command Ran By:-**\n${interaction.user.username} (${interaction.user.id})\n\n**Command Ran Guild:-**\n${interaction.guild.name} (${interaction.guild.id})`)
+                    .setThumbnail(interaction.user.displayAvatarURL())
+                    .setFooter({ iconURL: client.user.displayAvatarURL(), text: `Command Log  •  Zeon` })
+                    .setTimestamp()
+
+                    WebHook.send({ embeds: [CommandEMB] })
+                }
+              
                 try {
                     const data = await client.db.get(`botcommandchannel_${interaction.guild.id}`);
 
                     if (data) {
                         const data2 = await client.db.get(`botcommandchannel_channel_${interaction.guild.id}`);
     
-                        if (interaction.channel.id !== data2) {
+                        if (!data2.includes(interaction.channel.id)) {
+                            const map = data2.map((go) => `<#${go}>`).join(", ");
+                          
                             const embedpro = new EmbedBuilder()
-                            .setDescription(`${client.emoji.wrong} | This guild has configured the Bot System to listen Commands only in <#${data2}> channel. So, To use the bot run commands in <#${data2}> channel.`)
+                            .setDescription(`${client.emoji.wrong} | This guild has configured the Bot System to listen Commands only in <#${data2}> channel. So, To use the bot run commands in <#${map}> channels.`)
                             .setColor("Random")
     
                             if (!interaction.replied) {
-                                interaction.reply({ embeds: [embedpro] });
+                                return interaction.reply({ embeds: [embedpro] });
                             } else {
-                                interaction.editReply({ embeds: [embedpro] });
+                                return interaction.editReply({ embeds: [embedpro] });
                             }
                         }
                     }

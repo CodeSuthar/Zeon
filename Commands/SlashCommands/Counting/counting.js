@@ -69,7 +69,8 @@ module.exports = {
                                 Guild: guildId,
                                 Channel: channel.id,
                                 Count: 1,
-                                LastPerson: ""
+                                LastPerson: "",
+                                LastMessage: ""
                             });
 
                             const setupembed = new EmbedBuilder()

@@ -13,7 +13,7 @@ module.exports = {
         if (!Data || !Data.Channel) return;
 
         if (message.channel.id === Data.Channel) {
-            if  (isNaN(message.content)) return message.delete();
+            if (isNaN(message.content)) return;
 
             if (message.author.id === Data.LastPerson || message.content < Data.Count || message.content > Data.Count) {
                 const list = [
@@ -24,6 +24,7 @@ module.exports = {
 
                 Data.Count = 1;
                 Data.LastPerson = '';
+                Data.LastMessage = '';
                 Data.save();
 
                 message.channel.send({
@@ -49,6 +50,7 @@ module.exports = {
 
             Data.Count++
             Data.LastPerson = message.author.id;
+            Data.LastMessage = message.id
             Data.save();
         }
     }

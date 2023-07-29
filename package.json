@@ -24,6 +24,7 @@
     },
     "homepage": "https://github.com/Rtxeon/Command-Handler-Discord#readme",
     "dependencies": {
+        "@discordjs/builders": "^1.6.3",
         "@discordjs/rest": "^1.7.1",
         "@discordjs/voice": "^0.16.0",
         "@iamtraction/google-translate": "^2.0.1",
@@ -31,6 +32,8 @@
         "aki-api": "^6.0.8",
         "axios": "^1.4.0",
         "body-parser": "^1.20.2",
+        "canvas": "^2.11.2",
+        "discord-api-types": "^0.37.48",
         "discord-gamecord": "^4.4.0",
         "discord-giveaways": "^6.0.1",
         "discord-html-transcripts": "^3.1.4",
@@ -59,8 +62,11 @@
         "passport-discord": "^0.1.4",
         "path": "^0.12.7",
         "quickmongo": "^5.2.0",
+        "replicate": "^0.12.3",
         "session": "^0.1.0",
+        "superagent": "^8.0.9",
         "systeminformation": "^5.17.12",
+        "undici": "^5.22.1",
         "url": "^0.11.0",
         "util": "^0.12.5",
         "wikijs": "^6.4.1"

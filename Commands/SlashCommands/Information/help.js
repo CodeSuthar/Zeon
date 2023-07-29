@@ -1,23 +1,60 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ButtonBuilder } = require("discord.js");
+const { CapitalizeText } = require("../../../Handler/Bot-Function-Extended/Utils.js")
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
     .setName("help")
-    .setDescription("Shows a list of all commands."),
+    .setDescription("Shows a list of all commands.")
+    .addStringOption(option => option
+        .setName("command")
+        .setDescription("The command to get specific information of.")
+        .setRequired(false)
+        .setAutocomplete(true)
+    ),
+    async autocomplete(interaction) {
+        const value = interaction.options.getFocused().toLowerCase();
+        const filteed = interaction.client.helpArray.filter(choice => choice.toLowerCase().includes(value));
+        const filtered = filteed.slice(0, 25);
+
+        if (!interaction) return;
+
+        await interaction.respond(
+            filtered.map(choice => ({ name: CapitalizeText(choice), value: choice }))
+        )
+    },
     run: async (client, interaction) => {
+        const cmd = interaction.options.getString("command");
+      
+        if (cmd) {
+            const SlashCommands = client.slashCommands.get(cmd);
+
+            if (SlashCommands) {
+                 if (!interaction.replied) await interaction.deferReply();
+              
+                 const embed = new EmbedBuilder()
+                .setAuthor({ name: `Zeon`,  iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+                .setDescription(`\`\`\`diff\n- [] = optional argument\n- <> = required argument\n- Do NOT type these when using commands!\`\`\`\n> ${SlashCommands.SlashData.description}`)
+                .setColor("Random")
+                .addFields(
+                  { name: `Usage`, value: `\`\`\`${SlashCommands.usage ? SlashCommands.usage : "No Usage Mentioned"}\`\`\``, inline: false }
+                )
+
+                return interaction.editReply({ embeds: [embed] })
+            } else {
+                
+            }
+        }
         if (!interaction.replied) await interaction.deferReply();
 
         const helpembed = new EmbedBuilder()
-        .setTitle(`${client.config.Bot.Name}'s Help Page`)
+        .setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL() })
         .setColor("Random")
-        .setDescription(`**Hey <@${interaction.user.id}> 👋, I'm ${client.user.username} , The Best Multifunctional Discord Bot Of To Make Dream Of Your Server Come True. Find Out What I Can Do Using The Dropdown Menu Below.**`)
+        .setDescription(`• Slash Commands Only \`/\`\n• [Get Zeon](${client.config.Bot.Invite}) | [Dashboard](${client.config.Dashboard.Information.Domain}) | [Support server](${client.config.Bot.SupportServer}) | [Vote me](${client.config.BotList.TopGG.LinkToVote})\n• Type \`/help [command | module]\` for more info.`)
         .addFields(
-            { name: "___Commands Categories are Listed Below___",  value: `${client.emoji.automod} \`:\` **Automod**\n${client.emoji.gear} \`:\` **Configuration**\n${client.emoji.fun} \`:\` **Fun**\n${client.emoji.images} \`:\` **Images**\n${client.emoji.info} \`:\` **Information**\n${client.emoji.gift} \`:\` **Giveaway**\n${client.emoji.mod} \`:\` **Moderation**\n${client.emoji.jointocreate} \`:\` **Join To Create**\n${client.emoji.ticket} \`:\` Ticket\n${client.emoji.counting} \`:\` **Counting**\n${client.emoji.utility} \`:\` **Utility**\n\n • *Select Category From Below Menu*`},
-            { name: "___Links___",  value: `[Vote](${client.config.BotList.TopGG.LinkToVote}) • [Dashboard](${client.config.Dashboard.Information.Domain}) • [Support Server](${client.config.Bot.SupportServer})`}
+            { name: "__Main__",  value: `${client.emoji.automod} Automod\n${client.emoji.gear} Configuration\n${client.emoji.fun} Fun\n${client.emoji.images} Images\n${client.emoji.info} Information\n${client.emoji.gift} Giveaway\n${client.emoji.mod} Moderation\n${client.emoji.jointocreate} Join To Create\n${client.emoji.ticket} Ticket\n${client.emoji.counting} Counting\n${client.emoji.utility} Utility`}
         )
         .setThumbnail(client.user.displayAvatarURL())
-        .setFooter({ text: `Helping You Is My Pleasure <3`, iconURL: client.user.displayAvatarURL() })
-        .setTimestamp()
+        .setFooter({ text: `Made With 💖 By The CodeSource | Development Team`, iconURL: client.user.displayAvatarURL() })
     
         const menu = new StringSelectMenuBuilder()
         .setCustomId('menu')
@@ -279,7 +316,7 @@ module.exports = {
 
         const counting = new EmbedBuilder().setColor("Random").setDescription(`\`counting game setup\`, \`counting game de-setup\`. \`counting user block\`, \`counting user unblock\``).setTitle("Counting Commands").setFooter({text: `Total 4 Counting Commands.`})
 
-        const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 8 Utility Commands.`});
+        const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`snipe\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 9 Utility Commands.`});
         
         await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         

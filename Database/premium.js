@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const user = new Schema({
+const gdata = new Schema({
     _id: {
         type: String,
         required: true,
@@ -37,4 +37,4 @@ const user = new Schema({
     }
 })
 
-module.exports = model('user', user);
+module.exports = model('guilds-pr', gdata);

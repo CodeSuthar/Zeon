@@ -25,5 +25,9 @@ module.exports = {
                 require("../../Dashboard/dashboard.js")(client);
             }
         }
+
+        const { GetChoicesCommand } = require("../../Handler/Bot-Function-Extended/Utils.js")
+
+        client.helpArray = GetChoicesCommand();
     }
 }

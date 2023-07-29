@@ -121,6 +121,7 @@ module.exports = {
                 if (Pcode.plan === "lifetime") {
                     let userembed = new EmbedBuilder()
                     .setDescription(`${client.emoji.tick} | You have successfully redeemed premium for this guild\nRedeemed by - <@${interaction.user.id}>\nPlan - ${plan}`)
+                    .setColor("Random")
     
                     return interaction.editReply({ embeds: [userembed] });
                 }

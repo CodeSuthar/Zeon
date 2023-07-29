@@ -132,7 +132,7 @@ module.exports = {
                         endedAt: "Ended at", 
                         giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
                         giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
-                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        winMessage: `Congratulations, {winners}! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
                         embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
                     }
                 });
@@ -161,7 +161,7 @@ module.exports = {
                         endedAt: "Ended at", 
                         giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
                         giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
-                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        winMessage: `Congratulations, {winners}! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
                         embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
                     }
                 });
@@ -190,7 +190,7 @@ module.exports = {
                         endedAt: "Ended at", 
                         giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
                         giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
-                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        winMessage: `Congratulations, {winners}! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
                         embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
                     }
                 });
@@ -219,7 +219,7 @@ module.exports = {
                         endedAt: "Ended at", 
                         giveaway: '🎉 **GIVEAWAY STARTED** 🎉',
                         giveawayEnded: '🎉 **GIVEAWAY ENDED** 🎉',
-                        winMessage: `Congratulations! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
+                        winMessage: `Congratulations, {winners}! You have won the giveaway for **{this.prize}**, Click here ({this.messageURL}) to jump to the giveaway message!`,
                         embedFooter: '{this.winnerCount} Winner{this.winnerCount > 1 ? "s" : ""}'
                     }
                 });

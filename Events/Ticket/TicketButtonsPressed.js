@@ -159,7 +159,7 @@ module.exports = {
                         return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat2.Handler}> role to unlock this ticket!`)] });
                     }
 
-                    if (!settt.locked) {
+                    if (!settt.Locked) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
                         client.timertowait(2000);

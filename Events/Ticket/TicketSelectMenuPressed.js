@@ -15,14 +15,11 @@ module.exports = {
  
                 const result = choices.join("");
 
-                const data = ticketSchema.findOne({ Guild: interaction.guild.id });
+                const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
  
-                const filter = { Guild: interaction.guild.id };
-                const update = { Ticket: result };
-         
-                ticketSchema.updateOne(filter, update, {
-                    new: true
-                })
+                data.Ticket = result;
+
+                await data.save();
             } else {
                 return;
             }
