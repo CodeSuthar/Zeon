@@ -21,14 +21,16 @@ module.exports = {
 
         if (!ch) ch = interaction.channel;
 
+        const interactionChannelId = interaction.channel.id;
+
         try {
-            ch.clone().then(async (channel) => {
+            return ch.clone().then(async (channel) => {
                 await channel.setParent(ch.parent);
                 await channel.setPosition(ch.position);
                 await channel.send({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.tick} | The channel has been successfully nuked!`).setImage("https://i.imgur.com/LIyGeCR.gif")] })
                 await ch.delete();
 
-                if (interaction.channel.id !== ch.id) await interaction.editReply({ content: `${client.emoji.tick} | The channel has been successfully nuked!` });
+                if (interactionChannelId !== ch.id) await interaction.editReply({ content: `${client.emoji.tick} | The channel has been successfully nuked!` });
             });
         } catch (e) {
             await interaction.editReply({ content: `${client.emoji.wrong} | An error occurred while cloning the channel!` });

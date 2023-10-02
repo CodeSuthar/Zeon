@@ -67,6 +67,10 @@ module.exports = {
     .addSubcommand((subcommand) => subcommand
         .setName("list")
         .setDescription("Lists all users in your vc.")
+    )
+    .addSubcommand((subcommand) => subcommand
+        .setName("info")
+        .setDescription("Gives you info about your vc.")
     ),
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
@@ -249,6 +253,19 @@ module.exports = {
             let members = interaction.guild.members.cache.filter(m => m.voice?.channel?.id == interaction.member?.voice?.channel?.id).map(m => `${m.user.tag} | <@${m.user.id}>`).join(`\n`)
             
             return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(members).setTitle(`**Users in ${interaction.member.voice.channel.name} - ${interaction.member.voice.channel.members.size}**`)]})
+        }
+
+        if (SubCommand === "info") {
+            if (!interaction.member.voice.channel) {
+                return interaction.editReply({embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.wrong} | You must be connected to a voice channel first.`)]})
+            }
+
+            const embed = new EmbedBuilder()
+            .setColor("Random")
+            .setTitle(`Voice Channel Info`)
+            .setDescription(`**Name:** ${interaction.member.voice.channel.name}\n**ID:** ${interaction.member.voice.channel.id}\n**Bitrate:** ${interaction.member.voice.channel.bitrate}\n**User Limit:** ${interaction.member.voice.channel.userLimit}\n**Members:** ${interaction.member.voice.channel.members.size}`)
+
+            return interaction.editReply({embeds: [embed]})
         }
     }
 };
