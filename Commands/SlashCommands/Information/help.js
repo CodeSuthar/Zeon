@@ -300,15 +300,15 @@ module.exports = {
 
         const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel setup\`, \`botcommandchannel de-setup\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
 
-        const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 11 Information Commands.`});
+        const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`dinochrome\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`pokedex\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 13 Information Commands.`});
 
-        const Images = new EmbedBuilder().setColor("Random").setDescription(`\`advertisement\`, \`affect\`, \`batslap\`, \`beautiful\`, \`blur\`, \`bobross\`, \`delete\`, \`gay\`, \`gay\`, \`hitler\`, \`jail\`, \`poutine\`, \`rip\`, \`trash\`, \`triggered\`, \`wanted\``).setTitle("Images Commands").setFooter({text: `Total 16 Images Commands.`});
+        const Images = new EmbedBuilder().setColor("Random").setDescription(`\`achievement\`, \`advertisement\`, \`affect\`, \`batslap\`, \`beautiful\`, \`blur\`, \`bobross\`, \`delete\`, \`gay\`, \`hitler\`, \`jail\`, \`poutine\`, \`rip\`, \`trash\`, \`triggered\`, \`wanted\``).setTitle("Images Commands").setFooter({text: `Total 16 Images Commands.`});
 
-        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`time\`, \`uptime\`, \`user info\`, \`user profile\``).setTitle("Information Commands").setFooter({text: `Total 11 Information Commands.`});
+        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`invite\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`time\`, \`uptime\`, \`user info\`, \`user profile\`, \`worldclock\`, \`vote\``).setTitle("Information Commands").setFooter({text: `Total 14 Information Commands.`});
 
         const gw = new EmbedBuilder().setColor("Random").setDescription(`\`giveaway start\`, \`giveaway edit\`, \`giveaway end\`, \`giveaway reroll\`, \`giveaway pause\`, \`giveaway resume\``).setTitle("Giveaway Commands").setFooter({text: `Total 6 Giveaway Commands.`});
 
-        const Mod = new EmbedBuilder().setColor("Random").setDescription(`\`ban\`, \`kick\`, \`lock\`, \`unlock\`, \`mass-unban\`, \`purge\`, \`role all\`, \`nickname\`, \`slowmode\`, \`timeout\`, \`untimeout\`, \`voice kick\`, \`voice deafen\`, \`voice undeafen\`, \`voice mute\`, \`voice unmute\`, \`voice list\`, \`voice move\``).setTitle("Moderation Commands").setFooter({text: `Total 18 Moderation Commands.`});
+        const Mod = new EmbedBuilder().setColor("Random").setDescription(`\`ban\`, \`kick\`, \`lock\`, \`unlock\`, \`mass-unban\`, \`nuke\`, \`purge\`, \`role all\`, \`nickname\`, \`slowmode\`, \`timeout\`, \`untimeout\`, \`voice kick\`, \`voice deafen\`, \`voice undeafen\`, \`voice mute\`, \`voice unmute\`, \`voice list\`, \`voice move\``).setTitle("Moderation Commands").setFooter({text: `Total 19 Moderation Commands.`});
 
         const jointocreate = new EmbedBuilder().setColor("Random").setDescription(`\`jointocreate setup\`, \`jointocreate de-setup\``).setTitle("Join To Create Commands").setFooter({text: `Total 2 Join To Create Commands.`});
 
