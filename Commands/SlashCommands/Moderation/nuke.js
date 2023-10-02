@@ -25,7 +25,6 @@ module.exports = {
             ch.clone().then(async (channel) => {
                 await channel.setParent(ch.parent);
                 await channel.setPosition(ch.position);
-                await channel.setTopic(ch.topic);
                 await channel.send({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.tick} | The channel has been successfully nuked!`).setImage("https://i.imgur.com/LIyGeCR.gif")] })
                 await ch.delete();
 

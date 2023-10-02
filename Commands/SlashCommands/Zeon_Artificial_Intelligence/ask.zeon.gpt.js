@@ -35,7 +35,7 @@ module.exports = {
                   text: prompt,
                   lang: 'en',
                   psid: "bghdSEoIWN6Rf-h7niygUWj3LBDc3Dx1RwgAUsmtNeTiQCgFPtfia-MiIKc9czYAje6NYQ.",
-                  'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
+                  'X-RapidAPI-Key': '9c4f4b0a0emsh47ac8353094529bp14cd6djsn7f662c852aad',
                   'X-RapidAPI-Host': 'google-bard1.p.rapidapi.com'
                 }
             };

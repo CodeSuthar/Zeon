@@ -21,6 +21,7 @@ module.exports = {
             .setStyle("Link")
         )
 
-        return member.send({ embeds: [Embed], components: [Row] })
+        return member.send({ embeds: [Embed], components: [Row] }).catch(() => {});
+                
     }
 };
