@@ -304,7 +304,7 @@ module.exports = {
 
         const Images = new EmbedBuilder().setColor("Random").setDescription(`\`achievement\`, \`advertisement\`, \`affect\`, \`batslap\`, \`beautiful\`, \`blur\`, \`bobross\`, \`delete\`, \`gay\`, \`hitler\`, \`jail\`, \`poutine\`, \`rip\`, \`trash\`, \`triggered\`, \`wanted\``).setTitle("Images Commands").setFooter({text: `Total 16 Images Commands.`});
 
-        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`invite\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`voice info\` \`time\`, \`uptime\`, \`user info\`, \`user profile\`, \`worldclock\`, \`vote\``).setTitle("Information Commands").setFooter({text: `Total 15 Information Commands.`});
+        const Info = new EmbedBuilder().setColor("Random").setDescription(`\`help\`, \`invite\`, \`membercount\`, \`ping\`, \`role info\`, \`server info\`, \`shards\`, \`statistics\`, \`voice info\`, \`time\`, \`uptime\`, \`user info\`, \`user profile\`, \`worldclock\`, \`vote\``).setTitle("Information Commands").setFooter({text: `Total 15 Information Commands.`});
 
         const gw = new EmbedBuilder().setColor("Random").setDescription(`\`giveaway start\`, \`giveaway edit\`, \`giveaway end\`, \`giveaway reroll\`, \`giveaway pause\`, \`giveaway resume\``).setTitle("Giveaway Commands").setFooter({text: `Total 6 Giveaway Commands.`});
 
