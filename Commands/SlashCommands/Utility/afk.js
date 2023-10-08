@@ -32,7 +32,7 @@ module.exports = {
             });
             newafk.save();
             const embed = new EmbedBuilder()
-            .setDescription(`**${interaction.user.username}#${interaction.user.discriminator}**, I Added You To My AFK List`)
+            .setDescription(`**${interaction.user.username}**, I Added You To My AFK List`)
             .addFields(
                 { name: "Note:-", value: `Note: If You Wanna Be In AFK Mode And Type A Message Just Add \`[AFK]\` In The Starting Of Message, And If Want To Disable Afk Mode Type Anything Without AFK Tag` }
             )
@@ -41,7 +41,7 @@ module.exports = {
         } else {
             await interaction.member.setNickname(data.Nickname).catch(e => {});
             
-            interaction.editReply(`Welcome Back! **${interaction.user.username}#${interaction.user.discriminator}**, I Removed You From My AFK List, You Were AFK For **${convertTime(Date.now() - data.Time)}**`)
+            interaction.editReply(`Welcome Back! **${interaction.user.username}**, I Removed You From My AFK List, You Were AFK For **${convertTime(Date.now() - data.Time)}**`)
             afk.deleteMany({ Guild: interaction.guild.id, Member: interaction.user.id }).then(() => {
                 console.log(`AFK Ended`)
             });

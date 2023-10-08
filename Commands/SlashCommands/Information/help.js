@@ -51,7 +51,15 @@ module.exports = {
         .setColor("Random")
         .setDescription(`• Slash Commands Only \`/\`\n• [Get Zeon](${client.config.Bot.Invite}) | [Dashboard](${client.config.Dashboard.Information.Domain}) | [Support server](${client.config.Bot.SupportServer}) | [Vote me](${client.config.BotList.TopGG.LinkToVote})\n• Type \`/help [command | module]\` for more info.`)
         .addFields(
-            { name: "__Main__",  value: `${client.emoji.automod} Automod\n${client.emoji.gear} Configuration\n${client.emoji.fun} Fun\n${client.emoji.images} Images\n${client.emoji.info} Information\n${client.emoji.gift} Giveaway\n${client.emoji.mod} Moderation\n${client.emoji.jointocreate} Join To Create\n${client.emoji.ticket} Ticket\n${client.emoji.counting} Counting\n${client.emoji.utility} Utility`}
+            { 
+                name: "__Main__",  
+                value: `${client.emoji.automod} Automod\n${client.emoji.gear} Configuration\n${client.emoji.fun} Fun\n${client.emoji.images} Images\n${client.emoji.info} Information\n${client.emoji.gift} Giveaway\n${client.emoji.mod} Moderation\n${client.emoji.jointocreate} Join To Create\n${client.emoji.ticket} Ticket\n${client.emoji.counting} Counting\n${client.emoji.utility} Utility`, 
+                inline: true 
+            },            { 
+                name: "__Extra__", 
+                value: `${client.emoji.backup} Backup`,
+                inline: true
+            }
         )
         .setThumbnail(client.user.displayAvatarURL())
         .setFooter({ text: `Made With 💖 By The CodeSource | Development Team`, iconURL: client.user.displayAvatarURL() })

@@ -13,7 +13,7 @@ module.exports = {
         });
 
         //Game
-        let statuses = [ `In ${scount} Guilds!`, `With ${mcount} Users!`, 'In Beta'];
+        let statuses = [ `With Version ${require(`${process.cwd()}/package.json`).version}`, `With 94 Commands`, `In ${scount} Guilds!`, `With ${mcount} Users!`, 'In Beta'];
         setInterval(function() {
   		    let status = statuses[Math.floor(Math.random()*statuses.length)];
   		    client.user.setActivity(status, { type: ActivityType.Playing });

@@ -12,7 +12,7 @@ module.exports = {
 
             await message.member.setNickname(afk.Nickname).catch(e => {});
             
-            message.reply(`Welcome Back! **${message.author.username}#${message.author.discriminator}**, I Removed You From My AFK List, You Were AFK For **${convertTime(Date.now() - afk.Time)}**`)
+            message.reply(`Welcome Back! **${message.author.username}**, I Removed You From My AFK List, You Were AFK For **${convertTime(Date.now() - afk.Time)}**`)
             db.deleteMany({ Guild: message.guild.id, Member: message.author.id }).then(() => {
                 console.log(`AFK Ended`)
             });
