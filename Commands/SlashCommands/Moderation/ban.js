@@ -45,7 +45,7 @@ module.exports = {
                 if (!banMember.bannable) {
                     return interaction.editReply({ content: `${client.emoji.wrong} | I cannot ban this member as, I am not high enough in the role hierarchy to do that.` })
                 } else {
-                    const reason = options.getString("reason") || "No Reason Provided";
+                    const reason = `${options.getString("reason")}, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})` || "No Reason Provided";
 
                     const emb = new EmbedBuilder()
                     .setTitle(`Banned An Member From The Server`)

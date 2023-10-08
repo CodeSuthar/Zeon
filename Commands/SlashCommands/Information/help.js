@@ -308,7 +308,7 @@ module.exports = {
 
         const Config = new EmbedBuilder().setColor("Random").setDescription(`\`botcommandchannel setup\`, \`botcommandchannel de-setup\`, \`premium redeem\`, \`premium status\``).setTitle("Configuration Commands").setFooter({text: `Total 4 Configuration Commands.`});
 
-        const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`coinflip\`, \`dice\`, \`dinochrome\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`pokedex\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 13 Information Commands.`});
+        const Fun = new EmbedBuilder().setColor("Random").setDescription(`\`8ball\`, \`ascii\`, \`cattext\`, \`coinflip\`, \`dice\`, \`dinochrome\`, \`google\`, \`hangman\`, \`impersonate\`, \`meme\`, \`pokedex\`, \`random answer\`, \`texttospeech\`, \`tic-tac-toe\``).setTitle("Fun Commands").setFooter({text: `Total 14 Information Commands.`});
 
         const Images = new EmbedBuilder().setColor("Random").setDescription(`\`achievement\`, \`advertisement\`, \`affect\`, \`batslap\`, \`beautiful\`, \`blur\`, \`bobross\`, \`delete\`, \`gay\`, \`hitler\`, \`jail\`, \`poutine\`, \`rip\`, \`trash\`, \`triggered\`, \`wanted\``).setTitle("Images Commands").setFooter({text: `Total 16 Images Commands.`});
 

@@ -1,4 +1,5 @@
 const { Collection } = require("discord.js");
+const nekoClient = require("nekos.life");
 
 module.exports = async (client) => {
     client.commands = new Collection();
@@ -12,6 +13,7 @@ module.exports = async (client) => {
     client.DeveloperId = client.config.Bot.DeveloperId;
     client.emoji = require("../emoji.json");
     client.snipes = new Collection();
+    client.neko = new nekoClient();
 
     client.rest.on('rateLimited', (info) => {
         console.log("[ Rate Limited Log ]" + info);
