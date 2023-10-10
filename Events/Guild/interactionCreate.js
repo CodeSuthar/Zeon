@@ -97,6 +97,7 @@ module.exports = {
                             return interaction.reply({ content: `Im, Not A Fool Bot, Only Owner Can Use This Commands` })
                         }
                     }
+                    
                     await SlashCommands.run(client, interaction);
                 } catch (e) {
                     console.log(e);

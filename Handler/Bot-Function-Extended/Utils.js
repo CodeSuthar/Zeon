@@ -2,25 +2,6 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Bot, Dashboard } = require(`../../config.js`)
 
-function ImageGenerationGetChoices() {
-    const imagegenchoices = [
-        {
-            name: 'Stable Diffusion (Default)',
-            value: 'https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5',
-        },
-        {
-            name: 'Openjourney (Midjourney style)',
-            value: 'https://api-inference.huggingface.co/models/prompthero/openjourney',
-        },
-        {
-            name: 'Waifu Diffusion',
-            value: 'https://api-inference.huggingface.co/models/hakurei/waifu-diffusion',
-        },
-    ];
-
-    return imagegenchoices;
-}
-
 function GetChoicesCommand() {
     const rest = new REST({ version: '9' }).setToken(Bot.Token);
 
@@ -47,10 +28,23 @@ function GetChoicesCommand() {
     return choices
 }
 
+function convertTime(duration) {
+    let seconds = parseInt((duration / 1000) % 60);
+    let minutes = parseInt((duration / (1000 * 60)) % 60);
+    let hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    if (duration >= 86400000) "◉ LIVE";
+    if (duration >= 3600000) return hours + ":" + minutes + ":" + seconds;
+    if (duration < 3600000) return minutes + ":" + seconds;
+}
+
 function CapitalizeText(text) {
     const capitalizedSentence = text.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
     return capitalizedSentence
 }
 
-module.exports = { ImageGenerationGetChoices, CapitalizeText, GetChoicesCommand }
+module.exports = { CapitalizeText, GetChoicesCommand, convertTime }

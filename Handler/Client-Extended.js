@@ -1,5 +1,6 @@
 const { Collection } = require("discord.js");
 const nekoClient = require("nekos.life");
+const PlayerManager = require("./Bot-Function-Extended/Music-Manager.js");
 
 module.exports = async (client) => {
     client.commands = new Collection();
@@ -14,6 +15,9 @@ module.exports = async (client) => {
     client.emoji = require("../emoji.json");
     client.snipes = new Collection();
     client.neko = new nekoClient();
+
+    //Loading The Music Manager
+    client.musicManager = new PlayerManager(client);
 
     client.rest.on('rateLimited', (info) => {
         console.log("[ Rate Limited Log ]" + info);
@@ -36,6 +40,6 @@ function timertowait(ms) {
     let start = new Date().getTime();
     let end = start;
     while (end < start + ms) {
-      end = new Date().getTime();
+        end = new Date().getTime();
     }
 }

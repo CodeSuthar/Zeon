@@ -1,3 +1,4 @@
+const { useMainPlayer } = require("discord-player");
 const { ActivityType } = require("discord.js");
 const isPortReachable = require("is-port-reachable");
 
@@ -25,6 +26,10 @@ module.exports = {
                 require("../../Dashboard/dashboard.js")(client);
             }
         }
+
+        //Loading The Music Extractors
+        let Player = await useMainPlayer();
+        await Player.extractors.loadDefault();
 
         const { GetChoicesCommand } = require("../../Handler/Bot-Function-Extended/Utils.js")
 

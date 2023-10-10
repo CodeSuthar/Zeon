@@ -11,11 +11,31 @@ module.exports = {
         SupportServer: "https://discord.gg/tHvGtcyh6V"
     },
 
+    Webhooks: {
+        Lavalinks: process.env.LavalinkWebhook || "https://discord.com/api/webhooks/1160840465348825149/oy24URrTAHnzaRsZS3hAqbRBgGnINrs74WW0qKAchIgBVfYarzVZYdeRCZXAZWT3nWjy",
+    },
+
     BotList: {
         TopGG: {
             APIToken: process.env.TopGGToken || "",
             LinkToVote: "https://top.gg/bot/969558840926437406/vote"
         }
+    },
+
+    Music: {
+        Spotify: {
+            ClientID: process.env.SpotifyClientId || "",
+            ClientSecret: process.env.SpotifyClientSecret || ""
+        },
+
+        Nodes: [
+            {
+                name: "Zeon - Lavalink - 1",
+                url: "lava1.horizxon.tech:443",
+                auth: "horizxon.tech",
+                secure: true
+            }
+        ]
     },
 
     Dashboard: {
