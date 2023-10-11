@@ -57,7 +57,7 @@ module.exports = {
                 } else {
                     if (!interaction.replied)
                     
-                    await interaction.editReply({ content: `You are not connected to <#${queue.channel.id}> to use this buttons.`, ephemeral: true });
+                    await interaction.editReply({ content: `${client.emoji.wrong} | You are not connected to <#${queue.channel.id}> to use this buttons.`, ephemeral: true });
                     return false;
                 };
             },
@@ -72,7 +72,7 @@ module.exports = {
 
                 if (amount === -10 || amount < 0) {
                     const embed = new EmbedBuilder()
-                    .setDescription(`Player Volume Limit Is Between 0 And 150!`)
+                    .setDescription(`${client.emoji.wrong} | Player Volume Limit Is Between 0 And 150!`)
                     .setColor("Random")
                     await interaction.editReply({ embeds: [embed], ephemeral: true }) 
                 } else {     
@@ -80,11 +80,11 @@ module.exports = {
                               
                     if (amount === 0) {
                         embed = new EmbedBuilder()
-                        .setDescription("Player Have Been Muted Sucessfully")
+                        .setDescription(`${client.emoji.tick} | Player Have Been Muted Sucessfully`)
                         .setColor("Random")
                     } else {
                         embed = new EmbedBuilder()
-                        .setDescription(`${client.emoji.volumedown} Player Volme Has Been Set To ${amount}`)
+                        .setDescription(`${client.emoji.volumedown} | Player Volume Has Been Set To ${amount}`)
                         .setColor("Random")
                     }
           
@@ -97,25 +97,25 @@ module.exports = {
 
                     if (amount === 160 || amount > 150) {
                         const embed = new EmbedBuilder()
-                        .setDescription(`Player Volume Limit Is Between 0 And 150!`)
+                        .setDescription(`${client.emoji.wrong} | Player Volume Limit Is Between 0 And 150!`)
                         .setColor("Random")
                         await interaction.editReply({ embeds: [embed], ephemeral: true }) 
                     } else {
                         await queue.node.setVolume(amount);
-                        await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.volumeup} Set the volume to: **${amount}**`)], ephemeral: true });
+                        await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setDescription(`${client.emoji.volumeup} | Player Volume Has Been Set To **${amount}**`)], ephemeral: true });
                     }
                 } else {
                     if (interaction.customId === "stop") {
                         if (!queue || queue && !queue.node.isPlaying()) {
                             const embed = new EmbedBuilder()
-                            .setDescription(`There's No Player Playing In The Guild`)
+                            .setDescription(`${client.emoji.wrong} | There's No Player Playing In The Guild`)
                             .setColor("Random")
                             await interaction.editReply({ embeds: [embed], ephemeral: true })  
                         } else {
                             if (queue.tracks.length) queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
 
                             if (queue.node.isPlaying()) queue.node.skip(); //so clearing the queue than skipping it will work like stop 
-                            await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`The Player Has Been Stopped`)], ephemeral: true });
+                            await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`${client.emoji.tick} | The Player Has Been Stopped`)], ephemeral: true });
                           
                             return await collector.stop()
                         }    
@@ -148,12 +148,12 @@ module.exports = {
                                 components: [row]
                             })
         
-                            await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`The Player Has Been ${Action}`)], ephemeral: true });
+                            await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`${client.emoji.tick} | The Player Has Been ${Action}`)], ephemeral: true });
                         } else {
                             if (interaction.customId === "skip") {
                                 const embed = new EmbedBuilder()
                                 .setAuthor({ name: "Skipped The Track" })
-                                .setDescription(`Skipped - [${track.title}](${track.url})`)
+                                .setDescription(`${client.emoji.tick} | Skipped The Current Track`)
                                 .setColor("Random")
                                 await interaction.editReply({ embeds: [embed], ephemeral: true })
                                 queue.node.skip();

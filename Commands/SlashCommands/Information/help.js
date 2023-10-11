@@ -57,7 +57,7 @@ module.exports = {
                 inline: true 
             },            { 
                 name: "__Extra__", 
-                value: `${client.emoji.backup} Backup`,
+                value: `${client.emoji.music} Backup`,
                 inline: true
             }
         )
@@ -117,7 +117,11 @@ module.exports = {
             new StringSelectMenuOptionBuilder()
             .setLabel("Utility")
             .setValue("utility")
-            .setEmoji(client.emoji.utility)
+            .setEmoji(client.emoji.utility),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Music")
+            .setValue("music")
+            .setEmoji(client.emoji.music)
         );
         
         const Ended = new StringSelectMenuBuilder()
@@ -174,7 +178,11 @@ module.exports = {
             new StringSelectMenuOptionBuilder()
             .setLabel("Utility")
             .setValue("utility")
-            .setEmoji(client.emoji.utility)
+            .setEmoji(client.emoji.utility),
+            new StringSelectMenuOptionBuilder()
+            .setLabel("Music")
+            .setValue("music")
+            .setEmoji(client.emoji.music)
         );
         
         const row = new ActionRowBuilder()
@@ -325,6 +333,8 @@ module.exports = {
         const counting = new EmbedBuilder().setColor("Random").setDescription(`\`counting game setup\`, \`counting game de-setup\`. \`counting user block\`, \`counting user unblock\``).setTitle("Counting Commands").setFooter({text: `Total 4 Counting Commands.`})
 
         const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`snipe\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 9 Utility Commands.`});
+
+        const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`nowplaying\`, \`play\`, \`queue\`, \`skip\`, \`volume\``).setFooter({text: `Total 11 Music Commands.`});
         
         await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         
@@ -342,7 +352,7 @@ module.exports = {
             idle: 60000 / 2,
         });
 
-        const pages = [ helpembed, automod, Config, Fun, Images, Info, gw, Mod, jointocreate, ticket, counting, Utility ];
+        const pages = [ helpembed, automod, Config, Fun, Images, Info, gw, Mod, jointocreate, ticket, counting, Utility, Music ];
 
         let currentPage = 0;
     

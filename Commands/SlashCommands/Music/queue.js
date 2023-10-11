@@ -87,7 +87,7 @@ module.exports = {
                         } else {
                             i.reply({
                                 ephemeral: true,
-                                content: `Only **${i.user.tag}** can use this button, if you want then you've to run the command again.`,
+                                content: `${client.emoji.wrong} | Only **${i.user.tag}** can use this button, if you want then you've to run the command again.`,
                             });
                             return false;
                         }
