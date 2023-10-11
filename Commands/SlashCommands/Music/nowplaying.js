@@ -15,14 +15,14 @@ module.exports = {
     
         if (!Queue) {
             const embed = new EmbedBuilder()
-            .setDescription(`There's No Player In The Guild`)
+            .setDescription(`${client.emoji.wrong} | There's No Player To Show Now Playing In This Server!`)
             .setColor("Random")
             return interaction.editReply({ embeds: [embed] })  
         }
 
         if (!Queue.node.isPlaying()) {
             const embed = new EmbedBuilder()
-            .setDescription(`There's No Player Playing In The Guild`)
+            .setDescription(`${client.emoji.wrong} | There's No Track Playing In This Server!`)
             .setColor("Random")
             return interaction.editReply({ embeds: [embed] })  
         }
@@ -51,8 +51,8 @@ module.exports = {
               ] 
             })
         } catch (e) {
-            console.log(e)
-            return interaction.editReply({ content: `Can't Show The Queue The Track` })
+            console.log(e);
+            return interaction.editReply({ content: `${client.emoji.wrong} | Due To Loadage On The System, Can't Fetch The Now Playing Data, Anytime Now! Try Again Later.` });
         }
     }
 }

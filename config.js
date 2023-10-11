@@ -26,16 +26,7 @@ module.exports = {
         Spotify: {
             ClientID: process.env.SpotifyClientId || "",
             ClientSecret: process.env.SpotifyClientSecret || ""
-        },
-
-        Nodes: [
-            {
-                name: "Zeon - Lavalink - 1",
-                url: "lava1.horizxon.tech:443",
-                auth: "horizxon.tech",
-                secure: true
-            }
-        ]
+        }
     },
 
     Dashboard: {

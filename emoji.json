@@ -49,12 +49,14 @@
     "images": "<:images:1127602448832401570>",
     "litter": "🚮",
     "backup": "<:icons_discover:1160254023203573801>",
-    "musicnote": "🎵",
-    "disconnect": "📤",
-    "voldown": "🔉",
-    "previous": "⏮️",
-    "volup": "🔊",
-    "play": "▶️",
+    "join": "📥",
+    "leave": "📤",
     "pause": "⏸️",
-    "skip": "⏭️"
+    "play": "▶️",
+    "skip": "⏭️",
+    "volumedown": "🔉",
+    "volumeup": "🔊",
+    "stop": "⏹️",
+    "musicalnote": "🎶",
+    "eject": "⏏️"
 }

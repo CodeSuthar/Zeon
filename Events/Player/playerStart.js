@@ -14,19 +14,32 @@ module.exports = {
 
         const MusicPlaying = new EmbedBuilder()
         .setAuthor({ name: "Now Playing", iconURL: "https://c.tenor.com/B-pEg3SWo7kAAAAi/disk.gif" })
-        .setDescription(`**Now Playing** - *[${track.title}](${track.url})* - \`${track.duration}\``)
-        .setFooter({ text: `Requested By ${track.requestedBy.tag}`, iconURL: track.requestedBy.displayAvatarURL() })
+        .setDescription(`**Now Playing** - *[${track.title}](${track.url})*`)
+        .addFields(
+            {
+                name: "Duration",
+                value: `\`[ ${track.duration} ]\``,
+                inline: true
+            },
+            {
+                name: "Requester",
+                value: `\`[ ${track.requestedBy.username} | ${track.requestedBy.id} ]\``,
+                inline: true
+            }
+        )
+        .setThumbnail(track.thumbnail)
+        .setTimestamp()
         .setColor("Random")
 
-        const But1 = new ButtonBuilder().setCustomId("volumedown").setEmoji("🔉").setStyle("Primary");
+        const But1 = new ButtonBuilder().setCustomId("volumedown").setEmoji(`${client.emoji.volumedown}`).setStyle("Primary");
 
-        const But2 = new ButtonBuilder().setCustomId("stop").setEmoji("⏹️").setStyle("Secondary");
+        const But2 = new ButtonBuilder().setCustomId("stop").setEmoji(`${client.emoji.stop}`).setStyle("Secondary");
 
-        const But3 = new ButtonBuilder().setCustomId("pause").setEmoji("⏸️").setStyle("Primary");
+        const But3 = new ButtonBuilder().setCustomId("pause").setEmoji(`${client.emoji.pause}`).setStyle("Primary");
 
-        const But4 = new ButtonBuilder().setCustomId("skip").setEmoji("⏭️").setStyle("Secondary");
+        const But4 = new ButtonBuilder().setCustomId("skip").setEmoji(`${client.emoji.skip}`).setStyle("Secondary");
 
-        const But5 = new ButtonBuilder().setCustomId("volumeup").setEmoji("🔊").setStyle("Primary");
+        const But5 = new ButtonBuilder().setCustomId("volumeup").setEmoji(`${client.emoji.volumeup}`).setStyle("Primary");
 
         const row = new ActionRowBuilder().addComponents(But1, But2, But3, But4, But5)
 
@@ -34,7 +47,7 @@ module.exports = {
 
         const msg = Channel.send({ embeds: [MusicPlaying], components: [row] }).then(async (msg) => {
             id = msg.id
-            await Player.setNowPlayingMessage(Guild.id, msg);
+            await Player.setNowPlayingMessage(Guild.id, id);
         })
       
         const collector = Channel.createMessageComponentCollector({
@@ -99,49 +112,6 @@ module.exports = {
                             .setColor("Random")
                             await interaction.editReply({ embeds: [embed], ephemeral: true })  
                         } else {
-                            const embedend = new EmbedBuilder()
-                            .setTitle("Seems... Like Track Has Been Ended")
-                            .setDescription(`*[${track.title}](${track.url})* - Track Has Been **Ended**`)
-                            .setFooter({ text: `Track Was Requested By ${track.requestedBy.tag}`, iconURL: track.requestedBy.displayAvatarURL() })
-                            .setColor("Random")
-
-                            const But1 = new ButtonBuilder()
-                            .setCustomId("volumedown")
-                            .setEmoji("🔉")
-                            .setStyle("Primary")
-                            .setDisabled(true)
-            
-                            const But2 = new ButtonBuilder()
-                            .setCustomId("stop")
-                            .setEmoji("⏹️")
-                            .setStyle("Secondary")
-                            .setDisabled(true)
-            
-                            const But3 = new ButtonBuilder()
-                            .setCustomId("pause")
-                            .setEmoji("⏸️")
-                            .setStyle("Primary")
-                            .setDisabled(true)
-            
-                            const But4 = new ButtonBuilder()
-                            .setCustomId("skip")
-                            .setEmoji("⏭️")
-                            .setStyle("Secondary")
-                            .setDisabled(true)
-                
-                            const But5 = new ButtonBuilder()
-                            .setCustomId("volumeup")
-                            .setEmoji("🔊")
-                            .setStyle("Primary")
-                            .setDisabled(true)
-                
-                            const row = new ActionRowBuilder().addComponents(But1, But2, But3, But4, But5);
-      
-                            await Channel.messages.edit(id, {
-                                embeds: [embedend],
-                                components: [row]
-                            })
-                
                             if (queue.tracks.length) queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
 
                             if (queue.node.isPlaying()) queue.node.skip(); //so clearing the queue than skipping it will work like stop 

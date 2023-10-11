@@ -17,17 +17,19 @@ module.exports = {
 
         let Queue = await useQueue(interaction.guildId);
         
-        if (!interaction.member.voice.channelId) {
+        if (!interaction.member.voice.channel) {
             const embed = new EmbedBuilder()
-            .setDescription("You Are Not Connected To A Voice Channed!")
+            .setDescription(`${client.emoji.wrong} | You Need To Be Connected To A Voice Channel To Use This Command!`)
             .setColor("Random")
+
             return interaction.editReply({ embeds: [embed] })
         }
-    
+
         if (Queue && Queue.channel.id !== interaction.member.voice.channelId) {
             const embed = new EmbedBuilder()
-            .setDescription(`I'm Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
+            .setDescription(`${client.emoji.wrong} | I'm Already Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
             .setColor("Random")
+
             return interaction.editReply({ embeds: [embed] })
         }
     
@@ -67,8 +69,8 @@ module.exports = {
             await Queue.node.setVolume(amount);
             return interaction.editReply({ embeds: [embed] })
         } catch (e) {
-            console.log(e)
-            return interaction.editReply({ content: `Can't Set The Volume` })
+            console.log(e);
+            return interaction.editReply({ content: `${client.emoji.wrong} | Due To Loadage On The System, Can't Set The Volume Level, Anytime Now! Try Again Later.` });
         }
     }
 }

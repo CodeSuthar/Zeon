@@ -19,15 +19,17 @@ module.exports = {
 
         if (!interaction.member.voice.channel) {
             const embed = new EmbedBuilder()
-            .setDescription("You Are Not Connected To A Voice Channed!")
+            .setDescription(`${client.emoji.wrong} | You Need To Be Connected To A Voice Channel To Use This Command!`)
             .setColor("Random")
+
             return interaction.editReply({ embeds: [embed] })
         }
 
         if (Queue && Queue.channel.id !== interaction.member.voice.channelId) {
             const embed = new EmbedBuilder()
-            .setDescription(`I'm Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
+            .setDescription(`${client.emoji.wrong} | I'm Already Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
             .setColor("Random")
+
             return interaction.editReply({ embeds: [embed] })
         }
 
@@ -42,9 +44,7 @@ module.exports = {
                 selfDeaf: true,
                 metadata: {
                     guild: interaction.guild.id,
-                    channel: interaction.channel.id,
-                    client: interaction.guild.members.me,
-                    requestedBy: interaction.user
+                    channel: interaction.channel.id
                 }
             });
 
@@ -64,6 +64,7 @@ module.exports = {
             if (!searchResult || !searchResult.tracks.length) return interaction.editReply({ content: 'No results were found!' });
 
             if (searchResult.playlist) {
+                await interaction.editReply({ content: `${client.emoji.loading} | Loading Playlist... • ${searchResult.playlist.title} • ${searchResult.playlist.length + 1}` })
                 let count = 0;
             
                 for (const track of searchResult.tracks) {
@@ -81,12 +82,32 @@ module.exports = {
                 if (!Queue.node.isPlaying()) Queue.node.play();
 
                 const embed = new EmbedBuilder()
-                .setAuthor({ name: `Loaded Your Playlist`, iconURL: `https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png` })
-                .setDescription(`Added ${count} Tracks To Queue`)
-                .setFooter({ text: `Requested By ${interaction.user.tag}` })
+                .addFields(
+                    {
+                        name: `Playlist Name`,
+                        value: `\`[ ${searchResult.playlist.title} ]\``,
+                        inline: true
+                    },
+                    {
+                        name: `Playlist Duration`,
+                        value: `\`[ ${searchResult.playlist.durationFormatted} ]\``,
+                        inline: true
+                    },
+                    {
+                        name: `Playlist Tracks Count`,
+                        value: `\`[ ${count} ]\``,
+                        inline: true
+                    },
+                    {
+                        name: `Requester`,
+                        value: `\`[ ${interaction.user.username} | ${interaction.user.id} ]\``,
+                        inline: true
+                    }
+                )
+                .setTimestamp()
                 .setColor("Random")
 
-                return interaction.editReply({ embeds: [embed], content: `🎶 Loaded You Playlist` })
+                return interaction.editReply({ embeds: [embed], content: `${client.emoji.musicalnote} | Playlist added to queue!` })
             } else {
                 if (/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi.test(searchResult.tracks[0].url)) {
                     const yemb = new EmbedBuilder()
@@ -100,16 +121,27 @@ module.exports = {
                 if (!Queue.node.isPlaying()) Queue.node.play();
 
                 const embed = new EmbedBuilder()
-                .setAuthor({ name: "Added To Queue" })
-                .setDescription(`[${searchResult.tracks[0].title}](${searchResult.tracks[0].url})`)
+                .setDescription(`${client.emoji.musicalnote} | Track added to queue! • [${searchResult.tracks[0].title}](${searchResult.tracks[0].url})`)
+                .addFields(
+                    {
+                        name: `Track Duration`,
+                        value: `\`[ ${searchResult.tracks[0].duration} ]\``,
+                        inline: true
+                    },
+                    {
+                        name: `Requester`,
+                        value: `\`[ ${interaction.user.username} | ${interaction.user.id} ]\``,
+                        inline: true
+                    }
+                )
+                .setThumbnail(searchResult.tracks[0].thumbnail)
                 .setColor("Random")
-                .setFooter({ text: `Requested By ${interaction.user.tag}` })
             
                 return interaction.editReply({ embeds: [embed] })
             }
         } catch (e) {
-            console.log(e)
-            return interaction.editReply({ content: `Can't Load The Track, Try Again One More Time!` })
+            console.log(e);
+            return interaction.editReply({ content: `${client.emoji.wrong} | Due To Loadage On The System, Can't Play The Music In The Voice Channel, Anytime Now! Try Again Later.` });
         }
     }
 }
