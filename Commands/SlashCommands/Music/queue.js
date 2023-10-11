@@ -197,7 +197,7 @@ module.exports = {
                 })
             } else {
                 const embed3 = new EmbedBuilder()
-                .setAuthor({ name: `${i.guild.name}'s Queue`, iconURL: i.guild.iconURL() })
+                .setAuthor({ name: `${interaction.guild.name}'s Queue`, iconURL: interaction.guild.iconURL() })
                 .addFields(
                     { name: "Now Playing", value: `[${Queue.currentTrack.title}](${Queue.currentTrack.url}) • \`[ ${convertTime(Queue.node.getTimestamp(true).current.value)} / ${Queue.currentTrack.duration} ]\`` },
                     { name: "Queued Tracks", value: `${Page[queuedList]}` }
