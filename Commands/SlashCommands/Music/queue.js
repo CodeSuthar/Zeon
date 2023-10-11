@@ -22,7 +22,7 @@ module.exports = {
             return interaction.editReply({ embeds: [embed] })  
         }
 
-        if (!Queue.node.isPlaying() && !Queue.node.isPaused) {
+        if (!Queue.currentTrack) {
             const embed = new EmbedBuilder()
             .setDescription(`There's No Track Playing To Show You Queue In This Server!`)
             .setColor("Random")

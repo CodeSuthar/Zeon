@@ -27,7 +27,7 @@ module.exports = {
 
         if (Queue && Queue.channel.id !== interaction.member.voice.channelId) {
             const embed = new EmbedBuilder()
-            .setDescription(`${client.emoji.wrong} | I'm Already Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
+            .setDescription(`${client.emoji.wrong} | I'm Connected To <#${Queue.channel.id}> Voice Channel, You Need To Be In The Same Channel As Me To Control Me!`)
             .setColor("Random")
 
             return interaction.editReply({ embeds: [embed] })

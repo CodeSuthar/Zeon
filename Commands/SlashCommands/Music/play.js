@@ -27,7 +27,7 @@ module.exports = {
 
         if (Queue && Queue.channel.id !== interaction.member.voice.channelId) {
             const embed = new EmbedBuilder()
-            .setDescription(`${client.emoji.wrong} | I'm Already Connected To <#${Queue.channel.id}> Voice Channel, I Can't Betray <#${Queue.channel.id}> By Listening Your Command, Join My Voice Channel To Use Me!`)
+            .setDescription(`${client.emoji.wrong} | I'm Connected To <#${Queue.channel.id}> Voice Channel, You Need To Be In The Same Channel As Me To Control Me!`)
             .setColor("Random")
 
             return interaction.editReply({ embeds: [embed] })
@@ -71,7 +71,7 @@ module.exports = {
                     if (/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi.test(track.url)) {
                         const yemb = new EmbedBuilder()
                         .setColor("Random")
-                        .setDescription(`Unfortunately, due to recent demand from both Discord and Youtube, we have disabled the bot's ability to play YouTube URLs. This is a tremendous disappointment for everyone, including Reverb's team, however it is likely that this will be a permanent modification to prevent the bot from being unverified. We really regret any inconvenience and aim to have more alternative choices accessible in the near future.`)
+                        .setDescription(`Unfortunately, due to recent demand from both Discord and Youtube, we have disabled the bot's ability to play YouTube URLs. This is a tremendous disappointment for everyone, including Zeon's team, however it is likely that this will be a permanent modification to prevent the bot from being unverified. We really regret any inconvenience and aim to have more alternative choices accessible in the near future.`)
                         return interaction.editReply({ embeds: [yemb] })
                     }
 
@@ -112,7 +112,7 @@ module.exports = {
                 if (/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi.test(searchResult.tracks[0].url)) {
                     const yemb = new EmbedBuilder()
                     .setColor("Random")
-                    .setDescription(`Unfortunately, due to recent demand from both Discord and Youtube, we have disabled the bot's ability to play YouTube URLs. This is a tremendous disappointment for everyone, including Reverb's team, however it is likely that this will be a permanent modification to prevent the bot from being unverified. We really regret any inconvenience and aim to have more alternative choices accessible in the near future.`)
+                    .setDescription(`Unfortunately, due to recent demand from both Discord and Youtube, we have disabled the bot's ability to play YouTube URLs. This is a tremendous disappointment for everyone, including Zeon's team, however it is likely that this will be a permanent modification to prevent the bot from being unverified. We really regret any inconvenience and aim to have more alternative choices accessible in the near future.`)
                     return interaction.editReply({ embeds: [yemb] })
                 }
 

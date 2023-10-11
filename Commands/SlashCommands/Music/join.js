@@ -44,7 +44,7 @@ module.exports = {
                         leaveOnEnd: false,
                         leaveOnStop: false,
                         leaveOnEmpty: false,
-                        initialVolume: 80,
+                        volume: 80,
                         bufferingTimeout: 200,
                         selfDeaf: true,
                         metadata: {
