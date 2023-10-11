@@ -57,7 +57,7 @@ module.exports = {
                 inline: true 
             },            { 
                 name: "__Extra__", 
-                value: `${client.emoji.music} Backup`,
+                value: `${client.emoji.music} Music`,
                 inline: true
             }
         )
