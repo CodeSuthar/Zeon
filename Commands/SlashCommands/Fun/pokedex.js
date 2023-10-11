@@ -54,11 +54,7 @@ async function pokedex(pokemon) {
             .setFooter({ text: json.description });
 
         return { embeds: [embed] };
-    } catch (ex) {
-        debug(`URL: https://pokeapi.glitch.me/v1/pokemon/${pokemon}`);
-        error('getJson', ex);
-        return {
-            success: false,
-        };
+    } catch (e) {
+        return '```The given Pokemon is not found```';
     }
 }
