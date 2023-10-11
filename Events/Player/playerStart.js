@@ -55,9 +55,7 @@ module.exports = {
                 if (queue && queue.channel.id === interaction.member.voice.channelId) {
                     return true;
                 } else {
-                    if (!interaction.replied)
-                    
-                    await interaction.editReply({ content: `${client.emoji.wrong} | You are not connected to <#${queue.channel.id}> to use this buttons.`, ephemeral: true });
+                    await interaction.reply({ content: `${client.emoji.wrong} | You are not connected to <#${queue.channel.id}> to use this buttons.`, ephemeral: true });
                     return false;
                 };
             },

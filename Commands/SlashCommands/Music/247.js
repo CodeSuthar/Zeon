@@ -49,53 +49,52 @@ module.exports = {
                 });
 
                 if (!Queue.connection) Queue.connect(vc);
+            }
 
-                //Now Use The Codes From Comments Below
-                if (!data) {
-                    data = new db({
-                        _id: interaction.guildId,
-                        mode: true,
-                        textChannel: interaction.channelId,
-                        voiceChannel: interaction.member.voice.channelId,
-                        moderator: interaction.user.id,
-                        lastUpdated: Math.round(Date.now() / 1000)
-                    });
+            //Now Use The Codes From Comments Below
+            if (!data) {
+                data = new db({
+                    _id: interaction.guildId,
+                    mode: true,
+                    textChannel: interaction.channelId,
+                    voiceChannel: interaction.member.voice.channelId,
+                    moderator: interaction.user.id,
+                    lastUpdated: Math.round(Date.now() / 1000)
+                });
+                await data.save();
+                const embed = new EmbedBuilder()
+                .setColor("Random")
+                .setDescription(`${client.emoji.tick} | 24/7 mode is now **enabled**.`)
+
+                return await interaction.editReply({ embeds: [embed] });
+            } else {
+                if (data.mode) {
+                    data.mode = false;
+                    data.textChannel = null;
+                    data.voiceChannel = null;
+                    data.moderator = interaction.user.id;
+                    data.lastUpdated = Math.round(Date.now() / 1000);
                     await data.save();
-                    const embed = new EmbedBuilder()
+                    const embed1 = new EmbedBuilder()
+                    .setColor("Random")
+                    .setDescription(`${client.emoji.tick} | 24/7 mode is now **disabled**.`)
+
+                    return await interaction.editReply({ embeds: [embed1] });
+                } else {
+                    data.mode = true;
+                    data.textChannel = interaction.channelId;
+                    data.voiceChannel = interaction.member.voice.channelId;
+                    data.moderator = interaction.user.id;
+                    data.lastUpdated = Math.round(Date.now() / 1000);
+
+                    await data.save();
+                    const embed2 = new EmbedBuilder()
                     .setColor("Random")
                     .setDescription(`${client.emoji.tick} | 24/7 mode is now **enabled**.`)
 
-                    return await interaction.editReply({ embeds: [embed] });
-                } else {
-                    if (data.mode) {
-                        data.mode = false;
-                        data.textChannel = null;
-                        data.voiceChannel = null;
-                        data.moderator = interaction.user.id;
-                        data.lastUpdated = Math.round(Date.now() / 1000);
-                        await data.save();
-                        const embed1 = new EmbedBuilder()
-                        .setColor("Random")
-                        .setDescription(`${client.emoji.tick} | 24/7 mode is now **disabled**.`)
-
-                        return await interaction.editReply({ embeds: [embed1] });
-                    } else {
-                        data.mode = true;
-                        data.textChannel = interaction.channelId;
-                        data.voiceChannel = interaction.member.voice.channelId;
-                        data.moderator = interaction.user.id;
-                        data.lastUpdated = Math.round(Date.now() / 1000);
-
-                        await data.save();
-                        const embed2 = new EmbedBuilder()
-                        .setColor("Random")
-                        .setDescription(`${client.emoji.tick} | 24/7 mode is now **enabled**.`)
-
-                        return await interaction.editReply({ embeds: [embed2] });
-                    }
+                    return await interaction.editReply({ embeds: [embed2] });
                 }
             }
-
         } catch (e) {
             console.log(e);
             return interaction.editReply({ content: `${client.emoji.wrong} | Due To Loadage On The System, Can't Set 24/7 Mode, Anytime Now! Try Again Later.` });
