@@ -420,6 +420,9 @@ module.exports = {
             } else if (int.values[0] === 'Utility') {
                 currentPage = 11;
                 interaction.editReply({ embeds: [Utility], components: [rowbut, rowbut4, rowbutlink] });
+            } else if (int.values[0] === 'music') {
+                currentPage = 12;
+                interaction.editReply({ embeds: [Music], components: [rowbut, row, rowbutlink] });
             }
         })
     

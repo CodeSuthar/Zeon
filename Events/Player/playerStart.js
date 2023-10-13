@@ -1,20 +1,24 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const { useMainPlayer } = require("discord-player");
+const db = require("../../Database/MusicSetup.js");
 
 
 module.exports = {
     name: "playerStart",
     run: async (client, queue, track) => {
         let Player = await useMainPlayer();
+        let data = await db.findOne({ _id: queue.guild.id });
+
         const queuedata = queue.metadata;
-        const Guild = client.guilds.cache.get(queuedata.guild)
+        const Guild = await client.guilds.cache.get(queuedata.guild) || await client.guilds.fetch(queuedata.guild);
         if (!Guild) return;
-        const Channel = Guild.channels.cache.get(queuedata.channel)
+        const Channel = await Guild.channels.cache.get(queuedata.channel) || await Guild.channels.fetch(queuedata.channel);
         if (!Channel) return;
+        if (data && data.channel && data.channel === Channel.id) return;
 
         const MusicPlaying = new EmbedBuilder()
-        .setAuthor({ name: "Now Playing", iconURL: "https://c.tenor.com/B-pEg3SWo7kAAAAi/disk.gif" })
-        .setDescription(`**Now Playing** - *[${track.title}](${track.url})*`)
+        .setAuthor({ name: "|  Playing", iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+        .setDescription(`[${track.title}](${track.url})`)
         .addFields(
             {
                 name: "Duration",
@@ -31,15 +35,15 @@ module.exports = {
         .setTimestamp()
         .setColor("Random")
 
-        const But1 = new ButtonBuilder().setCustomId("volumedown").setEmoji(`${client.emoji.volumedown}`).setStyle("Primary");
+        const But1 = new ButtonBuilder().setCustomId("volumedown").setEmoji(`${client.emoji.volumedown}`).setStyle("Secondary");
 
         const But2 = new ButtonBuilder().setCustomId("stop").setEmoji(`${client.emoji.stop}`).setStyle("Secondary");
 
-        const But3 = new ButtonBuilder().setCustomId("pause").setEmoji(`${client.emoji.pause}`).setStyle("Primary");
+        const But3 = new ButtonBuilder().setCustomId("pause").setEmoji(`${client.emoji.pause}`).setStyle("Secondary");
 
         const But4 = new ButtonBuilder().setCustomId("skip").setEmoji(`${client.emoji.skip}`).setStyle("Secondary");
 
-        const But5 = new ButtonBuilder().setCustomId("volumeup").setEmoji(`${client.emoji.volumeup}`).setStyle("Primary");
+        const But5 = new ButtonBuilder().setCustomId("volumeup").setEmoji(`${client.emoji.volumeup}`).setStyle("Secondary");
 
         const row = new ActionRowBuilder().addComponents(But1, But2, But3, But4, But5)
 
@@ -104,7 +108,7 @@ module.exports = {
                     }
                 } else {
                     if (interaction.customId === "stop") {
-                        if (!queue || queue && !queue.node.isPlaying()) {
+                        if (!queue || queue && !queue.currentTrack) {
                             const embed = new EmbedBuilder()
                             .setDescription(`${client.emoji.wrong} | There's No Player Playing In The Guild`)
                             .setColor("Random")
@@ -126,18 +130,44 @@ module.exports = {
                                 Action = `**Paused**`
 
                                 DecisionEmbed = new EmbedBuilder()
-                                .setAuthor({ name: "Paused", iconURL: "https://c.tenor.com/B-pEg3SWo7kAAAAi/disk.gif" })
-                                .setDescription(`**Paused** - *[${track.title}](${track.url})* - \`${track.duration}\``)
-                                .setFooter({ text: `Requested By ${track.requestedBy.tag}`, iconURL: track.requestedBy.displayAvatarURL() })
+                                .setAuthor({ name: "|  Paused", iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+                                .setDescription(`[${track.title}](${track.url})`)
+                                .addFields(
+                                    {
+                                        name: "Duration",
+                                        value: `\`[ ${track.duration} ]\``,
+                                        inline: true
+                                    },
+                                    {
+                                        name: "Requester",
+                                        value: `\`[ ${track.requestedBy.username} | ${track.requestedBy.id} ]\``,
+                                        inline: true
+                                    }
+                                )
+                                .setThumbnail(track.thumbnail)
+                                .setTimestamp()
                                 .setColor("Random")
                             } else {
                                 queue.node.resume();
                                 Action = `**Resumed**`
 
                                 DecisionEmbed = new EmbedBuilder()
-                                .setAuthor({ name: "Now Playing", iconURL: "https://c.tenor.com/B-pEg3SWo7kAAAAi/disk.gif" })
-                                .setDescription(`**Now Playing** - *[${track.title}](${track.url})* - \`${track.duration}\``)
-                                .setFooter({ text: `Requested By ${track.requestedBy.tag}`, iconURL: track.requestedBy.displayAvatarURL() })
+                                .setAuthor({ name: "|  Playing", iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+                                .setDescription(`[${track.title}](${track.url})`)
+                                .addFields(
+                                    {
+                                        name: "Duration",
+                                        value: `\`[ ${track.duration} ]\``,
+                                        inline: true
+                                    },
+                                    {
+                                        name: "Requester",
+                                        value: `\`[ ${track.requestedBy.username} | ${track.requestedBy.id} ]\``,
+                                        inline: true
+                                    }
+                                )
+                                .setThumbnail(track.thumbnail)
+                                .setTimestamp()
                                 .setColor("Random")
                             }
 

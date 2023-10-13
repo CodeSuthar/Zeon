@@ -1,6 +1,15 @@
+const db = require("../../Database/MusicSetup.js");
+const { updateQueue } = require("../../Handler/Bot-Function-Extended/Utils.js");
+
 module.exports = {
     name: "error",
     run: async (client, queue, error) => {
-        console.log(`[ Music Manager ] - Error - ${error}`)
+        const data = await db.findOne({ _id: queue.guild.id });
+
+        if (data) {
+            await updateQueue(client, queue, queue.guild);
+        }
+
+        return console.log(`[ Music Manager ] - Error - ${error}`)
     }
 }

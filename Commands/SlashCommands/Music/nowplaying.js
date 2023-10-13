@@ -55,4 +55,4 @@ module.exports = {
             return interaction.editReply({ content: `${client.emoji.wrong} | Due To Loadage On The System, Can't Fetch The Now Playing Data, Anytime Now! Try Again Later.` });
         }
     }
-}
+};
