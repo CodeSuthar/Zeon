@@ -1,6 +1,7 @@
 const { useMainPlayer } = require("discord-player");
 const { ActivityType } = require("discord.js");
 const isPortReachable = require("is-port-reachable");
+const { GetChoicesCommand } = require("../../Handler/Bot-Function-Extended/Utils.js")
 
 module.exports = {
     name: "ready",
@@ -31,7 +32,6 @@ module.exports = {
         let Player = await useMainPlayer();
         await Player.extractors.loadDefault();
 
-        const { GetChoicesCommand } = require("../../Handler/Bot-Function-Extended/Utils.js")
 
         client.helpArray = GetChoicesCommand();
     }

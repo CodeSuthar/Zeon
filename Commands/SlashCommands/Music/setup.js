@@ -50,6 +50,9 @@ module.exports = {
 
         if (Queue && Queue.currentTrack) embed1.setDescription(desc);
 
+        let disabled = true;
+        if (Queue && Queue.currentTrack) disabled = false;
+
         let lowvolumebut = new ButtonBuilder()
         .setCustomId(`SETUP_VOL_DOWN_BUTTON`)
         .setEmoji(`${client.emoji.volumedown}`)
@@ -82,6 +85,10 @@ module.exports = {
 
         switch (subCommand) {
             case "create":
+                if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Channels Or Administrator permission to use this command!` });
+
+                if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Channels Or Administrator permission to use this command!` });
+
                 if (data) {
                     const embed10 = new EmbedBuilder()
                     .setColor("Random")
@@ -204,6 +211,10 @@ module.exports = {
             break;
 
             case "delete":
+                if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Channels Or Administrator permission to use this command!` });
+
+                if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Channels Or Administrator permission to use this command!` });
+
                 if (!data) {
                     const embed16 = new EmbedBuilder()
                     .setColor("Random")
@@ -235,6 +246,10 @@ module.exports = {
             break;
 
             case "info":
+                if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Channels Or Administrator permission to use this command!` });
+
+                if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) return interaction.editReply({ content: `${client.emoji.wrong} | You must have the Manage Channels Or Administrator permission to use this command!` });
+                
                 if (!data) {
                     const embed18 = new EmbedBuilder()
                     .setColor("Random")

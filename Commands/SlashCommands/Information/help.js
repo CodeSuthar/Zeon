@@ -268,7 +268,7 @@ module.exports = {
         .addComponents(
             new ButtonBuilder()
             .setStyle("Link")
-            .setLabel("Invite Flantic")
+            .setLabel("Invite Zeon")
             .setURL(client.config.Bot.Invite),
             new ButtonBuilder()
             .setStyle("Link")
@@ -334,7 +334,7 @@ module.exports = {
 
         const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`snipe\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 9 Utility Commands.`});
 
-        const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`nowplaying\`, \`play\`, \`queue\`, \`skip\`, \`volume\``).setFooter({text: `Total 11 Music Commands.`});
+        const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`lyrics\`, \`nowplaying\`, \`pause\`, \`play\`, \`queue\`, \`replay\`, \`resume\`, \`skip\`, \`setup create\`, \`setup delete\`, \`setup info\`, \`volume\``).setFooter({text: `Total 18 Music Commands.`});
         
         await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         
