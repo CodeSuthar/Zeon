@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, ButtonBuilder, ActionRowBuilder, PermissionsBitField } = require("discord.js");
 const { useMainPlayer, useQueue } = require("discord-player");
 const db = require("../../../Database/MusicSetup.js");
 const { readdirSync } = require('fs');

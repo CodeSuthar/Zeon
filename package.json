@@ -84,6 +84,6 @@
         "youtube-ext": "^1.1.14"
     },
     "engines": {
-        "node": ">=19"
+        "node": ">=20"
     }
 }
