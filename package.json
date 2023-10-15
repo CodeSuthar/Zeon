@@ -28,6 +28,7 @@
         "@discordjs/builders": "^1.6.3",
         "@discordjs/rest": "^1.7.1",
         "@discordjs/voice": "^0.16.0",
+        "@distube/ytdl-core": "^4.13.2",
         "@iamtraction/google-translate": "^2.0.1",
         "@top-gg/sdk": "^3.1.5",
         "aki-api": "^6.0.8",
@@ -80,8 +81,7 @@
         "undici": "^5.25.4",
         "url": "^0.11.0",
         "util": "^0.12.5",
-        "wikijs": "^6.4.1",
-        "youtube-ext": "^1.1.14"
+        "wikijs": "^6.4.1"
     },
     "engines": {
         "node": ">=20"
