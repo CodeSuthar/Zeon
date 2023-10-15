@@ -1,14 +1,14 @@
 const { PermissionFlagsBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const { useMainPlayer, useQueue } = require("discord-player");
 const db = require("../../Database/MusicSetup.js");
-const { chunk } = require("../../Handler/Bot-Function-Extended/Utils.js");
+const { chunk } = require("../../Utils/Utils.js");
 
 module.exports = {
     name: "messageCreate",
     run: async (client, message) => {
         let data = await db.findOne({ _id: message.guildId });
         if (data && data.channel && message.channelId === data.channel) {
-            let color = "#050f39"
+            let color = "#050f39";
             let fail = client.emoji.wrong;
 
             if (message.author.bot) return;

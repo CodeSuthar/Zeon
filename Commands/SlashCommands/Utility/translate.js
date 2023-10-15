@@ -17,7 +17,7 @@ module.exports = {
     run: async (client, interaction) => {
         if (!interaction.replied) await interaction.deferReply();
 
-        client.timertowait(2000);
+        await client.wait(2000);
 
         interaction.editReply({ content: `${client.emoji.loading} | Translating...` });
 

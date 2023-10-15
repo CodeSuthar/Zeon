@@ -1,8 +1,8 @@
 const { EmbedBuilder, AttachmentBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { Bot, Dashboard } = require(`../../config.js`)
-const setupSchema = require("../../Database/MusicSetup.js");
+const { Bot, Dashboard } = require(`../config.js`)
+const setupSchema = require("../Database/MusicSetup.js");
 const { readdirSync } = require("fs");
 
 function GetChoicesCommand() {

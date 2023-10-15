@@ -6,6 +6,11 @@ const musicSetup = new Schema({
         required: true
     },
 
+    category: {
+        type: String,
+        required: true
+    },
+
     channel: {
         type: String,
         required: true

@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
 const load = require('lodash');
 const { useMainPlayer, useQueue } = require("discord-player");
-const { convertTime } = require("../../../Handler/Bot-Function-Extended/Utils.js")
+const { convertTime } = require("../../../Utils/Utils.js")
 
 module.exports = {
     SlashData: new SlashCommandBuilder()

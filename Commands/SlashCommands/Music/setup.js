@@ -26,7 +26,7 @@ module.exports = {
 
         let Queue = await useQueue(interaction.guildId);
 
-        let data = await db.findOne({ Guild: interaction.guildId });
+        let data = await db.findOne({ _id: interaction.guildId });
 
         let imgs = readdirSync("./Assets/img/").filter(c => c.split('.').pop() === 'png');
 
@@ -199,6 +199,7 @@ module.exports = {
 
                 data = new db({
                     _id: interaction.guildId,
+                    category: parent.id,
                     channel: textChannel.id,
                     message: msg.id,
                     voiceChannel: voiceChannel.id,
@@ -222,11 +223,19 @@ module.exports = {
                     return await interaction.editReply({ embeds: [embed16] });
                 }
 
-                const voiceChannel2 = await interaction.guild.channels.cache.get(data.VoiceChannel) || await interaction.guild.channels.fetch(data.VoiceChannel);
+                // i want both declaration to use the handle error with .ccatch
 
-                const channel2 = await interaction.guild.channels.cache.get(data.TextChannel) || await interaction.guild.channels.fetch(data.TextChannel);
+                const parent2 = await interaction.guild.channels.cache.get(data.category) || await interaction.guild.channels.fetch(data.category).catch(e => {});
 
+                const voiceChannel2 = await interaction.guild.channels.cache.get(data.voiceChannel) || await interaction.guild.channels.fetch(data.voiceChannel).catch(e => {});
+
+                const channel2 = await interaction.guild.channels.cache.get(data.channel) || await interaction.guild.channels.fetch(data.channel).catch(e => {});
+                
                 try {
+                    if (parent2) {
+                        await parent2.delete();
+                    }
+
                     if (channel2) {
                         await channel2.delete();
                     }
@@ -236,7 +245,7 @@ module.exports = {
                     }
                 } catch (e) { };
 
-                await data.delete();
+                await db.deleteMany({ _id: interaction.guildId });
 
                 const embed17 = new EmbedBuilder()
                 .setColor("Random")
@@ -262,18 +271,28 @@ module.exports = {
                 .setTitle("Setup information")
                 .addFields([
                     {
+                        name: "Category",
+                        value: `<#${data.category}> **(Id: ${data.category})**`,
+                        inline: false
+                    },
+                    {
                         name: "Text channel",
-                        value: `<#${data.TextChannel}> **(Id: ${data.TextChannel})**`,
+                        value: `<#${data.channel}> **(Id: ${data.channel})**`,
+                        inline: false
+                    },
+                    {
+                        name: "Voice channel",
+                        value: `<#${data.voiceChannel}> **(Id: ${data.voiceChannel})**`,
                         inline: false
                     },
                     {
                         name: "Setup by",
-                        value: `<@${data.Moderator}> **(Id: ${data.Moderator})**`,
+                        value: `<@${data.moderator}> **(Id: ${data.moderator})**`,
                         inline: false
                     },
                     {
                         name: "Last updated",
-                        value: `<t:${data.LastUpdated}>`,
+                        value: `<t:${data.lastUpdated}>`,
                         inline: false
                     }
                 ]);

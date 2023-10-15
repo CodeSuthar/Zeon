@@ -1,8 +1,6 @@
 const { Player } = require('discord-player');
 const { readdirSync } = require("fs");
 
-//Extend The Player With Features Like Remembering NowPlayingMessage
-
 module.exports = class MusicPlayer extends Player {
     constructor(client) {
         super(client);
@@ -24,7 +22,7 @@ module.exports = class MusicPlayer extends Player {
         const events = readdirSync("./Events/Player/").filter((f) => f.endsWith(".js"));
         if (!events.length) throw new Error(`[ EVENTS ] No player event files found!`);
         events.forEach((eventStr) => {
-            const Events = require(`../../Events/Player/${eventStr}`);
+            const Events = require(`../Events/Player/${eventStr}`);
             console.log(`[ EVENTS ] Player event named ${eventStr} loaded`);
             this.events.on(Events.name, (...args) => Events.run(this.client, ...args));
             count++;

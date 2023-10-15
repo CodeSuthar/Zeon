@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ButtonBuilder } = require("discord.js");
-const { CapitalizeText } = require("../../../Handler/Bot-Function-Extended/Utils.js")
+const { CapitalizeText } = require("../../../Utils/Utils.js")
 
 module.exports = {
     SlashData: new SlashCommandBuilder()

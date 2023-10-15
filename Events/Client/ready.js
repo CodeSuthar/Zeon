@@ -1,7 +1,7 @@
 const { useMainPlayer } = require("discord-player");
 const { ActivityType } = require("discord.js");
 const isPortReachable = require("is-port-reachable");
-const { GetChoicesCommand } = require("../../Handler/Bot-Function-Extended/Utils.js")
+const { GetChoicesCommand } = require("../../Utils/Utils.js")
 
 module.exports = {
     name: "ready",

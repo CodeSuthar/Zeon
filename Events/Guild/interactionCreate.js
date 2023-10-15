@@ -1,7 +1,7 @@
 const { InteractionType, EmbedBuilder, Collection, ButtonBuilder, WebhookClient } = require("discord.js");
 const Topgg = require("@top-gg/sdk");
 const pdata = require("../../Database/premium.js");
-const { CapitalizeText } = require("../../Handler/Bot-Function-Extended/Utils.js")
+const { CapitalizeText } = require("../../Utils/Utils.js")
 
 module.exports = {
     name: "interactionCreate",

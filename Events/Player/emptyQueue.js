@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const { useMainPlayer } = require("discord-player");
 const db = require("../../Database/MusicSetup.js");
-const { updateQueue } = require("../../Handler/Bot-Function-Extended/Utils.js");
+const { updateQueue } = require("../../Utils/Utils.js");
 
 module.exports = {
     name: "emptyQueue",
