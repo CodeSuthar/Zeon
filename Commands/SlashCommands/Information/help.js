@@ -193,23 +193,23 @@ module.exports = {
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.backforward)
-            .setCustomId('back'),
+            .setCustomId('backk'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonleft)
-            .setCustomId('prev'),
+            .setCustomId('prevv'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonstop)
-            .setCustomId('stop'),
+            .setCustomId('stopp'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonright)
-            .setCustomId('next'),
+            .setCustomId('nextt'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.frontbackward)
-            .setCustomId('front')
+            .setCustomId('frontt')
         );
 
         const rowbut3 = new ActionRowBuilder()
@@ -288,27 +288,27 @@ module.exports = {
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.backforward)
-            .setCustomId('back')
+            .setCustomId('backk')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonleft)
-            .setCustomId('prev')
+            .setCustomId('prevv')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonstop)
-            .setCustomId('stop')
+            .setCustomId('stopp')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonright)
-            .setCustomId('next')
+            .setCustomId('nextt')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.frontbackward)
-            .setCustomId('front')
+            .setCustomId('frontt')
             .setDisabled(true)
         );
 
@@ -370,7 +370,7 @@ module.exports = {
                 } else {
                     interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut, row, rowbutlink] });
                 }
-            } else if (int.customId === "stop") {
+            } else if (int.customId === "stopp") {
                 await collector.stop();
             } else if (int.customId === "nextt") {
                 if (currentPage === pages.length - 1) currentPage = 0;
