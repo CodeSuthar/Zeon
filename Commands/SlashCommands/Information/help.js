@@ -217,25 +217,25 @@ module.exports = {
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.backforward)
-            .setCustomId('back')
+            .setCustomId('backk')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonleft)
-            .setCustomId('prev')
+            .setCustomId('prevv')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonstop)
-            .setCustomId('stop'),
+            .setCustomId('stopp'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonright)
-            .setCustomId('next'),
+            .setCustomId('nextt'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.frontbackward)
-            .setCustomId('front')
+            .setCustomId('frontt')
         );
 
         const rowbut4 = new ActionRowBuilder()
@@ -243,24 +243,24 @@ module.exports = {
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.backforward)
-            .setCustomId('back'),
+            .setCustomId('backk'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonleft)
-            .setCustomId('prev'),
+            .setCustomId('prevv'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonstop)
-            .setCustomId('stop'),
+            .setCustomId('stopp'),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.buttonright)
-            .setCustomId('next')
+            .setCustomId('nextt')
             .setDisabled(true),
             new ButtonBuilder()
             .setStyle("Secondary")
             .setEmoji(client.emoji.frontbackward)
-            .setCustomId('front')
+            .setCustomId('frontt')
             .setDisabled(true)
         );
 
@@ -359,10 +359,10 @@ module.exports = {
         collector.on("collect", async (int) => {
             if (!int.deferred) await int.deferUpdate();
 
-            if (int.customId === "back") {
+            if (int.customId === "backk") {
                 currentPage = 0;
                 interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut3, row, rowbutlink] });
-            } else if (int.customId === "prev") {
+            } else if (int.customId === "prevv") {
                 if (currentPage === 0) currentPage = pages.length - 1;
                 else currentPage--;
                 if (currentPage === 0) {
@@ -371,8 +371,8 @@ module.exports = {
                     interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut, row, rowbutlink] });
                 }
             } else if (int.customId === "stop") {
-                collector.stop();
-            } else if (int.customId === "next") {
+                await collector.stop();
+            } else if (int.customId === "nextt") {
                 if (currentPage === pages.length - 1) currentPage = 0;
                 else currentPage++;
                 const cur = pages.length - 1
@@ -381,7 +381,7 @@ module.exports = {
                 } else {
                     interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut, row, rowbutlink] });
                 }
-            } else if (int.customId === "front") {
+            } else if (int.customId === "frontt") {
                 currentPage = pages.length - 1;
                 interaction.editReply({ embeds: [pages[currentPage]], components: [rowbut4, row, rowbutlink] });
             } else if (int.values[0] === 'Home') {
