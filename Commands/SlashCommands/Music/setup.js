@@ -118,7 +118,7 @@ module.exports = {
                     name: `${client.user.username}-song-requests`,
                     type: 0,
                     parent: parent.id,
-                    topic: "🔉 To decrease 10% volume.\n⏮️ To play the previously played song.\n⏯️ To pause/resume the song.\n⏭️ To skip the song.\n🔊 To increase 10% volume.\n⏪ To rewind 10s seconds.\n♾️To enable/disable autoplay.\n⏹️ To stops/destroy the player.\n🔁 Tp switch between the loop modes (track/queue/shuffle).\n⏩ To forward 10 seconds.",
+                    topic: "“🔉 Volume Down”: To decrease the volume by a certain percentage, typically 10%./n“⏹️ Stop”: To completely stop the playback and reset the player.\n“⏸️ Pause”: To temporarily halt the playback without resetting the player. The playback can be resumed from the same point.\n“⏭️ Skip”: To move forward to the next item in the playlist or queue.\n“� Volume Up”: To increase the volume by a certain percentage, typically 10%.",
                     permissionOverwrites: [
                         {
                             type: "member",
@@ -222,15 +222,13 @@ module.exports = {
                     .setDescription(`${client.emoji.wrong} | The song request channel has not yet been setup.`)
                     return await interaction.editReply({ embeds: [embed16] });
                 }
-
-                // i want both declaration to use the handle error with .ccatch
-
+                
                 const parent2 = await interaction.guild.channels.cache.get(data.category) || await interaction.guild.channels.fetch(data.category).catch(e => {});
 
                 const voiceChannel2 = await interaction.guild.channels.cache.get(data.voiceChannel) || await interaction.guild.channels.fetch(data.voiceChannel).catch(e => {});
 
                 const channel2 = await interaction.guild.channels.cache.get(data.channel) || await interaction.guild.channels.fetch(data.channel).catch(e => {});
-                
+
                 try {
                     if (parent2) {
                         await parent2.delete();
