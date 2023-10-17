@@ -334,7 +334,7 @@ module.exports = {
 
         const Utility = new EmbedBuilder().setColor("Random").setDescription(`\`afk\`, \`server icon\`,  \`user avatar\`, \`banner\`, \`calculator\`, \`enlarge\`, \`snipe\`, \`translate\`, \`wikipedia search\``).setTitle("Utility Commands").setFooter({text: `Total 9 Utility Commands.`});
 
-        const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`lyrics\`, \`nowplaying\`, \`pause\`, \`play\`, \`queue\`, \`replay\`, \`resume\`, \`skip\`, \`setup create\`, \`setup delete\`, \`setup info\`, \`volume\``).setFooter({text: `Total 18 Music Commands.`});
+        const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`autoplay\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`loop\`, \`lyrics\`, \`nowplaying\`, \`pause\`, \`play\`, \`queue\`, \`replay\`, \`resume\`, \`search\`, \`seek\`, \`setup create\`, \`setup delete\`, \`setup info\`, \`shuffle\`, \`skip\`, \`volume\``).setFooter({text: `Total 23 Music Commands.`});
         
         const msg = await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         
