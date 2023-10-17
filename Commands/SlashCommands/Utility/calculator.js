@@ -117,7 +117,7 @@ module.exports = {
         const msg = await interaction.editReply({ embeds: [embed], components: [row, row1, row2, row3, row4], ephemeral: false });
  
         let data = "";
-        const col = msg.createMessageComponentCollector({
+        const col = await msg.createMessageComponentCollector({
             filter: i => i.user.id === interaction.user.id,
             time: 120000
         });

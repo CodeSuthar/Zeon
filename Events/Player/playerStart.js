@@ -54,12 +54,12 @@ module.exports = {
 
         let id;
 
-        const msg = Channel.send({ embeds: [MusicPlaying], components: [row] }).then(async (msg) => {
-            id = msg.id
-            await Player.setNowPlayingMessage(Guild.id, id);
-        })
+        const msg = await Channel.send({ embeds: [MusicPlaying], components: [row] });
+
+        const msgid = msg.id;
+        await Player.setNowPlayingMessage(Guild.id, msgid);
       
-        const collector = Channel.createMessageComponentCollector({
+        const collector = await msg.createMessageComponentCollector({
             filter: async (interaction) => {
                 if (queue && queue.channel.id === interaction.member.voice.channelId) {
                     return true;
@@ -119,9 +119,12 @@ module.exports = {
                             .setColor("Random")
                             await interaction.editReply({ embeds: [embed], ephemeral: true })  
                         } else {
-                            if (queue.tracks.length) queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
+                            if (queue.tracks.size) queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
 
-                            if (queue.node.isPlaying()) queue.node.skip(); //so clearing the queue than skipping it will work like stop 
+                            if (queue.currentTrack) queue.node.skip(); //so clearing the queue than skipping it will work like stop 
+
+                            if (queue.node.isPaused()) queue.node.resume(); //if the player is paused and we stop it, so setup system loads perfectly
+
                             await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`${client.emoji.tick} | The Player Has Been Stopped`)], ephemeral: true });
                           
                             return await collector.stop()

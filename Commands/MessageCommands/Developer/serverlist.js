@@ -46,7 +46,7 @@ module.exports = {
             components: [row1],
         });
 
-        const collector = message.channel.createMessageComponentCollector({
+        const collector = await msg.createMessageComponentCollector({
             filter: (b) => {
                 if (b.user.id === message.author.id) return true;
                 else {

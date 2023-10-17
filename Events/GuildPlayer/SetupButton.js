@@ -72,9 +72,12 @@ module.exports = {
                         .setColor("Random")
                         return await interaction.editReply({ embeds: [embed], ephemeral: true })
                     } else {
-                        if (Queue.tracks.length) Queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
+                        if (Queue.tracks.size) Queue.clear(); //there is a bug if we stop the queue it will delete the queue and we can't use leave cmd after that because the queue has been destroyed
 
-                        if (Queue.node.isPlaying()) Queue.node.skip(); //so clearing the queue than skipping it will work like stop 
+                        if (Queue.currentTrack) Queue.node.skip(); //so clearing the queue than skipping it will work like stop 
+
+                        if (Queue.node.isPaused()) Queue.node.resume(); //if the player is paused and we stop it, so setup system loads perfectly
+                        
                         return await interaction.editReply({ embeds: [new EmbedBuilder().setColor("Random").setTimestamp().setDescription(`${client.emoji.tick} | The Player Has Been Stopped`)], ephemeral: true });
                     }
                 break;
@@ -134,7 +137,7 @@ module.exports = {
                     const Channel = await Guild.channels.cache.get(QueueData.channel) || await Guild.channels.fetch(QueueData.channel);
                     const Information = await Player.getNowPlayingMessage(Guild.id);
 
-                    if (Channel) {
+                    if (Information) {
                         await Channel.messages.edit(Information, {
                             embeds: [DecisionEmbed]
                         });

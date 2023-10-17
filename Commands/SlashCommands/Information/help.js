@@ -336,7 +336,7 @@ module.exports = {
 
         const Music = new EmbedBuilder().setColor("Random").setDescription(`\`247\`, \`clearqueue\`, \`fixvoice\`, \`grab\`, \`join\`, \`leave\`, \`lyrics\`, \`nowplaying\`, \`pause\`, \`play\`, \`queue\`, \`replay\`, \`resume\`, \`skip\`, \`setup create\`, \`setup delete\`, \`setup info\`, \`volume\``).setFooter({text: `Total 18 Music Commands.`});
         
-        await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
+        const msg = await interaction.editReply({ embeds: [helpembed], components: [rowbut3, row, rowbutlink] });
         
         const filter = (int) => {
             if (int.user.id === interaction.user.id) return true;
@@ -346,7 +346,7 @@ module.exports = {
             });
         };
     
-        const collector = interaction.channel.createMessageComponentCollector({
+        const collector = await msg.createMessageComponentCollector({
             filter,
             time: 60000,
             idle: 60000 / 2,

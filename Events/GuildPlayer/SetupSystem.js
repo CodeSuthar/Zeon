@@ -184,10 +184,11 @@ async function playerhandler(client, query, player, queue, message, color, setup
                 inline: true
             }
         )
+        .setThumbnail(res.playlist.thumbnail)
         .setTimestamp()
         .setColor(color)
 
-        await message.channel.send({ embeds: [embed], content: `${client.config.emojis.success} | Playlist added to queue!` }).then(async (a) => setTimeout(async () => await a.delete().catch(() => { }), 5000)).catch(() => { });
+        await message.channel.send({ embeds: [embed], content: `${client.emoji.tick} | Playlist added to queue!` }).then(async (a) => setTimeout(async () => await a.delete().catch(() => { }), 5000)).catch(() => { });
 
         await qeb(client, q, queue);
         await neb(n, queue, client);
@@ -223,6 +224,7 @@ async function playerhandler(client, query, player, queue, message, color, setup
                 inline: true
             }
         )
+        .setThumbnail(track.thumbnail)
         .setTimestamp()
 
         await message.channel.send({ embeds: [embed], content: `${client.emoji.tick} | Track added to queue!` }).then(async (a) => setTimeout(async () => await a.delete().catch(() => { }), 5000)).catch(() => { });

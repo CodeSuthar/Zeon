@@ -80,7 +80,7 @@ module.exports = {
         
                 const msg = await interaction.editReply({ embeds: [embed], components: [row] })
         
-                const collector = interaction.channel.createMessageComponentCollector({
+                const collector = await msg.createMessageComponentCollector({
                     filter: async (int) => {
                         if (int.user.id === interaction.user.id) { 
                             return true;
@@ -97,7 +97,7 @@ module.exports = {
                 });
 
                 collector.on("end", async () => {
-                    msg.edit({ components: [] })
+                    await msg.edit({ components: [] })
                 })
   
                 collector.on('collect', async (i) => {
@@ -116,7 +116,7 @@ module.exports = {
                             .setColor("Random")
                             .setFooter({ text: `Page:- ${queuedList + 1}/${Page.length}`, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
 
-                            msg.edit({ 
+                            await msg.edit({ 
                                 embeds: [embed],
                                 components: [
                                     new ActionRowBuilder().addComponents(
@@ -162,7 +162,7 @@ module.exports = {
                             .setColor("Random")
                             .setFooter({ text: `Page:- ${queuedList + 1}/${Page.length}`, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
             
-                            msg.edit({ 
+                            await msg.edit({ 
                                 embeds: [embed],
                                 components: [
                                     new ActionRowBuilder().addComponents(

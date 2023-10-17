@@ -39,7 +39,7 @@ module.exports = {
  
         const msg = await interaction.editReply({ embeds: [embed], components: [button] });
  
-        const collector = msg.createMessageComponentCollector()
+        const collector = await msg.createMessageComponentCollector()
  
         collector.on('collect', async i => {
             if (i.customId == 'button') {

@@ -51,7 +51,7 @@ module.exports = {
         
         const filter = i => i.user.id === interaction.user.id;
 
-        const collector = msg.createMessageComponentCollector({ filter, time: 10000 });
+        const collector = await msg.createMessageComponentCollector({ filter, time: 10000 });
 
         collector.on('collect', async (int) => {
             if (int.customId === 'purge') {
