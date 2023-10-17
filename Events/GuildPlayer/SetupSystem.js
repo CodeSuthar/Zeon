@@ -105,7 +105,7 @@ async function qeb(client, embed, queue) {
             inline: true
         }
     );
-    if (queue.tracks.length > 0) {
+    if (queue.tracks.size > 0) {
         fields.push({
             name: `Up next`,
             value: `${pages[page]}`,

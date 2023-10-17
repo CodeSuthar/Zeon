@@ -107,7 +107,7 @@ async function updateQueue(client, queue, guild) {
                             inline: true
                         }
                     );
-                    if (queue.tracks.length > 0) {
+                    if (queue.tracks.size > 0) {
                         fields.push({
                             name: `Up next`,
                             value: `${pages[page]}`,
@@ -246,7 +246,21 @@ async function updateQueue(client, queue, guild) {
     } catch (error) {
         return console.error(error);
     }
-
 }
 
-module.exports = { CapitalizeText, GetChoicesCommand, convertTime, updateQueue, chunk }
+function parseTime(string) {
+    const time = string.match(/([0-9]+[d,h,m,s])/g);
+    if (!time) return 0;
+    let ms = 0;
+    for (const t of time) {
+        const unit = t[t.length - 1];
+        const amount = Number(t.slice(0, -1));
+        if (unit === 'd') ms += amount * 24 * 60 * 60 * 1000;
+        else if (unit === 'h') ms += amount * 60 * 60 * 1000;
+        else if (unit === 'm') ms += amount * 60 * 1000;
+        else if (unit === 's') ms += amount * 1000;
+    }
+    return ms;
+}
+
+module.exports = { CapitalizeText, GetChoicesCommand, convertTime, updateQueue, chunk, parseTime }

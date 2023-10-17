@@ -59,5 +59,8 @@
     "stop": "⏹️",
     "musicalnote": "🎶",
     "eject": "⏏️",
-    "music": "<:icons_pause:1161675811301105794>"
+    "music": "<:icons_pause:1161675811301105794>",
+    "looptrack": "🔂",
+    "loopqueue": "🔁",
+    "loopoff": "📴"
 }

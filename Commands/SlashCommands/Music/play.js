@@ -104,6 +104,7 @@ module.exports = {
                         inline: true
                     }
                 )
+                .setThumbnail(searchResult.playlist.thumbnail)
                 .setTimestamp()
                 .setColor("Random")
 
