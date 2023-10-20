@@ -47,7 +47,7 @@ module.exports = {
 
             const role = options.getRole('role');
             await interaction.editReply({ content: `${client.emoji.loading} | Giving ${role} to every member in the guild... This may take some time.` });
-            await client.wait(2000);
+            await client.sleep(2000);
             let num = 0;
             setTimeout(async () => {
                 members.forEach(async (member) => {

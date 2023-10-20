@@ -21,7 +21,7 @@ module.exports = {
                     if (data.closed) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ content: "This ticket is already closed or is being closed!", ephemeral: true });
                     }
@@ -87,7 +87,7 @@ module.exports = {
                     if (!interaction.member.roles.cache.has(TicDat.Handler)) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat.Handler}> role to claim this ticket!`)] });
                     }
@@ -95,7 +95,7 @@ module.exports = {
                     if (set.Claimed) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`This ticket is already claimed by <@${set.ClaimedBy}>`)] });
                     }
@@ -121,7 +121,7 @@ module.exports = {
                     if (!interaction.member.roles.cache.has(TicDat1.Handler)) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat1.Handler}> role to lock this ticket!`)] });
                     }
@@ -129,7 +129,7 @@ module.exports = {
                     if (sett.Locked) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`The mode of ticket is already set to locked.`)] });
                     }
@@ -154,7 +154,7 @@ module.exports = {
                     if (!interaction.member.roles.cache.has(TicDat2.Handler)) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`You need to have the <@&${TicDat2.Handler}> role to unlock this ticket!`)] });
                     }
@@ -162,7 +162,7 @@ module.exports = {
                     if (!settt.Locked) {
                         if (!interaction.replied) await interaction.deferReply({ ephemeral: true });
 
-                        await client.wait(2000);
+                        await client.sleep(2000);
 
                         return await interaction.editReply({ embeds: [emb.setDescription(`The mode of ticket is already set to unlocked.`)] });
                     }

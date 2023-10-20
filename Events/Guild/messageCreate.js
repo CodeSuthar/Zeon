@@ -63,7 +63,7 @@ module.exports = {
 
                         const msg = await message.reply({ embeds: [embedpro] });
 
-                        await client.wait(8000)
+                        await client.sleep(8000)
 
                         msg.delete();
                     }

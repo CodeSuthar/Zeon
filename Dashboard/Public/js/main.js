@@ -14214,7 +14214,7 @@
                             e.stop(),
                             e.animate(t)
                         }, function(e) {
-                            "wait"in e && (s = u(e.wait, 0))
+                            "wait"in e && (s = u(e.sleep, 0))
                         }),
                         d.call(this),
                         s > 0 && (this.timer = new X({
@@ -17440,7 +17440,7 @@
     Object.defineProperty(t, "waitForInFlightQueries", {
         enumerable: !0,
         get: function() {
-            return i.waitForInFlightQueries
+            return i.sleepForInFlightQueries
         }
     });
     var r = n(668)
@@ -19308,10 +19308,10 @@
     Object.defineProperty(t, "__esModule", {
         value: !0
     }),
-    t.createRetryLink = t.waitForInFlightQueries = void 0;
+    t.createRetryLink = t.sleepForInFlightQueries = void 0;
     r(n(138));
     var i = n(694);
-    t.waitForInFlightQueries = function(e) {
+    t.sleepForInFlightQueries = function(e) {
         if (!e || !e.queryManager)
             return Promise.resolve(null);
         var t = e.queryManager.queries
@@ -46177,14 +46177,14 @@
         }
         function _(e) {
             var t = e.btn = e.form.find(':input[type="submit"]');
-            e.wait = e.btn.attr("data-wait") || null,
+            e.sleep = e.btn.attr("data-wait") || null,
             e.success = !1,
             t.prop("disabled", !1),
             e.label && t.val(e.label)
         }
         function y(e) {
             var t = e.btn
-              , n = e.wait;
+              , n = e.sleep;
             t.prop("disabled", !0),
             n && (e.label = t.val(),
             t.val(n))
@@ -47030,7 +47030,7 @@
                         x: d,
                         opacity: 0,
                         zIndex: t.depth++
-                    }).add(O).wait(N).then({
+                    }).add(O).sleep(N).then({
                         opacity: 1
                     }).then(S)
                 }

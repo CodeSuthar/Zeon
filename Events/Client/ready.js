@@ -2,6 +2,7 @@ const { useMainPlayer } = require("discord-player");
 const { ActivityType } = require("discord.js");
 const isPortReachable = require("is-port-reachable");
 const { GetChoicesCommand } = require("../../Utils/Utils.js")
+const { default: DeezerExtractor } = require("discord-player-deezer");
 
 module.exports = {
     name: "ready",
@@ -31,6 +32,7 @@ module.exports = {
         //Loading The Music Extractors
         let Player = await useMainPlayer();
         await Player.extractors.loadDefault();
+        await Player.extractors.register(DeezerExtractor);
 
 
         client.helpArray = GetChoicesCommand();

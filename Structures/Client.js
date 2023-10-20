@@ -38,7 +38,7 @@ module.exports = class Zeon extends Client {
         this.cooldowns = new Collection();
         this.config = require("../config.js");
         this.runfix = this.config.Bot.Prefix;
-        this.wait = async (ms) => {
+        this.sleep = async (ms) => {
             let start = new Date().getTime();
             let end = start;
             while (end < start + ms) {
