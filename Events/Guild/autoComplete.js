@@ -1,6 +1,3 @@
-const { ChannelType } = require("discord.js");
-const publishschema = require("../../Database/autoPublish");
-
 module.exports = {
     name: "interactionCreate",
     run: async (client, interaction) => {

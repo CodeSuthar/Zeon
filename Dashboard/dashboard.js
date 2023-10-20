@@ -114,6 +114,15 @@ module.exports = async (client) => {
         });
     });
 
+    app.get("/commands", (req, res) => {
+        res.render("commands", {
+            user: req.isAuthenticated() ? req.user : null,
+            bot: client,
+            req: req,
+            config: client.config
+        });
+    });
+
     app.get("/invite", (req, res) => {
         res.render("invite", {
             user: req.isAuthenticated() ? req.user : null,

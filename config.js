@@ -36,9 +36,9 @@ module.exports = {
             ClientSecret: process.env.CLIENT_SECRET || "",
             Domain: process.env.DOMAIN || "https://zeon.code-source.tech",
             CallbackURL: process.env.CallbackURL || "/api/callback",
-            Port: 20333,
+            Port: 3180,
             Scopes: ["identify", "guilds"],
-            ReverseProxy: "103.60.13.253"
+            ReverseProxy: "n2.kolama.host"
         } 
     },
     
