@@ -22,13 +22,6 @@ module.exports = {
         }
     },
 
-    Music: {
-        Spotify: {
-            ClientID: process.env.SpotifyClientId || "",
-            ClientSecret: process.env.SpotifyClientSecret || ""
-        }
-    },
-
     Dashboard: {
         ShouldRun: true,
         Information: {
