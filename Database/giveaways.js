@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const { model, Schema, SchemaTypes } = require('mongoose');
  
-const giveawaySchema = new mongoose.Schema({
+const giveawaySchema = new Schema({
     messageId: String,
     channelId: String,
     guildId: String,
@@ -15,8 +15,8 @@ const giveawaySchema = new mongoose.Schema({
         inviteToParticipate: String,
         drawing: String,
         dropMessage: String,
-        winMessage: mongoose.SchemaTypes.Mixed,
-        embedFooter: mongoose.SchemaTypes.Mixed,
+        winMessage: SchemaTypes.Mixed,
+        embedFooter: SchemaTypes.Mixed,
         noWinner: String,
         winners: String,
         endedAt: String,
@@ -26,25 +26,28 @@ const giveawaySchema = new mongoose.Schema({
     image: String,
     hostedBy: String,
     winnerIds: { type: [String], default: undefined },
-    reaction: mongoose.SchemaTypes.Mixed,
+    reaction: SchemaTypes.Mixed,
     botsCanWin: Boolean,
-    embedColor: mongoose.SchemaTypes.Mixed,
-    embedColorEnd: mongoose.SchemaTypes.Mixed,
+    embedColor: SchemaTypes.Mixed,
+    embedColorEnd: SchemaTypes.Mixed,
     exemptPermissions: { type: [], default: undefined },
     exemptMembers: String,
     bonusEntries: String,
-    extraData: mongoose.SchemaTypes.Mixed,
+    extraData: SchemaTypes.Mixed,
     lastChance: {
-        enabled: Boolean,
+        enabled: {
+            type: Boolean,
+            default: false
+        },
         content: String,
         threshold: Number,
-        embedColor: mongoose.SchemaTypes.Mixed
+        embedColor: SchemaTypes.Mixed
     },
     pauseOptions: {
         isPaused: Boolean,
         content: String,
         unPauseAfter: Number,
-        embedColor: mongoose.SchemaTypes.Mixed,
+        embedColor: SchemaTypes.Mixed,
         durationAfterPause: Number,
         infiniteDurationText: String
     },
@@ -56,4 +59,4 @@ const giveawaySchema = new mongoose.Schema({
     }
 }, { id: false });
  
-module.exports = mongoose.model('giveaway-zeon', giveawaySchema);
+module.exports = model('giveaway-zeon', giveawaySchema);

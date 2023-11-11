@@ -131,15 +131,6 @@ function neb(embed, queue, client) {
 };
 
 async function playerhandler(client, query, player, queue, message, color, setupSchema, emoji) {
-    let m;
-    let d = await setupSchema.findOne({ _id: message.guildId });
-    let q = new EmbedBuilder().setTitle("Queue statistics").setColor(color);
-    let n = new EmbedBuilder().setColor(color);
-  
-    try {
-        if (d) m = await message.channel.messages.fetch({ message: d.message, cache: true, force: true });
-    } catch (e) { };
-
     if (/^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi.test(query)) {
         return await oops(message.channel, "Unfortunately, due to recent demand from both Discord and Youtube, we have disabled the bot's ability to play YouTube URLs. This is a tremendous disappointment for everyone, including Zeon's team, however it is likely that this will be a permanent modification to prevent the bot from being unverified. We really regret any inconvenience and aim to have more alternative choices accessible in the near future.", color, emoji);
     }
@@ -189,11 +180,6 @@ async function playerhandler(client, query, player, queue, message, color, setup
         .setColor(color)
 
         await message.channel.send({ embeds: [embed], content: `${client.emoji.tick} | Playlist added to queue!` }).then(async (a) => setTimeout(async () => await a.delete().catch(() => { }), 5000)).catch(() => { });
-
-        await qeb(client, q, queue);
-        await neb(n, queue, client);
-
-        if (m) await m.edit({ embeds: [q, n], files: [] }).catch(() => { });
     } else {
         const track = res.tracks[0];
 
@@ -228,37 +214,5 @@ async function playerhandler(client, query, player, queue, message, color, setup
         .setTimestamp()
 
         await message.channel.send({ embeds: [embed], content: `${client.emoji.tick} | Track added to queue!` }).then(async (a) => setTimeout(async () => await a.delete().catch(() => { }), 5000)).catch(() => { });
-
-        await qeb(client, q, queue);
-        await neb(n, queue, client);
-
-        let lowvolumebut = new ButtonBuilder()
-        .setCustomId(`SETUP_VOL_DOWN_BUTTON`)
-        .setEmoji(`${client.emoji.volumedown}`)
-        .setStyle(2)
-
-        let stopbut = new ButtonBuilder()
-        .setCustomId(`SETUP_STOP_BUTTON`)
-        .setEmoji(`${client.emoji.stop}`)
-        .setStyle(2)
-
-        let pausebut = new ButtonBuilder()
-        .setCustomId(`SETUP_PLAY_PAUSE_BUTTON`)
-        .setEmoji(`${client.emoji.pause}`)
-        .setStyle(2)
-
-        let skipbut = new ButtonBuilder()
-        .setCustomId(`SETUP_SKIP_BUTTON`)
-        .setEmoji(`${client.emoji.skip}`)
-        .setStyle(2)
-
-        let highvolumebut = new ButtonBuilder()
-        .setCustomId(`SETUP_VOL_UP_BUTTON`)
-        .setEmoji(`${client.emoji.volumeup}`)
-        .setStyle(2) 
-
-        const row1 = new ActionRowBuilder().addComponents(lowvolumebut, stopbut, pausebut, skipbut, highvolumebut);
-
-        if (m) await m.edit({ embeds: [q, n], components: [row1], files: [] }).catch(() => { });
     }
 };

@@ -19,7 +19,9 @@ module.exports = {
             return await updateQueue(client, queue, Guild);
         };
 
-        await updateQueue(client, queue, Guild);
+        if (data) {
+            await updateQueue(client, queue, Guild);
+        }
 
         const MusicPlaying = new EmbedBuilder()
         .setAuthor({ name: "|  Playing", iconURL: client.user.displayAvatarURL({ dynamic: true }) })

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { useMainPlayer, useQueue, QueryType, lyricsExtractor } = require("discord-player");
+const { useMainPlayer, useQueue, QueryType } = require("discord-player");
+const { lyricsExtractor } = require("@discord-player/extractor");
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -39,26 +40,30 @@ module.exports = {
 
                 return interaction.editReply({ embeds: [embed] })
             }
-
-            const geniusSearchQuery = await getGeniusSearchQuery(query, Queue);
-
-            const [playerSearchResult, geniusLyricsResult] = await Promise.all([
-                await getPlayerSearchResult(Player, geniusSearchQuery),
-                await getGeniusLyricsResult(geniusSearchQuery)
-            ]);
-
-            const finalLyricsData = validateGeniusLyricsResult(geniusLyricsResult, playerSearchResult, Queue);
-
-            if (!finalLyricsData) {
-                return await sendNoLyricsFoundEmbed(client, interaction, geniusSearchQuery)
-            }
-
-            if (finalLyricsData.lyrics.length > 3800) {
-                return await sendMultipleLyricsMessages(client, interaction, finalLyricsData)
-            }
-
-            return await sendLyricsEmbed(client, interaction, finalLyricsData)
         }
+
+        let geniusSearchQuery = await getGeniusSearchQuery(query, Queue);
+
+        if (!geniusSearchQuery) {
+            geniusLyricsResult = query;
+        }
+
+        const [playerSearchResult, geniusLyricsResult] = await Promise.all([
+            await getPlayerSearchResult(Player, geniusSearchQuery),
+            await getGeniusLyricsResult(geniusSearchQuery)
+        ]);
+
+        const finalLyricsData = validateGeniusLyricsResult(geniusLyricsResult, playerSearchResult, Queue);
+
+        if (!finalLyricsData) {
+            return await sendNoLyricsFoundEmbed(client, interaction, geniusSearchQuery)
+        }
+
+        if (finalLyricsData.lyrics.length > 3800) {
+            return await sendMultipleLyricsMessages(client, interaction, finalLyricsData)
+        }
+
+        return await sendLyricsEmbed(client, interaction, finalLyricsData)
     }
 };
 

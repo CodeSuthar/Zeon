@@ -1,9 +1,10 @@
-const { EmbedBuilder, AttachmentBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder, ButtonBuilder, ActionRowBuilder, PermissionsBitField } = require("discord.js");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Bot, Dashboard } = require(`../config.js`)
 const setupSchema = require("../Database/MusicSetup.js");
 const { readdirSync } = require("fs");
+const logdb = require("../Database/loggingSchema.js");
 
 function GetChoicesCommand() {
     const rest = new REST({ version: '9' }).setToken(Bot.Token);
@@ -263,4 +264,51 @@ function parseTime(string) {
     return ms;
 }
 
-module.exports = { CapitalizeText, GetChoicesCommand, convertTime, updateQueue, chunk, parseTime }
+async function sendMessage(guild, content, type) {
+    const exactlogdb = await logdb.findOne({ Guild: guild.id });
+
+    if (!exactlogdb) return;
+
+    let realtype;
+
+    if (type === "channelLogs") realtype = exactlogdb.channelLogs;
+    else if (type === "emojiLogs") realtype = exactlogdb.emojiLogs;
+    else if (type === "guildBanLogs") realtype = exactlogdb.guildBanLogs;
+    else if (type === "guildMemberLogs") realtype = exactlogdb.guildMemberLogs;
+    else if (type === "guildRoleLogs") realtype = exactlogdb.guildRoleLogs;
+    else if (type === "guildScheduledEventLogs") realtype = exactlogdb.guildScheduledEventLogs;
+    else if (type === "inviteLinkLogs") realtype = exactlogdb.inviteLinkLogs;
+    else if (type === "messageLogs") realtype = exactlogdb.messageLogs;
+    else if (type === "stickerLogs") realtype = exactlogdb.moderationLogs;
+    else if (type === "stageLogs") realtype = exactlogdb.serverLogs;
+    else if (type === "threadLogs") realtype = exactlogdb.threadLogs;
+    else if (type === "voiceStateLogs") realtype = exactlogdb.voiceLogs;
+    else if (type === "webhookLogs") realtype = exactlogdb.webhookLogs;
+
+    const channel = await guild.channels.cache.get(realtype.channel) || await guild.channels.fetch(realtype.channel);
+
+    if (!channel) throw new SyntaxError(`[Audit Logger] Unable to find Log Channel.`)
+
+    const guildMember = await guild.members.cache.get(channel.client.user.id) || await guild.members.fetch(channel.client.user.id);
+
+    const perms = channel.permissionsFor(guildMember);
+    if (!perms.has(PermissionsBitField.Flags.ManageWebhooks)) throw new SyntaxError(`[Audit Logger] Missing Some Permissions For Log Channel. [Missing Permission: Manage Webhooks]`)
+
+    const webhooks = await channel.fetchWebhooks();
+    // find webhook with name and ownerid
+    let webhook = webhooks.find(x => x.name === `Audit Logger | Zeon` && x.owner.id === channel.client.user.id);
+
+    if (!webhook) {
+        webhook = await channel.createWebhook({
+            name: `Audit Logger | Zeon`,
+            avatar: channel.client.user.displayAvatarURL(),
+            reason: `Audit Logger | Zeon`
+        });
+    }
+
+    if (!webhook) throw new SyntaxError(`[Audit Logger] Unable to create Webhook.`)
+
+    webhook.send(content)
+}
+
+module.exports = { CapitalizeText, GetChoicesCommand, convertTime, updateQueue, chunk, parseTime, sendMessage }

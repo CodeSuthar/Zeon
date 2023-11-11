@@ -24,7 +24,7 @@
     },
     "homepage": "https://github.com/Rtxeon/Command-Handler-Discord#readme",
     "dependencies": {
-        "@discord-player/extractor": "^4.4.4",
+        "@discord-player/extractor": "^4.4.5",
         "@discordjs/builders": "^1.6.3",
         "@discordjs/rest": "^1.7.1",
         "@discordjs/voice": "^0.16.0",
@@ -34,6 +34,7 @@
         "aki-api": "^6.0.8",
         "axios": "^1.4.0",
         "body-parser": "^1.20.2",
+        "bufferutil": "^4.0.8",
         "canvafy": "^7.0.4",
         "canvas": "^2.11.2",
         "common-tags": "^1.8.2",
@@ -44,7 +45,7 @@
         "discord-image-generation": "^1.4.25",
         "discord-player": "^6.6.4",
         "discord-player-deezer": "^1.0.0",
-        "discord.js": "^14.13.0",
+        "discord.js": "^14.12.1",
         "discordinfo.js": "^1.0.0",
         "dotenv": "^16.0.3",
         "ejs": "^3.1.9",
@@ -54,8 +55,6 @@
         "figlet": "^1.6.0",
         "fs": "^0.0.1-security",
         "is-port-reachable": "^3.1.0",
-        "kazagumo": "^2.3.2",
-        "kazagumo-spotify": "^1.2.0",
         "libsodium-wrappers": "^0.7.11",
         "lodash": "^4.17.21",
         "mathjs": "^11.8.0",
@@ -75,13 +74,14 @@
         "quickmongo": "^5.2.0",
         "replicate": "^0.12.3",
         "session": "^0.1.0",
-        "shoukaku": "^3.2.0",
         "superagent": "^8.0.9",
         "systeminformation": "^5.17.12",
         "undici": "^5.25.4",
         "url": "^0.11.0",
+        "utf-8-validate": "^6.0.3",
         "util": "^0.12.5",
-        "wikijs": "^6.4.1"
+        "wikijs": "^6.4.1",
+        "zlib-sync": "^0.1.9"
     },
     "engines": {
         "node": ">=20"

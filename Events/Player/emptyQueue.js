@@ -24,10 +24,13 @@ module.exports = {
         .setDescription("Queue Has Been **Ended**")
         .setTimestamp()
         .setColor("Random")
+
+        if (data) {
+            await updateQueue(client, queue, Guild);
+        }
     
-        Channel.send({
+        return Channel.send({
             embeds: [embed]
         })
-        return await updateQueue(client, queue, Guild);
     }
 }

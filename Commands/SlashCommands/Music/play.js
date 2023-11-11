@@ -61,8 +61,6 @@ module.exports = {
         if (!searchResult || !searchResult.tracks.length) return interaction.editReply({ content: 'No results were found!' });
 
         try {
-            if (!searchResult || !searchResult.tracks.length) return interaction.editReply({ content: 'No results were found!' });
-
             if (searchResult.playlist) {
                 await interaction.editReply({ content: `${client.emoji.loading} | Loading Playlist... • ${searchResult.playlist.title} • ${searchResult.playlist.length + 1}` })
                 let count = 0;
