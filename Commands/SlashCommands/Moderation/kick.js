@@ -45,7 +45,10 @@ module.exports = {
                 if (!kickMember.kickable) {
                     return interaction.editReply({ content: `${client.emoji.wrong} | I cannot kick this member as, I am not high enough in the role hierarchy to do that.` })
                 } else {
-                    const reason = `${options.getString("reason")}, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})` || "No Reason Provided";
+                    let reason;
+
+                    if (options.getString("reason") === null) reason = `No Reason Provided, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})`
+                    else reason = `${options.getString("reason")}, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})`
 
                     const emb = new EmbedBuilder()
                     .setTitle(`Kicked An Member From The Server`)
@@ -72,6 +75,7 @@ module.exports = {
                     await kickMember.send({ embeds: [dm] }).catch(() => {});
                 
                     return kickMember.kick(reason).then(() => {
+                        client._kicks.set(`${kickMember.id}_${interaction.guild.id}`, kickInvoker.id);
                         interaction.editReply({ embeds: [emb] });
                     });
                 }

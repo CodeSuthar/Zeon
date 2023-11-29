@@ -18,7 +18,7 @@ module.exports = {
         .addChannelTypes(ChannelType.GuildText)
     ),
     run: async (client, interaction) => {
-        if (!interaction.replied) interaction.deferRelpy();
+        if (!interaction.replied) interaction.deferReply();
 
         if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) return interaction.editReply({ content: `${client.emoji.wrong} | I must have the Manage Messages Or Administrator permission to use this command!` });
 
@@ -37,21 +37,30 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setColor("Random")
         .setDescription(`${client.emoji.tick} | ${amount} messages have been purged in ${channel} by the administrator`)
-        .setFooter()
+        .setFooter({ text: `Purged At` })
+        .setTimestamp();
 
-        const row = new ActionRowBuilder()
+        const row = async (decision) => {
+            const realrow = new ActionRowBuilder()
             .addComponents(
-            new ButtonBuilder()
-            .setCustomId('purge')
-            .setEmoji('🗑️')
-            .setStyle(ButtonStyle.Primary)
-        )
+                new ButtonBuilder()
+                .setCustomId('purge')
+                .setEmoji('🗑️')
+                .setStyle(ButtonStyle.Primary)
+            )
+        }
 
-        const msg = await interaction.channel.send({ embeds: [embed], components: [row] }); 
+        const msg = await interaction.channel.send({ embeds: [embed], components: [row(false)] }); 
         
         const filter = i => i.user.id === interaction.user.id;
 
         const collector = await msg.createMessageComponentCollector({ filter, time: 10000 });
+
+        collector.on('end', async (collected, reason) => {
+            if (reason === 'time') {
+                await msg.edit({ components: [row(true)] });
+            }
+        });
 
         collector.on('collect', async (int) => {
             if (int.customId === 'purge') {

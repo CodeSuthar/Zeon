@@ -122,12 +122,60 @@ module.exports = {
                             channelLogs: {
                                 enabled: true,
                                 channel: channel.id
-                            }
+                            },
+                            emojiLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            guildBanLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            guildMemberLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            guildRoleLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            guildScheduledEventLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            inviteLinkLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            messageLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            stickerLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            stageLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            threadLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            voiceStateLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            },
+                            webhookLogs: {
+                                enabled: true,
+                                channel: channel.id
+                            }                            
                         });
 
                         await newdblogging.save();
 
-                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled all logging to <${channel.id}!` });
+                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled all logging to <#${channel.id}>!` });
                     } else {
                         const newdblogging = new db({
                             Guild: guildId,
@@ -139,7 +187,7 @@ module.exports = {
 
                         await newdblogging.save();
 
-                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <${channel.id}>!` });
+                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <#${channel.id}>!` });
                     }
                 } else {
                     if (loggingType === "allLogs") {
@@ -159,20 +207,20 @@ module.exports = {
 
                         await loggingData.save();
 
-                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled all logging to <${channel.id}>!` });
+                        return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled all logging to <#${channel.id}>!` });
                     } else {
                         if (loggingData[loggingType].enabled) {
                             loggingData[loggingType].channel = channel.id;
 
                             await loggingData.save();
 
-                            return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <${channel.id}>!` });
+                            return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <#${channel.id}>!` });
                         } else {
                             loggingData[loggingType] = { enabled: true, channel: channel.id };
 
                             await loggingData.save();
 
-                            return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <${channel.id}>!` });
+                            return await interaction.editReply({ content: `${client.emoji.tick} | Successfully enabled ${loggingType} logging to <#${channel.id}>!` });
                         }
                     }
                 }
@@ -180,10 +228,8 @@ module.exports = {
 
             case "disable":
                 const loggingType2 = options.getString("logging-type");
-                const channel2 = options.getChannel("channel");
 
                 if (!loggingType2) return await interaction.editReply({ content: `${client.emoji.wrong} | You must provide a logging type!` });
-                if (!channel2) return await interaction.editReply({ content: `${client.emoji.wrong} | You must provide a channel!` });
 
                 if (!loggingData) {
                     if (loggingType2 === "allLogs") {

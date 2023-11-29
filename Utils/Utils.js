@@ -267,7 +267,7 @@ function parseTime(string) {
 async function sendMessage(guild, content, type) {
     const exactlogdb = await logdb.findOne({ Guild: guild.id });
 
-    if (!exactlogdb) return;
+    if (!exactlogdb) return
 
     let realtype;
 
@@ -284,18 +284,21 @@ async function sendMessage(guild, content, type) {
     else if (type === "threadLogs") realtype = exactlogdb.threadLogs;
     else if (type === "voiceStateLogs") realtype = exactlogdb.voiceLogs;
     else if (type === "webhookLogs") realtype = exactlogdb.webhookLogs;
+    else return console.log(`[Audit Logger] Invalid Type.`);
+
+    if (!realtype.enabled) return;
 
     const channel = await guild.channels.cache.get(realtype.channel) || await guild.channels.fetch(realtype.channel);
 
-    if (!channel) throw new SyntaxError(`[Audit Logger] Unable to find Log Channel.`)
+    if (!channel) console.log(`[Audit Logger] Unable to find Log Channel.`);
 
     const guildMember = await guild.members.cache.get(channel.client.user.id) || await guild.members.fetch(channel.client.user.id);
 
     const perms = channel.permissionsFor(guildMember);
-    if (!perms.has(PermissionsBitField.Flags.ManageWebhooks)) throw new SyntaxError(`[Audit Logger] Missing Some Permissions For Log Channel. [Missing Permission: Manage Webhooks]`)
+    if (!perms.has(PermissionsBitField.Flags.ManageWebhooks)) return console.log(`[Audit Logger] Missing Some Permissions For Log Channel. [Missing Permission: Manage Webhooks]`);
 
     const webhooks = await channel.fetchWebhooks();
-    // find webhook with name and ownerid
+
     let webhook = webhooks.find(x => x.name === `Audit Logger | Zeon` && x.owner.id === channel.client.user.id);
 
     if (!webhook) {
@@ -306,9 +309,9 @@ async function sendMessage(guild, content, type) {
         });
     }
 
-    if (!webhook) throw new SyntaxError(`[Audit Logger] Unable to create Webhook.`)
+    if (!webhook) return console.log(`[Audit Logger] Unable to find Webhook.`);
 
-    webhook.send(content)
+    return webhook.send(content)
 }
 
 module.exports = { CapitalizeText, GetChoicesCommand, convertTime, updateQueue, chunk, parseTime, sendMessage }

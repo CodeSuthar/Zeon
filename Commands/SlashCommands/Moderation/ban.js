@@ -45,8 +45,11 @@ module.exports = {
                 if (!banMember.bannable) {
                     return interaction.editReply({ content: `${client.emoji.wrong} | I cannot ban this member as, I am not high enough in the role hierarchy to do that.` })
                 } else {
-                    const reason = `${options.getString("reason")}, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})` || "No Reason Provided";
+                    let reason;
 
+                    if (options.getString("reason") === null) reason = `No Reason Provided, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})`
+                    else reason = `${options.getString("reason")}, Action Taken By:- ${interaction.member.displayName} (${interaction.member.id})`
+                    
                     const emb = new EmbedBuilder()
                     .setTitle(`Banned An Member From The Server`)
                     .setDescription(`${banMember.user.username} Has Been Banned`)
@@ -72,6 +75,7 @@ module.exports = {
                     await banMember.send({ embeds: [dm] }).catch(() => {});
 
                     return banMember.ban({ reason: reason }).then(() => {
+                        client._bans.set(`${banMember.id}_${interaction.guild.id}`, banInvoker.id)
                         interaction.editReply({ embeds: [emb] });
                     })
                 }

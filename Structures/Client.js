@@ -14,11 +14,14 @@ module.exports = class Zeon extends Client {
             },
             intents: [
                 GatewayIntentBits.Guilds,
+                GatewayIntentBits.GuildBans,
+                GatewayIntentBits.GuildModeration,
                 GatewayIntentBits.MessageContent,
                 GatewayIntentBits.GuildMembers,
                 GatewayIntentBits.GuildMessages,
                 GatewayIntentBits.DirectMessages,
                 GatewayIntentBits.GuildInvites,
+                GatewayIntentBits.GuildEmojisAndStickers,
                 GatewayIntentBits.GuildMessageReactions,
                 GatewayIntentBits.GuildVoiceStates
             ],
@@ -49,6 +52,9 @@ module.exports = class Zeon extends Client {
         this.DeveloperId = this.config.Bot.DeveloperId;
         this.emoji = require("../emoji.json");
         this.snipes = new Collection();
+        this._bans = new Collection();
+        this._unbans = new Collection();
+        this._kicks = new Collection();
     }
 
     _loadMusicManager() {

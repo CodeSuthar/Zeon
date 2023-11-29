@@ -9,7 +9,7 @@ module.exports = {
         if (newChannel.type === ChannelType.PrivateThread || newChannel.type === ChannelType.PublicThread || newChannel.type === ChannelType.AnnouncementThread) return;
 
         let embed = new EmbedBuilder()
-        .setDescription(`**🆕 Channel Updated!**`)
+        .setDescription(`**🔄️ Channel Updated!**`)
         .addFields(
             { name: 'Old Channel', value: `\`\`\`js\nChannel:- ${oldChannel.name}\nChannel Type:- ${CHType(oldChannel.type)}\nChannel ID:- ${oldChannel.id}\`\`\`` },
             { name: 'New Channel', value: `\`\`\`js\nChannel:- ${newChannel.name}\nChannel Type:- ${CHType(newChannel.type)}\nChannel ID:- ${newChannel.id}\`\`\`` }
@@ -49,4 +49,4 @@ function CHType(type) {
     }
 
     return CHType;
-}
+};

@@ -49,4 +49,4 @@ function CHType(type) {
     }
 
     return CHType;
-}
+};

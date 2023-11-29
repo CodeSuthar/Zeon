@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const axios = require("axios")
+const axios = require("axios");
 
 module.exports = {
     SlashData: new SlashCommandBuilder()
@@ -17,13 +17,13 @@ module.exports = {
         try {
             const options = {
                 method: 'GET',
-                url: 'https://google-bard1.p.rapidapi.com/',
+                url: 'https://google-bard1.p.rapidapi.com/new.room',
                 headers: {
-                  text: prompt,
-                  lang: 'en',
-                  psid: "bghdSEoIWN6Rf-h7niygUWj3LBDc3Dx1RwgAUsmtNeTiQCgFPtfia-MiIKc9czYAje6NYQ.",
-                  'X-RapidAPI-Key': '9c4f4b0a0emsh47ac8353094529bp14cd6djsn7f662c852aad',
-                  'X-RapidAPI-Host': 'google-bard1.p.rapidapi.com'
+                    userid: interaction.user.id,
+                    message: prompt,
+                    key: 'AIzaSyDtxwT4FR1kLuhGMzqcQMcnA4Gr8twQRLY',
+                    'X-RapidAPI-Key': '9c4f4b0a0emsh47ac8353094529bp14cd6djsn7f662c852aad',
+                    'X-RapidAPI-Host': 'google-bard1.p.rapidapi.com'
                 }
             };
             const output = await axios.request(options);
@@ -34,6 +34,7 @@ module.exports = {
 
             await interaction.editReply({ embeds: [emb] })
         } catch (e) {
+            console.log(e)
             await interaction.editReply(`${client.emoji.loading} | **${prompt}** - ${interaction.user.toString()} - There was an error getting the response from the AI! Try again later.`)
         }
     }

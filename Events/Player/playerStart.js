@@ -181,7 +181,7 @@ module.exports = {
                                 .setColor("Random")
                             }
 
-                            await Channel.messages.edit(id, {
+                            await Channel.messages.edit(msgid, {
                                 embeds: [DecisionEmbed],
                                 components: [row]
                             })
