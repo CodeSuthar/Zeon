@@ -72,6 +72,7 @@
         "passport": "^0.6.0",
         "passport-discord": "^0.1.4",
         "path": "^0.12.7",
+        "puppeteer": "^21.6.1",
         "quickmongo": "^5.2.0",
         "replicate": "^0.12.3",
         "session": "^0.1.0",
