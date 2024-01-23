@@ -1,5 +1,7 @@
 # Zeon Bot Code
 
+Zeon - https://rtxeon.github.io/Zeon/
+
 If like this project, please leave a star ⭐
 
 ## What is Zeon Bot?
@@ -18,7 +20,6 @@ In Short, I Want To Learn Game Development, Web Development, etc
 - Moderation
 - Fun
 - Utility
-- Music
 - And More!
 
 ## Note
@@ -27,7 +28,7 @@ In Short, I Want To Learn Game Development, Web Development, etc
 
 - If you want to use this code, please give me credit. I worked hard on this bot, and I would appreciate it if you gave me credit. Thanks!
 
-- I also used a lot of other people's code, so I'll link them below. If you find any code that is taken from other people, please let me know. I'll give them credit.
+- I also used a lot of other people's code, so I'll link them below. If you find any code that is taken from other people and not given credit, please let me know. I'll give them credit.
 
 ## Credits For Other People's Code
 
