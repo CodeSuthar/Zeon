@@ -1,61 +1,35 @@
-<p align="center">
-  <a href="https://github.com/Rtxeon/Command-Handler-Discordd">
-    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Favatars1.githubusercontent.com%2Fu%2F26492485%3Fs%3D280%26v%3D4&f=1&nofb=1" alt="Pbot-plus" width="200" height="200">
-  </a>
-  
-# Discord-js-v13-handler
+# Zeon Bot Code
 
-An Advanced Discord Bot Slash Command Only Handler Made In DiscordJS V14
-  
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Rtxeon/Command-Handler-Discord)
-[![Run on Repl.it](https://repl.it/badge/github/Rtxeon/Command-Handler-Discord)](https://repl.it/github/Rtxeon/Command-Handler-Discord)
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/Rtxeon/Command-Handler-Discord)
+If like this project, please leave a star ⭐
 
-## Environment Variables
+## What is Zeon Bot?
 
-To run this project, you will need to add the following environment variables to your .env file
+Zeon Bot was my old Discord Bot, I'm declaring it open source now. It's a bot that has a lot of features, such as moderation, fun, and more. It's a bot that I've worked on for a while, and I'm proud of it. I'm not going to be working on it anymore, so I'm making it open source. I hope you enjoy it!
 
-`TOKEN`
+## Why it became Open Source/
 
-`OWNER ID`
+This bot became open source because I'm not going to be working on it anymore. I don't want to get stuck in the past, and I want to move on to bigger and better things. I'm not going to be working on this bot anymore, so I'm making it open source. I hope you enjoy it!
 
-`MONGO_URI`
+In Short, I Want To Learn Game Development, Web Development, etc
 
-## Installation
+## Features 💫
 
-Install my-project with npm
+- Dashboard
+- Moderation
+- Fun
+- Utility
+- Music
+- And More!
 
-```bash
-  npm install <package name>
-  node i
-```
-    
-## Run Locally
+## Note
 
-Clone the project
+- I'm not going to be working on this bot anymore, so I'm making it open source. I hope you enjoy it!, If someone want's to revive it dm me on username @Rtxeon on Discord
 
-```bash
-  git clone https://github.com/Rtxeon/Command-Handler-Discord
-```
+- If you want to use this code, please give me credit. I worked hard on this bot, and I would appreciate it if you gave me credit. Thanks!
 
-Go to the project directory
+- I also used a lot of other people's code, so I'll link them below. If you find any code that is taken from other people, please let me know. I'll give them credit.
 
-```bash
-  cd Command-Handler-Discord
-```
+## Credits For Other People's Code
 
-Install dependencies
+- [MrJAwesome](https://www.youtube.com/@MrJAwesomeYT) for  GPT Command
 
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm start 
-```
-
-# 🔐 License
-
-Distributed under the Apache 2.0 License. See [`LICENSE`](https://github.com/Rtxeon/Command-Handler-Discord/blob/master/LICENSE) for more information.

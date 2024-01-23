@@ -2,36 +2,36 @@ require('dotenv').config()
 
 module.exports = {
     Bot: {
-        Name: "Zeon",
+        Name: "",
         Token: process.env.TOKEN || "",
         Prefix: "!",
-        NoPrefix: ["990643162928279592"],
-        DeveloperId: ["1060577145258262541"],
-        Invite: "https://discord.com/oauth2/authorize?client_id=969558840926437406&permissions=2088234238&scope=bot%20applications.commands",
-        SupportServer: "https://discord.gg/tHvGtcyh6V"
+        NoPrefix: [""],
+        DeveloperId: [""],
+        Invite: "",
+        SupportServer: ""
     },
 
     Webhooks: {
-        Lavalinks: process.env.LavalinkWebhook || "https://discord.com/api/webhooks/1160840465348825149/oy24URrTAHnzaRsZS3hAqbRBgGnINrs74WW0qKAchIgBVfYarzVZYdeRCZXAZWT3nWjy",
+        Lavalinks: process.env.LavalinkWebhook || "",
     },
 
     BotList: {
         TopGG: {
             APIToken: process.env.TopGGToken || "",
-            LinkToVote: "https://top.gg/bot/969558840926437406/vote"
+            LinkToVote: ""
         }
     },
 
     Dashboard: {
         ShouldRun: true,
         Information: {
-            ClientID: process.env.CLIENT_ID || "969558840926437406",
+            ClientID: process.env.CLIENT_ID || "",
             ClientSecret: process.env.CLIENT_SECRET || "",
-            Domain: process.env.DOMAIN || "https://zeon.code-source.tech",
+            Domain: process.env.DOMAIN || "",
             CallbackURL: process.env.CallbackURL || "/api/callback",
             Port: 3180,
             Scopes: ["identify", "guilds"],
-            ReverseProxy: "n2.kolama.host"
+            ReverseProxy: ""
         } 
     },
     
